@@ -1,0 +1,15 @@
+language: node_js
+sudo: false
+node_js: stable
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
+
+script:
+  - yarn run build
+
+after_success:
+  - cd build
+  - '[ "$TRAVIS_BRANCH" == "master" ] && [ $GH_TOKEN ] && git push --quiet https://$GH_TOKEN@github.com/1000ch/middleman-playground.git gh-pages 2> /dev/null'
