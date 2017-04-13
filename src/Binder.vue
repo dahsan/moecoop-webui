@@ -17,7 +17,7 @@ import _ from 'lodash'
 
 export default {
   name: 'binder',
-  data() {
+  data: function() {
     return {
       query: '',
       recipes: [],
