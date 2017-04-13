@@ -1,6 +1,6 @@
 #!/bin/sh
 
-git -rf public || exit 0
+rm -rf public || exit 0
 mkdir public
 
 cp index.html public
