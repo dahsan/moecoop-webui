@@ -1,16 +1,18 @@
-# moecoop-webui
+# 生協の知恵袋 ウェブUI版
+
+[![Build Status](https://travis-ci.org/coop-mojo/moecoop-webui.svg?branch=master)](https://travis-ci.org/coop-mojo/moecoop-webui)
 
 > 生協の知恵袋のウェブUI版です
 
-## Build Setup
+## ビルド方法
 
 ``` bash
-# install dependencies
+# 依存関係のインストール
 yarn install
 
-# serve with hot reload at localhost:8080
+# ホットリロード込みのサーバー立ち上げ (localhost:8080)
 yarn run dev
 
-# build for production with minification
+# ビルド
 yarn run build
 ```
