@@ -1,7 +1,5 @@
 <template>
   <div id="binder">
-    <img src="./assets/moecoop.svg" width=200>
-
     <b-form-input v-model="query" type="text" placeholder="検索したいレシピ"></b-form-input>
 
     <b-table striped hover :items="recipes" :fields="fields">
@@ -57,5 +55,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+#binder {
+  padding: 10px;
+}
 </style>
