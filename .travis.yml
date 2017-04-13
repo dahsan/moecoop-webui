@@ -15,4 +15,4 @@ script:
 
 after_success:
   - cd build
-  - '[ "$TRAVIS_BRANCH" == "master" ] && [ $GH_TOKEN ] && ./deploy'
+  - '[ "$TRAVIS_BRANCH" == "master" ] && [ $GH_TOKEN ] && ./deploy.sh'
