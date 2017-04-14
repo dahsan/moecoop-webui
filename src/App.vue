@@ -42,7 +42,7 @@
 
   <!-- もう少しスペース -->
   <!-- もう少し右 -->
-  <b-tabs small ref="tabs" v-model="tabIndex">
+  <b-tabs small id="tabs" ref="tabs" v-model="tabIndex">
     <b-tab title="バインダー">
       <binder></binder>
     </b-tab>
@@ -72,9 +72,8 @@ export default {
 </script>
 
 <style scoped>
-#app {
-  padding: 20px;
-  height: 300px;
+#tabs {
+  padding: 2px;
 }
 
 #char-box {
