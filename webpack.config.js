@@ -1,6 +1,11 @@
 var path = require('path')
 var webpack = require('webpack')
 
+var FaviconsWebpackPlugin = require('favicons-webpack-plugin')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+
+var appName = '生協の知恵袋 ウェブ版'
+
 module.exports = {
   entry: './src/main.js',
   output: {
@@ -34,7 +39,11 @@ module.exports = {
         options: {
           name: '[name].[ext]?[hash]'
         }
-      }
+      },
+      {
+        test: /\.html$/,
+        loader: 'html-loader',
+      },
     ]
   },
   resolve: {
@@ -69,6 +78,15 @@ if (process.env.NODE_ENV === 'production') {
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
+    }),
+    new FaviconsWebpackPlugin({
+      logo: './src/assets/moecoop.svg',
+      prefix: 'icons/',
+      inject: true,
+    }),
+    new HtmlWebpackPlugin({
+        title: appName,
+        template: '!!html-loader!./index.html'
     })
   ])
 }

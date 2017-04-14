@@ -4,7 +4,7 @@
 
     <b-nav-toggle target="nav_collapse"></b-nav-toggle>
     <b-link class="navbar-brand" to="#">
-      <img src="./assets/moecoop.svg" height=40>
+      <img src="assets/moecoop.svg" height=40>
       <span>生協の知恵袋 ウェブ版</span>
     </b-link>
 
@@ -34,7 +34,6 @@
     </b-collapse>
   </b-navbar>
 
-  <!-- もう少し右 -->
   <b-dropdown id="char-box" text="キャラクター" size="sm" class="m-md-2">
     <b-dropdown-item v-for="c in characters" :key="c">
       {{c}}
