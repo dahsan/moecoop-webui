@@ -83,6 +83,7 @@ if (process.env.NODE_ENV === 'production') {
       logo: './src/assets/moecoop.svg',
       prefix: 'icons/',
       inject: true,
+      title: appName,
     }),
     new HtmlWebpackPlugin({
         title: appName,
