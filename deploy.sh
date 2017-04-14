@@ -3,11 +3,11 @@
 rm -rf public || exit 0
 mkdir public
 
-cp index.html public
 cp -r dist public
 echo $MOECOOP_DOMAIN > public/CNAME
 
 cd public
+mv dist/index.html .
 
 git init
 git config user.name 'Travis CI'
