@@ -4,7 +4,7 @@
 
     <b-nav-toggle target="nav_collapse"></b-nav-toggle>
     <b-link class="navbar-brand" to="#">
-      <img src="./assets/moecoop.svg" height=40>
+      <img :src="logo" height=40>
       <span>生協の知恵袋 ウェブ版</span>
     </b-link>
 
@@ -56,12 +56,14 @@
 
 <script>
 import Binder from './Binder.vue'
+import logo from './assets/moecoop.svg'
 
 export default {
   name: 'app',
   data() {
     return {
       characters: ['しらたま', 'かきあげ'],
+      logo: logo,
     }
   },
   components: {

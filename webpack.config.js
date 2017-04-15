@@ -10,7 +10,6 @@ module.exports = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
     filename: 'build.js'
   },
   module: {
@@ -34,10 +33,10 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
+        test: /\.(png|svg|ico)$/,
         loader: 'file-loader',
         options: {
-          name: '[name].[ext]?[hash]'
+          name: 'images/[name].[ext]?[hash]'
         }
       },
       {
@@ -81,9 +80,8 @@ if (process.env.NODE_ENV === 'production') {
     }),
     new FaviconsWebpackPlugin({
       logo: './src/assets/moecoop.svg',
-      prefix: 'icons/',
+      prefix: 'images/',
       inject: true,
-      title: appName,
     }),
     new HtmlWebpackPlugin({
         title: appName,

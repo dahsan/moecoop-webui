@@ -1,13 +1,8 @@
 #!/bin/sh
 
-rm -rf public || exit 0
-mkdir public
+echo $MOECOOP_DOMAIN > dist/CNAME
 
-cp -r dist public
-echo $MOECOOP_DOMAIN > public/CNAME
-
-cd public
-mv dist/index.html .
+cd dist
 
 git init
 git config user.name 'Travis CI'
