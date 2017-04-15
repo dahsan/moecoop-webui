@@ -20,6 +20,7 @@
 
 <script>
 import _ from 'lodash'
+import { baseURL, restCall } from './rest'
 
 export default {
   name: 'binder',
@@ -44,36 +45,28 @@ export default {
     }
   },
   mounted: function() {
-    var url = 'https://moecoop-api.arukascloud.io/'
-    var xhr = new XMLHttpRequest()
-    var that = this
-    xhr.onreadystatechange = function() {
+    var that = this;
+    restCall('GET', baseURL+'/binders', function(xhr) {
+      console.log("てすてす")
       if (xhr.readyState==4 && xhr.status==200) {
-        var result = JSON.parse(this.response)
+        var result = JSON.parse(xhr.response)
         that.binders = [{text: '全てのバインダー', value: '/recipes'}].concat(
           result['バインダー一覧'].map(function(b) { return { text: b.バインダー名, value: b.レシピ一覧 }; })
         )
+        console.log("バインダー: "+that.binders)
       }
-    }
-    xhr.respenseType = 'json'
-    xhr.open('GET', url+'binders', true)
-    xhr.send()
+    })
   },
   methods: {
     getRecipes: _.debounce(
       function() {
-        var url = 'https://moecoop-api.arukascloud.io'
-        var xhr = new XMLHttpRequest()
-        var that = this
-        xhr.onreadystatechange = function() {
+        var that = this;
+        restCall('GET', baseURL+this.selected+'?migemo=true&query='+this.query, function(xhr) {
           if (xhr.readyState==4 && xhr.status==200) {
-            var result = JSON.parse(this.response)
+            var result = JSON.parse(xhr.response)
             that.recipes = result['レシピ一覧'];
           }
-        }
-        xhr.respenseType = 'json'
-        xhr.open('GET', url+this.selected+'?migemo=true&query='+this.query, true)
-        xhr.send()
+        })
       },
       500
     ),
