@@ -57,7 +57,18 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  devtool: '#eval-source-map',
+  plugins: [
+    new FaviconsWebpackPlugin({
+      logo: './src/assets/moecoop.svg',
+      prefix: 'images/',
+      inject: true,
+    }),
+    new HtmlWebpackPlugin({
+      title: appName,
+      template: '!!html-loader!./index.html'
+    })
+  ]
 }
 
 if (process.env.NODE_ENV === 'production') {
@@ -78,14 +89,5 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.LoaderOptionsPlugin({
       minimize: true
     }),
-    new FaviconsWebpackPlugin({
-      logo: './src/assets/moecoop.svg',
-      prefix: 'images/',
-      inject: true,
-    }),
-    new HtmlWebpackPlugin({
-        title: appName,
-        template: '!!html-loader!./index.html'
-    })
   ])
 }
