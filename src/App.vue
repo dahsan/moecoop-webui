@@ -34,11 +34,9 @@
     </b-collapse>
   </b-navbar>
 
-  <b-dropdown id="char-box" text="キャラクター" size="sm" class="m-md-2">
-    <b-dropdown-item v-for="c in characters" :key="c">
-      {{c}}
-    </b-dropdown-item>
-  </b-dropdown>
+  キャラクター:
+  <b-form-select v-model="selected" :options="characters" class="m-md-2">
+  </b-form-select>
 
   <!-- もう少しスペース -->
   <!-- もう少し右 -->
@@ -62,9 +60,13 @@ export default {
   name: 'app',
   data() {
     return {
-      characters: ['しらたま', 'かきあげ'],
+      characters: ['しらたま', 'かきあげ', 'もじょうにー'],
+      selected: '',
       logo: logo,
     }
+  },
+  mounted: function() {
+    this.selected = this.characters[0]
   },
   components: {
     Binder
@@ -75,10 +77,6 @@ export default {
 
 <style scoped>
 #tabs {
-  padding: 2px;
-}
-
-#char-box {
   padding: 2px;
 }
 </style>
