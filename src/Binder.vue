@@ -47,13 +47,11 @@ export default {
   mounted: function() {
     var that = this;
     restCall('GET', baseURL+'/binders', function(xhr) {
-      console.log("てすてす")
       if (xhr.readyState==4 && xhr.status==200) {
         var result = JSON.parse(xhr.response)
         that.binders = [{text: '全てのバインダー', value: '/recipes'}].concat(
           result['バインダー一覧'].map(function(b) { return { text: b.バインダー名, value: b.レシピ一覧 }; })
         )
-        console.log("バインダー: "+that.binders)
       }
     })
   },
