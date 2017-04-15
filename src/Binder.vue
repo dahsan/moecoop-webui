@@ -3,7 +3,8 @@
     <b-form-select v-model="selected" :options="binders" class="m-md-2">
     </b-form-select>
     から
-    <b-form-input id="queryBox" v-model="query" type="text" placeholder="検索したいレシピ"></b-form-input>を検索
+    <b-form-input id="queryBox" v-model="query" type="text" placeholder="レシピ名"></b-form-input>
+    を検索
 
     <b-table striped hover :items="recipes" :fields="fields" @row-clicked="showDetail">
       <template slot="recipe" scope="recipe">
