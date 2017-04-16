@@ -7,30 +7,30 @@
     を検索
 
     <b-table striped hover :items="recipes" :fields="fields" @row-clicked="showDetail">
-      <template slot="recipe" scope="recipe">
-        {{recipe.レシピ名}}
+      <template slot="r" scope="r">
+        {{r.レシピ名}}
       </template>
     </b-table>
 
-    <b-card header="レシピ情報" v-model="msg">
-      {{msg}}
-    </b-card>
+    <recipe-card :recipe="recipe">
+    </recipe-card>
   </div>
 </template>
 
 <script>
 import _ from 'lodash'
 import { baseURL, restCall } from './rest'
+import RecipeCard from './RecipeCard.vue'
 
 export default {
   name: 'binder',
   data: function() {
     return {
-      msg: '',
       query: '',
       selected: '',
       binders: [],
       recipes: [],
+      recipe: {},
       fields: {
         レシピ名: {
           label: 'レシピ名',
@@ -41,6 +41,9 @@ export default {
   },
   watch: {
     query: function() {
+      this.lazyGetRecipes()
+    },
+    selected: function() {
       this.getRecipes()
     }
   },
@@ -56,22 +59,28 @@ export default {
     })
   },
   methods: {
-    getRecipes: _.debounce(
+    lazyGetRecipes: _.debounce(
       function() {
-        var that = this;
-        restCall('GET', baseURL+this.selected+'?migemo=true&query='+this.query, function(xhr) {
-          if (xhr.readyState==4 && xhr.status==200) {
-            var result = JSON.parse(xhr.response)
-            that.recipes = result['レシピ一覧'];
-          }
-        })
+        this.getRecipes()
       },
       500
     ),
+    getRecipes: function() {
+      var that = this
+      restCall('GET', baseURL+this.selected+'?migemo=true&query='+this.query, function(xhr) {
+        if (xhr.readyState==4 && xhr.status==200) {
+          var result = JSON.parse(xhr.response)
+          that.recipes = result['レシピ一覧'];
+        }
+      })
+    },
     showDetail: function(item, index) {
-      this.msg = this.recipes[index].レシピ名
+      this.recipe = this.recipes[index]
     },
   },
+  components: {
+    RecipeCard
+  }
 }
 </script>
 

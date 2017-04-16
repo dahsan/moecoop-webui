@@ -40,7 +40,7 @@
 
   <!-- もう少しスペース -->
   <!-- もう少し右 -->
-  <b-tabs small id="tabs" ref="tabs" v-model="tabIndex">
+  <b-tabs small id="tabs" ref="tabs">
     <b-tab title="バインダー">
       <binder></binder>
     </b-tab>
