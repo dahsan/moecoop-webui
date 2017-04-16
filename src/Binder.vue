@@ -6,12 +6,14 @@
     <b-form-input id="queryBox" v-model="query" type="text" placeholder="レシピ名"></b-form-input>
     を検索
 
-    <b-table striped hover :items="recipes" :fields="fields" @row-clicked="showDetail">
+    <b-table striped hover :items="recipes" :fields="fields" :current-page="currentPage" :per-page="perPage" @row-clicked="showDetail">
       <template slot="r" scope="r">
         {{r.レシピ名}}
       </template>
     </b-table>
-
+    <div class="justify-content-center row my-1">
+      <b-pagination size="md" :total-rows="this.recipes.length" :per-page="perPage" v-model="currentPage" />
+    </div>
     <recipe-card :recipe="recipe">
     </recipe-card>
   </div>
@@ -28,6 +30,8 @@ export default {
     return {
       query: '',
       selected: '',
+      currentPage: 1,
+      perPage: 10,
       binders: [],
       recipes: [],
       recipe: {},
@@ -75,7 +79,7 @@ export default {
       })
     },
     showDetail: function(item, index) {
-      this.recipe = this.recipes[index]
+      this.recipe = item
     },
   },
   components: {
