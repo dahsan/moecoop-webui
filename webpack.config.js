@@ -63,6 +63,7 @@ module.exports = {
       logo: './src/assets/moecoop.svg',
       prefix: 'images/',
       inject: true,
+      title: appName,
     }),
     new HtmlWebpackPlugin({
       title: appName,
