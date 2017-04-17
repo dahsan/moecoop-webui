@@ -4,7 +4,7 @@ var webpack = require('webpack')
 var FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 
-var appName = '生協の知恵袋 ウェブ版'
+var appName = '生協の知恵袋'
 
 module.exports = {
   entry: './src/main.js',
