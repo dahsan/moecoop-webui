@@ -1,5 +1,5 @@
 <template>
-<div id="app">
+<div id="app" class="app-base">
   <b-navbar toggleable type="inverse" variant="success">
 
     <b-nav-toggle target="nav_collapse"></b-nav-toggle>
@@ -34,13 +34,15 @@
     </b-collapse>
   </b-navbar>
 
-  キャラクター:
-  <b-form-select v-model="selected" :options="characters" class="m-md-2">
-  </b-form-select>
+  <div class="m-md-2">
+    キャラクター:
+    <b-form-select v-model="selected" :options="characters">
+    </b-form-select>
+  </div>
 
   <!-- もう少しスペース -->
   <!-- もう少し右 -->
-  <b-tabs small id="tabs" ref="tabs">
+  <b-tabs small id="tabs" ref="tabs" class="justify-content-center">
     <b-tab title="バインダー">
       <binder></binder>
     </b-tab>
@@ -76,6 +78,13 @@ export default {
 </script>
 
 <style scoped>
+.binder-base {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction:         row;
+}
+
 #tabs {
   padding: 2px;
 }

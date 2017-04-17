@@ -4,9 +4,10 @@
       <b-form-select v-model="selected" :options="binders">
       </b-form-select>
       から
-      <b-form-input id="queryBox" v-model="query" type="text" placeholder="レシピ名"></b-form-input>
-      を検索
-
+      <div class="search-box">
+        <b-form-input id="queryBox" v-model="query" type="text" placeholder="レシピ名"></b-form-input>
+        を検索
+      </div>
       <b-table striped hover :items="recipes" :fields="fields" :current-page="currentPage" :per-page="perPage"
                @row-clicked="showDetail">
         <template slot="r" scope="r">
@@ -17,7 +18,7 @@
         <b-pagination size="md" :total-rows="this.recipes.length" :per-page="perPage" v-model="currentPage" />
       </div>
     </div>
-    <recipe-card :recipe="recipe">
+    <recipe-card :recipe="recipe" class="recipe-detail">
     </recipe-card>
   </div>
 </template>
@@ -102,11 +103,26 @@ export default {
   display: flex;
   -webkit-flex-direction: row;
   flex-direction:         row;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  flex-basis: 48%;
 }
 
 .recipe-list {
   -webkit-flex-direction: column;
   flex-direction:         column;
+  flex: 1;
+}
+
+.recipe-detail {
+  flex: 1;
+}
+
+.search-box {
+  display: -webkit-flex;
+  display: flex;
+  flex-wrap: nowrap;
+  flex: 1;
 }
 
 #queryBox {
