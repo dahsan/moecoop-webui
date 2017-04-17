@@ -59,6 +59,7 @@ export default {
         that.binders = [{text: '全てのバインダー', value: '/recipes'}].concat(
           result['バインダー一覧'].map(function(b) { return { text: b.バインダー名, value: b.レシピ一覧 }; })
         )
+        that.selected = that.binders[0].value
       }
     })
   },
