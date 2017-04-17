@@ -1,18 +1,21 @@
 <template>
-  <div id="binder">
-    <b-form-select v-model="selected" :options="binders" class="m-md-2">
-    </b-form-select>
-    から
-    <b-form-input id="queryBox" v-model="query" type="text" placeholder="レシピ名"></b-form-input>
-    を検索
+  <div id="binder" class="binder-base">
+    <div class="recipe-list">
+      <b-form-select v-model="selected" :options="binders">
+      </b-form-select>
+      から
+      <b-form-input id="queryBox" v-model="query" type="text" placeholder="レシピ名"></b-form-input>
+      を検索
 
-    <b-table striped hover :items="recipes" :fields="fields" :current-page="currentPage" :per-page="perPage" @row-clicked="showDetail">
-      <template slot="r" scope="r">
-        {{r.レシピ名}}
-      </template>
-    </b-table>
-    <div class="justify-content-center row my-1">
-      <b-pagination size="md" :total-rows="this.recipes.length" :per-page="perPage" v-model="currentPage" />
+      <b-table striped hover :items="recipes" :fields="fields" :current-page="currentPage" :per-page="perPage"
+               @row-clicked="showDetail">
+        <template slot="r" scope="r">
+          {{r.レシピ名}}
+        </template>
+      </b-table>
+      <div class="justify-content-center">
+        <b-pagination size="md" :total-rows="this.recipes.length" :per-page="perPage" v-model="currentPage" />
+      </div>
     </div>
     <recipe-card :recipe="recipe">
     </recipe-card>
@@ -92,6 +95,18 @@ export default {
 <style scoped>
 #binder {
   padding: 10px;
+}
+
+.binder-base {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction:         row;
+}
+
+.recipe-list {
+  -webkit-flex-direction: column;
+  flex-direction:         column;
 }
 
 #queryBox {
