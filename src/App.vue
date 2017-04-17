@@ -40,11 +40,9 @@
     </b-form-select>
   </div>
 
-  <!-- もう少しスペース -->
-  <!-- もう少し右 -->
-  <b-tabs small id="tabs" ref="tabs" class="justify-content-center">
+  <b-tabs small id="tabs" ref="tabs">
     <b-tab title="バインダー">
-      <binder></binder>
+      <binder class="justify-content-center"></binder>
     </b-tab>
     <b-tab title="スキル" disabled>
     </b-tab>

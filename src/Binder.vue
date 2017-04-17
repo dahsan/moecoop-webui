@@ -112,10 +112,12 @@ export default {
   -webkit-flex-direction: column;
   flex-direction:         column;
   flex: 1;
+  max-width: 400px;
 }
 
 .recipe-detail {
   flex: 1;
+  max-width: 400px;
 }
 
 .search-box {
