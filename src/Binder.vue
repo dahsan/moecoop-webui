@@ -56,14 +56,13 @@ export default {
     }
   },
   mounted: function() {
-    var that = this;
-    restCall('GET', baseURL+'/binders', function(xhr) {
+    restCall('GET', baseURL+'/binders', (xhr) => {
       if (xhr.readyState==4 && xhr.status==200) {
         var result = JSON.parse(xhr.response)
-        that.binders = [{text: '全てのバインダー', value: '/recipes'}].concat(
+        this.binders = [{text: '全てのバインダー', value: '/recipes'}].concat(
           result['バインダー一覧'].map(function(b) { return { text: b.バインダー名, value: b.レシピ一覧 }; })
         )
-        that.selected = that.binders[0].value
+        this.selected = this.binders[0].value
       }
     })
   },
@@ -75,11 +74,10 @@ export default {
       500
     ),
     getRecipes: function() {
-      var that = this
-      restCall('GET', baseURL+this.selected+'?migemo=true&query='+this.query, function(xhr) {
+      restCall('GET', baseURL+this.selected+'?migemo=true&query='+this.query, (xhr) => {
         if (xhr.readyState==4 && xhr.status==200) {
           var result = JSON.parse(xhr.response)
-          that.recipes = result['レシピ一覧'];
+          this.recipes = result['レシピ一覧'];
         }
       })
     },

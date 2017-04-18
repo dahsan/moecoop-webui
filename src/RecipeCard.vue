@@ -1,12 +1,6 @@
 <template>
   <div id="recipe-card" v-if="recipe.レシピ名 != undefined">
     <b-card :header="detail.レシピ名 + 'のレシピ情報'">
-      <b-form-fieldset label="テクニック">
-        {{techStr}}
-      </b-form-fieldset>
-      <b-form-fieldset label="必要スキル">
-        {{skillStr}}
-      </b-form-fieldset>
       <b-form-fieldset>
         <b-table striped :items="detail.材料" :fields="ingFields">
         </b-table>
@@ -15,21 +9,34 @@
         <b-table striped :items="detail.生成物" :fields="prodFields">
         </b-table>
       </b-form-fieldset>
-      <b-form-fieldset label="収録バインダー">
-        {{binderStr}}
-      </b-form-fieldset>
-      <!-- <b-form-fieldset label="所持キャラクター"> -->
-      <!--   {{skillStr}} -->
-      <!-- </b-form-fieldset> -->
-      <b-form-fieldset label="レシピ必須">
-        {{detail.レシピ必須 ? "はい" : "いいえ"}}
-      </b-form-fieldset>
-      <b-form-fieldset label="ルーレット">
-        {{rouletteStr}}
-      </b-form-fieldset>
-      <b-form-fieldset label="備考" v-if="detail.備考 != ''">
-        {{detail.備考}}
-      </b-form-fieldset>
+      <table class="table">
+        <tbody>
+          <tr>
+            <th scope="row"> テクニック </th>
+            <td> {{techStr}} </td>
+          </tr>
+          <tr>
+            <th scope="row"> 必要スキル </th>
+            <td> {{skillStr}} </td>
+          </tr>
+          <tr>
+            <th scope="row"> 収録バインダー </th>
+            <td> {{binderStr}} </td>
+          </tr>
+          <tr>
+            <th scope="row"> レシピ必須 </th>
+            <td> {{detail.レシピ必須 ? "はい" : "いいえ"}} </td>
+          </tr>
+          <tr>
+            <th scope="row"> ルーレット </th>
+            <td> {{rouletteStr}} </td>
+          </tr>
+          <tr v-if="detail.備考 != ''">
+            <th scope="row"> 備考 </th>
+            <td> {{detail.備考}} </td>
+          </tr>
+        </tbody>
+      </table>
     </b-card>
   </div>
 </template>
@@ -73,13 +80,12 @@ export default {
   },
   methods: {
     getDetail: function() {
-      var that = this
-      restCall('GET', baseURL+this.recipe.詳細, function(xhr) {
+      restCall('GET', baseURL+this.recipe.詳細, (xhr) => {
         if (xhr.readyState==4 && xhr.status==200) {
-          that.detail = JSON.parse(xhr.response)
+          this.detail = JSON.parse(xhr.response)
         } else if (xhr.readyState==404) {
-          that.detail = {
-            レシピ名: that.recipe.レシピ名,
+          this.detail = {
+            レシピ名: this.recipe.レシピ名,
             テクニック: ['わからん'],
             必要スキル: { 'わからん': 0 },
             収録バインダー: [{バインダー名: 'わからん'}],
@@ -89,7 +95,7 @@ export default {
             備考: 'よくわからん(´・ω・`)',
           }
         }
-        that.updateRecipe()
+        this.updateRecipe()
       })
     },
     updateRecipe: function() {
@@ -97,7 +103,7 @@ export default {
       var skills = ("必要スキル" in this.detail) ? this.detail.必要スキル : {}
       this.skillStr = Object.keys(skills).map(k => k+": "+(skills[k]+0.0).toFixed(1)).join(", ")
 
-      this.binderStr = this.detail.収録バインダー.map(b => b.バインダー名).join(", ")
+      this.binderStr = (this.detail.収録バインダー.length == 0) ? "なし" : this.detail.収録バインダー.map(b => b.バインダー名).join(", ")
 
       if (!this.detail.ギャンブル型 && !this.detail.ペナルティ型) {
         this.rouletteStr = "通常"
