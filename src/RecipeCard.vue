@@ -1,33 +1,11 @@
 <template>
   <div id="recipe-card" v-if="recipe.レシピ名 != undefined">
     <b-card :header="detail.レシピ名 + 'のレシピ情報'">
-      <table class="table-striped">
-        <thead>
-          <tr>
-            <th>材料</th>
-            <th>個数</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="ing in detail.材料">
-            <th scope="row"> {{ing.アイテム名}} </th>
-            <th> {{ing.個数}} </th>
-          </tr>
-        </tbody>
+      <b-table striped :items="detail.材料" :fields="ingFields">
+      </b-table>
 
-        <thead>
-          <tr class="success">
-            <th>生成物</th>
-            <th>個数</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="ing in detail.生成物">
-            <th scope="row"> {{ing.アイテム名}} </th>
-            <th> {{ing.個数}} </th>
-          </tr>
-        </tbody>
-      </table>
+      <b-table striped :items="detail.生成物" :fields="prodFields">
+      </b-table>
 
       <table>
         <tbody>
