@@ -74,7 +74,7 @@ export default {
     this.selected = this.characters[0]
     restCall('GET', baseURL+"/information", (xhr) => {
       if (xhr.readyState==4 && xhr.status==200) {
-        var msg = JSON.parse(xhr.response)["message"]
+        const msg = JSON.parse(xhr.response)["message"]
         if (msg.length > 0) {
           this.adMessage = msg
         }

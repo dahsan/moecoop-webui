@@ -58,7 +58,7 @@ export default {
   mounted: function() {
     restCall('GET', baseURL+'/binders', (xhr) => {
       if (xhr.readyState==4 && xhr.status==200) {
-        var result = JSON.parse(xhr.response)
+        const result = JSON.parse(xhr.response)
         this.binders = [{text: '全てのバインダー', value: '/recipes'}].concat(
           result['バインダー一覧'].map(function(b) { return { text: b.バインダー名, value: b.レシピ一覧 }; })
         )
@@ -76,8 +76,7 @@ export default {
     getRecipes: function() {
       restCall('GET', baseURL+this.selected+'?migemo=true&query='+this.query, (xhr) => {
         if (xhr.readyState==4 && xhr.status==200) {
-          var result = JSON.parse(xhr.response)
-          this.recipes = result['レシピ一覧'];
+          this.recipes = JSON.parse(xhr.response)['レシピ一覧'];
         }
       })
     },
