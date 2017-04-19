@@ -49,7 +49,8 @@
     <b-tab title="レシピ材料" disabled>
     </b-tab>
   </b-tabs>
-  <div class="justify-content-center" v-model="adMessage">
+
+  <div id="ad" class="justify-content-center" v-model="adMessage">
     <b-badge variant="primary">広告</b-badge> {{adMessage}}
   </div>
 </div>
