@@ -49,12 +49,16 @@
     <b-tab title="レシピ材料" disabled>
     </b-tab>
   </b-tabs>
+  <div class="justify-content-center" v-model="adMessage">
+    <b-badge variant="primary">広告</b-badge> {{adMessage}}
+  </div>
 </div>
 </template>
 
 <script>
 import Binder from './Binder.vue'
 import logo from './assets/moecoop.svg'
+import { baseURL, restCall } from './rest'
 
 export default {
   name: 'app',
@@ -63,10 +67,19 @@ export default {
       characters: ['しらたま', 'かきあげ', 'もじょうにー'],
       selected: '',
       logo: logo,
+      adMessage: "ダイアロス生活協同組合は P 鯖と E 鯖で活動中！晩御飯からピッキングの相談までお気軽にどうぞ！",
     }
   },
   mounted: function() {
     this.selected = this.characters[0]
+    restCall('GET', baseURL+"/information", (xhr) => {
+      if (xhr.readyState==4 && xhr.status==200) {
+        var msg = JSON.parse(xhr.response)["message"]
+        if (msg.length > 0) {
+          this.adMessage = msg
+        }
+      }
+    })
   },
   components: {
     Binder
