@@ -1,76 +1,56 @@
 <template>
-  <div id="recipe-card" v-if="recipe.レシピ名 != undefined">
-    <b-card :header="detail.レシピ名 + 'のレシピ情報'">
-      <b-tabs small>
-        <b-tab title="レシピ" active></b-tab>
-        <b-tab title="アイテム1" disabled></b-tab>
-        <b-tab title="アイテム2" disabled></b-tab>
-      </b-tabs>
-
-      <table class="table-striped">
-        <thead>
-          <tr>
-            <th> 材料 </th>
-            <th> 個数 </th>
-          </tr>
-          <tr bgcolor="black">
-            <th>  </th>
-            <th>  </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="ing in detail.材料">
-            <td> {{ing.アイテム名}} </td>
-            <td> {{ing.個数}} </td>
-          </tr>
-          <tr bgcolor="black"> <th></th><th></th></tr>
-          <tr>
-            <th> 生成物 </th>
-            <th> 個数 </th>
-          </tr>
-          <tr v-for="prod in detail.生成物">
-            <td> {{prod.アイテム名}} </td>
-            <td> {{prod.個数}} </td>
-          </tr>
-          <tr> <th></th><th></th></tr>
-          <tr bgcolor="black"> <th></th><th></th></tr>
-      <!--   </tbody> -->
-      <!-- </table> -->
-      <!-- <b-table striped :items="detail.材料" :fields="ingFields"> -->
-      <!-- </b-table> -->
-
-      <!-- <b-table striped :items="detail.生成物" :fields="prodFields"> -->
-      <!-- </b-table> -->
-
-      <!-- <table> -->
-      <!--   <tbody> -->
-          <tr>
-            <th scope="row" class="elem"> テクニック </th>
-            <td class="elem"> {{techStr}} </td>
-          </tr>
-          <tr>
-            <th scope="row" class="elem"> 必要スキル </th>
-            <td class="elem"> {{skillStr}} </td>
-          </tr>
-          <tr>
-            <th scope="row" class="elem"> 収録バインダー </th>
-            <td class="elem"> {{binderStr}} </td>
-          </tr>
-          <tr>
-            <th scope="row" class="elem"> レシピ必須 </th>
-            <td class="elem"> {{detail.レシピ必須 ? "はい" : "いいえ"}} </td>
-          </tr>
-          <tr>
-            <th scope="row" class="elem"> ルーレット </th>
-            <td class="elem"> {{rouletteStr}} </td>
-          </tr>
-          <tr v-if="detail.備考 != ''">
-            <th scope="row" class="elem"> 備考 </th>
-            <td class="elem"> {{detail.備考}} </td>
-          </tr>
-        </tbody>
-      </table>
-    </b-card>
+  <div id="recipe-card" v-if="recipe.レシピ名 != undefined" class="row">
+    <table class="table-striped justify-content-center">
+      <thead>
+        <tr>
+          <th> 材料 </th>
+          <th> 個数 </th>
+        </tr>
+        <tr class="sep"><th></th><th></th></tr>
+      </thead>
+      <tbody>
+        <tr v-for="ing in detail.材料">
+          <td> {{ing.アイテム名}} </td>
+          <td> {{ing.個数}} </td>
+        </tr>
+        <tr class="sep"> <th></th><th></th></tr>
+        <tr class="sep"> <th></th><th></th></tr>
+        <tr>
+          <th class="elem"> 生成物 </th>
+          <th class="elem"> 個数 </th>
+        </tr>
+        <tr v-for="prod in detail.生成物">
+          <td> {{prod.アイテム名}} </td>
+          <td> {{prod.個数}} </td>
+        </tr>
+        <tr class="sep"> <th></th><th></th></tr>
+        <tr class="sep"> <th></th><th></th></tr>
+        <tr>
+          <th scope="row" class="elem"> テクニック </th>
+          <td class="elem"> {{techStr}} </td>
+        </tr>
+        <tr>
+          <th scope="row" class="elem"> 必要スキル </th>
+          <td class="elem"> {{skillStr}} </td>
+        </tr>
+        <tr>
+          <th scope="row" class="elem"> 収録バインダー </th>
+          <td class="elem"> {{binderStr}} </td>
+        </tr>
+        <tr>
+          <th scope="row" class="elem"> レシピ必須 </th>
+          <td class="elem"> {{detail.レシピ必須 ? "はい" : "いいえ"}} </td>
+        </tr>
+        <tr>
+          <th scope="row" class="elem"> ルーレット </th>
+          <td class="elem"> {{rouletteStr}} </td>
+        </tr>
+        <tr v-if="detail.備考 != ''">
+          <th scope="row" class="elem"> 備考 </th>
+          <td class="elem"> {{detail.備考}} </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
@@ -150,6 +130,9 @@ export default {
 </script>
 
 <style scoped>
+  .sep {
+    background-color: black;
+  }
   .elem {
     background-color: white;
   }

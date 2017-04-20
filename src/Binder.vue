@@ -18,15 +18,16 @@
         <b-pagination size="md" :total-rows="this.recipes.length" :per-page="perPage" v-model="currentPage" />
       </div>
     </div>
-    <recipe-card :recipe="recipe" class="recipe-detail">
-    </recipe-card>
+
+    <info-card :recipe="recipe" class="info-detail">
+    </info-card>
   </div>
 </template>
 
 <script>
 import _ from 'lodash'
 import { baseURL, restCall } from './rest'
-import RecipeCard from './RecipeCard.vue'
+import InfoCard from './InfoCard.vue'
 
 export default {
   name: 'binder',
@@ -85,7 +86,7 @@ export default {
     },
   },
   components: {
-    RecipeCard
+    InfoCard
   }
 }
 </script>
@@ -108,11 +109,6 @@ export default {
 .recipe-list {
   -webkit-flex-direction: column;
   flex-direction:         column;
-  flex: 1;
-  max-width: 400px;
-}
-
-.recipe-detail {
   flex: 1;
   max-width: 400px;
 }
