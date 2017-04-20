@@ -1,6 +1,6 @@
 <template>
-  <div id="recipe-card" v-if="recipe.レシピ名 != undefined" class="row">
-    <table class="table-striped justify-content-center">
+  <div id="recipe-card" class="row">
+    <table class="table-striped">
       <thead>
         <tr>
           <th> 材料 </th>
@@ -68,22 +68,6 @@ export default {
       skillStr: '',
       binderStr: '',
       rouletteStr: '',
-      ingFields: {
-        アイテム名: {
-          label: '材料'
-        },
-        個数: {
-          label: '個数'
-        }
-      },
-      prodFields: {
-        アイテム名: {
-          label: '生成物'
-        },
-        個数: {
-          label: '個数'
-        }
-      }
     }
   },
   watch: {
