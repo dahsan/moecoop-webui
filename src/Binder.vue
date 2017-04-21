@@ -1,5 +1,5 @@
 <template>
-  <div id="binder" class="binder-base">
+  <div id="binder">
     <div class="recipe-list">
       <b-form-select v-model="selected" :options="binders">
       </b-form-select>
@@ -14,8 +14,8 @@
           {{r.レシピ名}}
         </template>
       </b-table>
-      <div class="justify-content-center">
-        <b-pagination size="md" :total-rows="this.recipes.length" :per-page="perPage" v-model="currentPage" />
+      <div class="justify-content-center row">
+        <b-pagination size="sm" :total-rows="this.recipes.length" :per-page="perPage" v-model="currentPage" />
       </div>
     </div>
 
@@ -94,9 +94,6 @@ export default {
 <style scoped>
 #binder {
   padding: 10px;
-}
-
-.binder-base {
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: row;
@@ -110,7 +107,7 @@ export default {
   -webkit-flex-direction: column;
   flex-direction:         column;
   flex: 1;
-  max-width: 400px;
+  max-width: 320px;
 }
 
 .search-box {
