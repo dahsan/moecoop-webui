@@ -64,7 +64,6 @@ module.exports = {
       prefix: 'images/',
       inject: true,
       title: appName,
-      background: 'bg-success',
     }),
     new HtmlWebpackPlugin({
       title: appName,
