@@ -31,23 +31,21 @@ import InfoCard from './InfoCard.vue'
 
 export default {
   name: 'binder',
-  data: function() {
-    return {
-      query: '',
-      selected: '',
-      currentPage: 1,
-      perPage: 10,
-      binders: [],
-      recipes: [],
-      recipe: {},
-      fields: {
-        レシピ名: {
-          label: 'レシピ名',
-          sortable: true,
-        }
+  data: () => ({
+    query: '',
+    selected: '',
+    currentPage: 1,
+    perPage: 10,
+    binders: [],
+    recipes: [],
+    recipe: {},
+    fields: {
+      レシピ名: {
+        label: 'レシピ名',
+        sortable: true,
       }
     }
-  },
+  }),
   watch: {
     query: function() {
       this.lazyGetRecipes()
@@ -61,7 +59,7 @@ export default {
       if (xhr.readyState==4 && xhr.status==200) {
         const result = JSON.parse(xhr.response)
         this.binders = [{text: '全てのバインダー', value: '/recipes'}].concat(
-          result['バインダー一覧'].map(function(b) { return { text: b.バインダー名, value: b.レシピ一覧 }; })
+          result['バインダー一覧'].map(b => ({ text: b.バインダー名, value: b.レシピ一覧 }))
         )
         this.selected = this.binders[0].value
       }

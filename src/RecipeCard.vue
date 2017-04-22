@@ -61,15 +61,13 @@ import { baseURL, restCall } from './rest'
 export default {
   name: 'recipe-card',
   props: ['recipe'],
-  data: function() {
-    return {
-      detail: {},
-      techStr: '',
-      skillStr: '',
-      binderStr: '',
-      rouletteStr: '',
-    }
-  },
+  data: () => ({
+    detail: {},
+    techStr: '',
+    skillStr: '',
+    binderStr: '',
+    rouletteStr: '',
+  }),
   watch: {
     recipe: function() {
       this.getDetail()
