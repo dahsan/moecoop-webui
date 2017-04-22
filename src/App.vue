@@ -40,7 +40,7 @@
     </b-form-select>
   </div>
 
-  <b-tabs small id="tabs" ref="tabs">
+  <b-tabs small id="tabs" ref="tabs" class="container">
     <b-tab title="バインダー">
       <binder class="justify-content-center"></binder>
     </b-tab>
@@ -50,7 +50,7 @@
     </b-tab>
   </b-tabs>
 
-  <div id="ad" class="justify-content-center" v-model="adMessage">
+  <div id="ad" v-model="adMessage" class="justify-content-center row">
     <b-badge variant="primary">広告</b-badge> {{adMessage}}
   </div>
 </div>
