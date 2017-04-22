@@ -55,7 +55,6 @@
 </template>
 
 <script>
-import _ from 'lodash'
 import { baseURL, restCall } from './rest'
 
 export default {
