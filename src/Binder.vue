@@ -15,7 +15,7 @@
         </template>
       </b-table>
       <div class="justify-content-center row">
-        <b-pagination size="sm" :total-rows="this.recipes.length" :per-page="perPage" v-model="currentPage" />
+        <b-pagination size="sm" :total-rows="recipes.length" :per-page="perPage" v-model="currentPage" />
       </div>
     </div>
 
@@ -73,7 +73,7 @@ export default {
       500
     ),
     getRecipes: function() {
-      restCall('GET', baseURL+this.selected+'?migemo=true&query='+this.query, (xhr) => {
+      restCall('GET', baseURL+this.selected+'?migemo=true&fields=生成物&query='+this.query, (xhr) => {
         if (xhr.readyState==4 && xhr.status==200) {
           this.recipes = JSON.parse(xhr.response)['レシピ一覧'];
         }
