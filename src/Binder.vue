@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <info-card :recipe="recipe" class="info-detail" v-if="'レシピ名' in recipe">
+    <info-card :recipe="recipe" class="info-detail" v-show="'レシピ名' in recipe">
     </info-card>
   </div>
 </template>

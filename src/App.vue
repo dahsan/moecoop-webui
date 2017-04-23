@@ -40,7 +40,7 @@
     </b-form-select>
   </div>
 
-  <b-tabs small id="tabs" ref="tabs" class="container">
+  <b-tabs small id="tabs" ref="tabs">
     <b-tab title="バインダー">
       <binder class="justify-content-center"></binder>
     </b-tab>

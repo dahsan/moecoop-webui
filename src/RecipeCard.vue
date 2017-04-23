@@ -10,8 +10,8 @@
       </thead>
       <tbody>
         <tr v-for="ing in detail.材料">
-          <td> {{ing.アイテム名}} </td>
-          <td> {{ing.個数}} </td>
+          <td v-text="ing.アイテム名" />
+          <td v-text="ing.個数" />
         </tr>
         <tr class="sep"> <th></th><th></th></tr>
         <tr class="sep"> <th></th><th></th></tr>
@@ -20,22 +20,22 @@
           <th class="elem"> 個数 </th>
         </tr>
         <tr v-for="prod in detail.生成物">
-          <td> {{prod.アイテム名}} </td>
-          <td> {{prod.個数}} </td>
+          <td v-text="prod.アイテム名" />
+          <td v-text="prod.個数" />
         </tr>
         <tr class="sep"> <th></th><th></th></tr>
         <tr class="sep"> <th></th><th></th></tr>
         <tr>
           <th scope="row" class="elem"> テクニック </th>
-          <td class="elem"> {{techStr}} </td>
+          <td class="elem" v-text="techStr" />
         </tr>
         <tr>
           <th scope="row" class="elem"> 必要スキル </th>
-          <td class="elem"> {{skillStr}} </td>
+          <td class="elem" v-html="skillStr" />
         </tr>
         <tr>
           <th scope="row" class="elem"> 収録バインダー </th>
-          <td class="elem"> {{binderStr}} </td>
+          <td class="elem" v-html="binderStr" />
         </tr>
         <tr>
           <th scope="row" class="elem"> レシピ必須 </th>
@@ -43,11 +43,11 @@
         </tr>
         <tr>
           <th scope="row" class="elem"> ルーレット </th>
-          <td class="elem"> {{rouletteStr}} </td>
+          <td class="elem" v-html="rouletteStr" />
         </tr>
         <tr v-if="detail.備考 != ''">
           <th scope="row" class="elem"> 備考 </th>
-          <td class="elem"> {{detail.備考}} </td>
+          <td class="elem" v-text="detail.備考" />
         </tr>
       </tbody>
     </table>
@@ -95,15 +95,15 @@ export default {
     updateRecipe: function() {
       this.techStr = this.detail.テクニック.join(", ")
       const skills = ("必要スキル" in this.detail) ? this.detail.必要スキル : {}
-      this.skillStr = Object.keys(skills).map(k => k+": "+(skills[k]+0.0).toFixed(1)).join(", ")
+      this.skillStr = Object.keys(skills).map(k => k+": "+(skills[k]+0.0).toFixed(1)).join("<br />")
 
-      this.binderStr = (this.detail.収録バインダー.length == 0) ? "なし" : this.detail.収録バインダー.map(b => b.バインダー名).join(", ")
+      this.binderStr = (this.detail.収録バインダー.length == 0) ? "なし" : this.detail.収録バインダー.map(b => b.バインダー名).join("<br /")
 
       if (!this.detail.ギャンブル型 && !this.detail.ペナルティ型) {
         this.rouletteStr = "通常"
       } else {
         this.rouletteStr = [this.detail.ギャンブル型 ? "ギャンブル型" : "",
-                            this.detail.ペナルティ型 ? "ペナルティ型" : ""].filter(s => s != "").join(", ")
+                            this.detail.ペナルティ型 ? "ペナルティ型" : ""].filter(s => s != "").join("<br />")
       }
     }
   }
