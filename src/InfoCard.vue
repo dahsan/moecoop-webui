@@ -30,7 +30,9 @@ export default {
 </script>
 
 <style scoped>
-#info-card {
-  max-width: 320px;
-}
+  #info-card {
+    display: -webkit-flex;
+    display: flex;
+    width: 320px;
+  }
 </style>

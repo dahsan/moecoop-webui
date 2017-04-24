@@ -19,8 +19,7 @@
       </div>
     </div>
 
-    <info-card :recipe="recipe" class="info-detail" v-show="'レシピ名' in recipe">
-    </info-card>
+    <info-card :recipe="recipe" class="info-detail" v-show="'レシピ名' in recipe" />
   </div>
 </template>
 
@@ -90,33 +89,28 @@ export default {
 </script>
 
 <style scoped>
-#binder {
-  padding: 10px;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: row;
-  flex-direction:         row;
-  -webkit-flex-wrap: wrap;
-  flex-wrap: wrap;
-  flex-basis: 48%;
-}
+  #binder {
+    padding: 10px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction:         row;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
 
-.recipe-list {
-  -webkit-flex-direction: column;
-  flex-direction:         column;
-  flex: 1;
-  max-width: 320px;
-}
+  .recipe-list {
+    -webkit-flex-direction: column;
+    flex-direction:         column;
+    max-width: 320px;
+  }
 
-.search-box {
-  display: -webkit-flex;
-  display: flex;
-  flex-wrap: nowrap;
-  flex: 1;
-}
+  .search-box {
+    flex-wrap: nowrap;
+  }
 
-#queryBox {
-  width: 200px;
-}
-
+  #queryBox {
+    width: 200px;
+  }
 </style>

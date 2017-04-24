@@ -1,15 +1,14 @@
 <template>
-<div id="app" class="app-base">
+<div id="app">
   <b-navbar toggleable type="inverse" variant="success">
 
-    <b-nav-toggle target="nav_collapse"></b-nav-toggle>
+    <b-nav-toggle target="nav_collapse" />
     <b-link class="navbar-brand" to="#">
       <img :src="logo" height=27>
-      <span>生協の知恵袋 ウェブ版</span>
+      <span>生協の知恵袋</span>
     </b-link>
 
     <b-collapse is-nav id="nav_collapse">
-
       <b-nav is-nav-bar>
         <b-nav-item>
           <b-link class="navbar-brand" to="http://docs.fukuro.coop.moe/">
@@ -29,15 +28,13 @@
             Github
           </b-link>
         </b-nav-item>
-
       </b-nav>
     </b-collapse>
   </b-navbar>
 
   <div class="m-md-2">
     キャラクター:
-    <b-form-select v-model="selected" :options="characters">
-    </b-form-select>
+    <b-form-select v-model="selected" :options="characters" />
   </div>
 
   <b-tabs small id="tabs" ref="tabs">
@@ -90,14 +87,14 @@ export default {
 </script>
 
 <style scoped>
-.binder-base {
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: row;
-  flex-direction:         row;
-}
+  #app {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction:         column;
+  }
 
-#tabs {
-  padding: 2px;
-}
+  #tabs {
+    padding: 2px;
+  }
 </style>
