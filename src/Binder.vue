@@ -15,11 +15,13 @@
         </template>
       </b-table>
       <div class="justify-content-center row">
-        <b-pagination size="sm" :total-rows="recipes.length" :per-page="perPage" v-model="currentPage" />
+        <b-pagination size="sm" :total-rows="recipes.length" :per-page="perPage" v-model="currentPage">
+        </b-pagination>
       </div>
     </div>
 
-    <info-card :recipe="recipe" class="info-detail" v-show="'レシピ名' in recipe" />
+    <info-card :recipe="recipe" class="info-detail" v-show="'レシピ名' in recipe">
+    </info-card>
   </div>
 </template>
 

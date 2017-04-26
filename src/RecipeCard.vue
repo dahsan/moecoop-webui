@@ -10,8 +10,8 @@
       </thead>
       <tbody>
         <tr v-for="ing in detail.材料">
-          <td v-text="ing.アイテム名" />
-          <td v-text="ing.個数" />
+          <td v-text="ing.アイテム名"></td>
+          <td v-text="ing.個数"></td>
         </tr>
         <tr class="sep"> <th></th><th></th></tr>
         <tr class="sep"> <th></th><th></th></tr>
@@ -20,22 +20,22 @@
           <th class="elem"> 個数 </th>
         </tr>
         <tr v-for="prod in detail.生成物">
-          <td v-text="prod.アイテム名" />
-          <td v-text="prod.個数" />
+          <td v-text="prod.アイテム名"></td>
+          <td v-text="prod.個数"></td>
         </tr>
         <tr class="sep"> <th></th><th></th></tr>
         <tr class="sep"> <th></th><th></th></tr>
         <tr>
           <th scope="row" class="elem"> テクニック </th>
-          <td class="elem" v-text="techStr" />
+          <td class="elem" v-text="techStr"></td>
         </tr>
         <tr>
           <th scope="row" class="elem"> 必要スキル </th>
-          <td class="elem" v-html="skillStr" />
+          <td class="elem" v-html="skillStr"></td>
         </tr>
         <tr>
           <th scope="row" class="elem"> 収録バインダー </th>
-          <td class="elem" v-html="binderStr" />
+          <td class="elem" v-html="binderStr"></td>
         </tr>
         <tr>
           <th scope="row" class="elem"> レシピ必須 </th>
@@ -43,11 +43,11 @@
         </tr>
         <tr>
           <th scope="row" class="elem"> ルーレット </th>
-          <td class="elem" v-html="rouletteStr" />
+          <td class="elem" v-html="rouletteStr"></td>
         </tr>
         <tr v-if="detail.備考 != ''">
           <th scope="row" class="elem"> 備考 </th>
-          <td class="elem" v-text="detail.備考" />
+          <td class="elem" v-text="detail.備考"></td>
         </tr>
       </tbody>
     </table>

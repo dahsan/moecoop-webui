@@ -2,7 +2,7 @@
 <div id="app">
   <b-navbar toggleable type="inverse" variant="success">
 
-    <b-nav-toggle target="nav_collapse" />
+    <b-nav-toggle target="nav_collapse"></b-nav-toggle>
     <b-link class="navbar-brand" to="#">
       <img :src="logo" height=27>
       <span>生協の知恵袋</span>
@@ -34,7 +34,7 @@
 
   <div class="m-md-2">
     キャラクター:
-    <b-form-select v-model="selected" :options="characters" />
+    <b-form-select v-model="selected" :options="characters"></b-form-select>
   </div>
 
   <b-tabs small id="tabs" ref="tabs">
