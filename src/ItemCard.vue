@@ -4,7 +4,7 @@
       <tbody>
         <tr>
           <th scope="row" class="elem"> アイテム名 </th>
-          <td class="elem"> {{detail.アイテム名}} </td>
+          <td class="elem" v-text="detail.アイテム名"></td>
         </tr>
         <tr>
           <th scope="row" class="elem"> 英名 </th>
@@ -28,11 +28,15 @@
         </tr>
         <tr v-if="detail.特殊条件.length > 0">
           <th scope="row" class="elem"> 特殊条件 </th>
-          <td class="elem"> {{effectStr}} </td>
+          <td class="elem" v-html="effectStr"></td>
         </tr>
         <tr v-if="detail.ペットアイテム.種別 != '犬も喰わない'">
           <th scope="row" class="elem"> ペットアイテム </th>
-          <td class="elem"> {{petItemStr}} </td>
+          <td class="elem" v-text="petItemStr"></td>
+        </tr>
+        <tr v-if="detail.info.length > 0">
+          <th scope="row" class="elem"> info </th>
+          <td class="elem" v-html="detail.info.replace(/\n/, '<br />')"></td>
         </tr>
       </tbody>
     </table>
@@ -70,12 +74,12 @@ export default {
       })
     },
     updateItem: function() {
-      this.effectStr = ''
+      this.effectStr = this.detail.特殊条件.map(sp => sp.詳細).join('<br />')
       if (this.detail.ペットアイテム.種別 == '不明') {
         this.petItemStr = '不明'
       }
       else{
-        this.petItemStr = this.detail.ペットアイテム.種別 + ': ' + (this.detail.ペットアイテム.効果+0.0).toFixed(1)
+        this.petItemStr = this.detail.ペットアイテム.種別 + '(' + (this.detail.ペットアイテム.効果+0.0).toFixed(1)+')'
       }
     }
   }

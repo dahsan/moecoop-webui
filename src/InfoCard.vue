@@ -6,7 +6,19 @@
           <recipe-card :recipe="recipe" class="justify-content-center">
           </recipe-card>
         </b-tab>
-        <!-- <b-tab :title="'アイテム'+(idx+1)" v-for="(it, idx) in recipe.追加情報.生成物" :key="idx" active> -->
+        <b-tab title="アイテム1" v-if="recipe.追加情報.生成物.length >= 1">
+          <item-card :item="recipe.追加情報.生成物[0]" class="justify-content-center">
+          </item-card>
+        </b-tab>
+        <b-tab title="アイテム1" v-else disabled>
+        </b-tab>
+        <b-tab title="アイテム2" v-if="recipe.追加情報.生成物.length >= 2">
+          <item-card :item="recipe.追加情報.生成物[1]" class="justify-content-center">
+          </item-card>
+        </b-tab>
+        <b-tab title="アイテム2" v-else>
+        </b-tab>
+        <!-- <b-tab :title="'アイテム'+(idx+1)" v-for="(it, idx) in recipe.追加情報.生成物" :key="idx"> -->
         <!--   <item-card :item="it" class="justify-content-center"> -->
         <!--   </item-card> -->
         <!-- </b-tab> -->

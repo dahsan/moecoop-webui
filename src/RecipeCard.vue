@@ -95,7 +95,7 @@ export default {
     updateRecipe: function() {
       this.techStr = this.detail.テクニック.join(", ")
       const skills = ("必要スキル" in this.detail) ? this.detail.必要スキル : {}
-      this.skillStr = Object.keys(skills).map(k => k+": "+(skills[k]+0.0).toFixed(1)).join("<br />")
+      this.skillStr = Object.keys(skills).map(k => k+'('+(skills[k]+0.0).toFixed(1)+')').join("<br />")
 
       this.binderStr = (this.detail.収録バインダー.length == 0) ? "なし" : this.detail.収録バインダー.map(b => b.バインダー名).join("<br /")
 

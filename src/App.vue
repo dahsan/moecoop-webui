@@ -1,6 +1,6 @@
 <template>
-<div id="app">
-  <b-navbar toggleable type="inverse" variant="success">
+<div id="app" class="container-fluid">
+  <b-navbar toggleable type="inverse" variant="success" class="row">
 
     <b-nav-toggle target="nav_collapse"></b-nav-toggle>
     <b-link class="navbar-brand" to="#">
