@@ -1,51 +1,44 @@
 <template>
   <div id="binder">
     <div class="recipe-list">
-      <b-form-select v-model="selected" :options="binders">
-      </b-form-select>
-      から
-      <div class="search-box">
-        <b-form-input id="queryBox" v-model="query" type="text" placeholder="レシピ名"></b-form-input>
-        を検索
-      </div>
-      <b-table striped hover :items="recipes" :fields="fields" :current-page="currentPage" :per-page="perPage"
-               @row-clicked="showDetail">
-        <template slot="r" scope="r">
-          {{r.レシピ名}}
+      <v-select label="バインダー" v-model="selected" :items="binders">
+      </v-select>から
+      <v-text-field label="レシピ名" v-model="query" type="text"></v-text-field> を検索
+
+      <v-data-table select-all no-data-text="ここにレシピが表示されます" v-model="recipes"
+                    :headers="[{ text: 'レシピ名', value: 'レシピ名'}]">
+        <template slot="items" scope="r">
+          <td>
+            <v-checkbox></v-checkbox>
+          </td>
+          <td>
+            {{r.item.レシピ名}}
+          </td>
         </template>
-      </b-table>
-      <div class="justify-content-center row">
-        <b-pagination size="sm" :total-rows="recipes.length" :per-page="perPage" v-model="currentPage">
-        </b-pagination>
-      </div>
+      </v-data-table>
     </div>
 
-    <info-card :recipe="recipe" class="info-detail" v-show="'レシピ名' in recipe">
-    </info-card>
+    <!-- <info-card :recipe="recipe" class="info-detail" v-show="'レシピ名' in recipe"> -->
+    <!-- </info-card> -->
   </div>
 </template>
 
 <script>
 import _ from 'lodash'
 import { baseURL, restCall } from './rest'
-import InfoCard from './InfoCard.vue'
+// import InfoCard from './InfoCard.vue'
 
 export default {
   name: 'binder',
   data: () => ({
     query: '',
     selected: '',
-    currentPage: 1,
-    perPage: 10,
     binders: [],
     recipes: [],
-    recipe: {},
-    fields: {
-      レシピ名: {
-        label: 'レシピ名',
-        sortable: true,
-      }
-    }
+    //recipe: {},
+    //headers: [
+    //  'レシピ名',
+    //],
   }),
   watch: {
     query: function() {
@@ -77,42 +70,19 @@ export default {
       restCall('GET', baseURL+this.selected+'?migemo=true&fields=生成物&query='+this.query, (xhr) => {
         if (xhr.readyState==4 && xhr.status==200) {
           this.recipes = JSON.parse(xhr.response)['レシピ一覧'];
+          console.log("レシピ: "+JSON.stringify(this.recipes))
         }
       })
     },
-    showDetail: function(item, index) {
-      this.recipe = item
-    },
+    // showDetail: function(item, index) {
+    //  this.recipe = item
+    // },
   },
-  components: {
-    InfoCard
-  }
+  // components: {
+  //   InfoCard
+  // }
 }
 </script>
 
 <style scoped>
-  #binder {
-    padding: 10px;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: row;
-    flex-direction:         row;
-    -webkit-flex-wrap: wrap;
-    flex-wrap: wrap;
-    justify-content: space-around;
-  }
-
-  .recipe-list {
-    -webkit-flex-direction: column;
-    flex-direction:         column;
-    max-width: 320px;
-  }
-
-  .search-box {
-    flex-wrap: nowrap;
-  }
-
-  #queryBox {
-    width: 200px;
-  }
 </style>

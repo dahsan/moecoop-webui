@@ -1,56 +1,49 @@
 <template>
-<div id="app" class="container-fluid">
-  <b-navbar toggleable type="inverse" variant="success" class="row">
+  <div id="app">
+    <v-toolbar>
+      <img :src="logo" width="27"></img>
+      <v-toolbar-title>生協の知恵袋</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <a href="http://docs.fukuro.coop.moe/" class="mr-3 mt-1">
+        <v-icon class="white--text">help</v-icon>
+      </a>
+      <a href="https://twitter.com/coop_moe" class="mr-3">
+        <i class="fa fa-twitter" aria-hidden="true"></i>
+      </a>
+      <a href="https://github.com/coop-mojo/moecoop-webui">
+        <i class="fa fa-github" aria-hidden="true"></i>
+      </a>
+    </v-toolbar>
+    <v-tabs centered>
+      <v-tab-item ripple slot="activators" href="#binder-tab">
+        バインダー
+      </v-tab-item>
+      <v-tab-item ripple slot="activators" href="#skill-tab" disabled>
+        スキル
+      </v-tab-item>
+      <v-tab-item ripple slot="activators" href="#recipe-menu-tab" disabled>
+        レシピ材料
+      </v-tab-item>
 
-    <b-nav-toggle target="nav_collapse"></b-nav-toggle>
-    <b-link class="navbar-brand" to="#">
-      <img :src="logo" height=27>
-      <span>生協の知恵袋</span>
-    </b-link>
-
-    <b-collapse is-nav id="nav_collapse">
-      <b-nav is-nav-bar>
-        <b-nav-item>
-          <b-link class="navbar-brand" to="http://docs.fukuro.coop.moe/">
-            ドキュメント
-          </b-link>
-        </b-nav-item>
-        <b-nav-item>
-          <b-link class="navbar-brand" to="https://twitter.com/coop_moe">
-            Twitter
-          </b-link>
-        </b-nav-item>
-      </b-nav>
-
-      <b-nav is-nav-bar class="ml-auto">
-        <b-nav-item>
-          <b-link class="navbar-brand" to="https://github.com/coop-mojo/moecoop-webui">
-            Github
-          </b-link>
-        </b-nav-item>
-      </b-nav>
-    </b-collapse>
-  </b-navbar>
-
-  <div class="m-md-2">
-    キャラクター:
-    <b-form-select v-model="selected" :options="characters"></b-form-select>
+      <v-tab-content slot="content" id="binder-tab">
+        <v-container fluid>
+          <v-row>
+            <v-col md2 xs6>
+              <v-select label="キャラクター" v-model="selected" :items="characters" item-value="text"/>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col xs12>
+              <v-card>
+                <binder></binder>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-tab-content>
+    </v-tabs>
+    <v-chip class="primary white--text">広告</v-chip>{{adMessage}}
   </div>
-
-  <b-tabs small id="tabs" ref="tabs">
-    <b-tab title="バインダー">
-      <binder class="justify-content-center"></binder>
-    </b-tab>
-    <b-tab title="スキル" disabled>
-    </b-tab>
-    <b-tab title="レシピ材料" disabled>
-    </b-tab>
-  </b-tabs>
-
-  <div id="ad" v-model="adMessage" class="justify-content-center row">
-    <b-badge variant="primary">広告</b-badge> {{adMessage}}
-  </div>
-</div>
 </template>
 
 <script>
@@ -62,7 +55,11 @@ export default {
   name: 'app',
   data() {
     return {
-      characters: ['しらたま', 'かきあげ', 'もじょうにー'],
+      characters: [
+        { text: 'しらたま' },
+        { text: 'かきあげ' },
+        { text: 'もじょうにー' }
+      ],
       selected: '',
       logo: logo,
       adMessage: "ダイアロス生活協同組合は P 鯖と E 鯖で活動中！晩御飯からピッキングの相談までお気軽にどうぞ！",
@@ -87,14 +84,7 @@ export default {
 </script>
 
 <style scoped>
-  #app {
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: column;
-    flex-direction:         column;
-  }
-
-  #tabs {
-    padding: 2px;
+  .fa {
+    color: white;
   }
 </style>

@@ -40,6 +40,10 @@ module.exports = {
         }
       },
       {
+        test: /\.styl$/,
+        loader: 'stylus-loader',
+      },
+      {
         test: /\.html$/,
         loader: 'html-loader',
       },
