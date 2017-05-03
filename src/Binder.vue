@@ -1,25 +1,43 @@
 <template>
   <div id="binder">
-    <div class="recipe-list">
-      <v-select label="バインダー" v-model="selected" :items="binders">
-      </v-select>から
-      <v-text-field label="レシピ名" v-model="query" type="text"></v-text-field> を検索
+    <v-container fluid>
+      <v-row>
+        <v-col md2 xs6>
+          <v-select class="mt-0 mb-0" label="バインダー" v-model="selected" :items="binders" >
+          </v-select>
+        </v-col>
+        <v-col md1 xs1>
+          <p class="text-xs-left">から</p>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col md3 xs9>
+          <v-text-field class="mt-0 mb-0" label="レシピ名" v-model="query" type="text"></v-text-field>
+        </v-col>
+        <v-col md1 xs1>
+          <p class="text-xs-left">を検索</p>
+        </v-col>
+      </v-row>
 
-      <v-data-table select-all no-data-text="ここにレシピが表示されます" v-model="recipes"
-                    :headers="[{ text: 'レシピ名', value: 'レシピ名'}]">
-        <template slot="items" scope="r">
-          <td>
-            <v-checkbox></v-checkbox>
-          </td>
-          <td>
-            {{r.item.レシピ名}}
-          </td>
-        </template>
-      </v-data-table>
-    </div>
+      <v-row>
+        <v-col md12>
+          <v-data-table select-all no-data-text="該当レシピがありません" v-model="recipes"
+                        :headers="[{ text: 'レシピ名', value: 'レシピ名'}]">
+            <template slot="items" scope="r">
+              <td>
+                <v-checkbox></v-checkbox>
+              </td>
+              <td>
+                {{r.item.レシピ名}}
+              </td>
+            </template>
+          </v-data-table>
+        </v-col>
+      </v-row>
 
     <!-- <info-card :recipe="recipe" class="info-detail" v-show="'レシピ名' in recipe"> -->
     <!-- </info-card> -->
+    </v-container>
   </div>
 </template>
 
@@ -36,9 +54,6 @@ export default {
     binders: [],
     recipes: [],
     //recipe: {},
-    //headers: [
-    //  'レシピ名',
-    //],
   }),
   watch: {
     query: function() {
@@ -55,7 +70,7 @@ export default {
         this.binders = [{text: '全てのバインダー', value: '/recipes'}].concat(
           result['バインダー一覧'].map(b => ({ text: b.バインダー名, value: b.レシピ一覧 }))
         )
-        this.selected = this.binders[0].value
+        this.selected = this.binders[0]
       }
     })
   },
@@ -67,10 +82,9 @@ export default {
       500
     ),
     getRecipes: function() {
-      restCall('GET', baseURL+this.selected+'?migemo=true&fields=生成物&query='+this.query, (xhr) => {
+      restCall('GET', baseURL+this.selected.value+'?migemo=true&fields=生成物&query='+this.query, (xhr) => {
         if (xhr.readyState==4 && xhr.status==200) {
-          this.recipes = JSON.parse(xhr.response)['レシピ一覧'];
-          console.log("レシピ: "+JSON.stringify(this.recipes))
+          this.recipes = JSON.parse(xhr.response)['レシピ一覧']
         }
       })
     },

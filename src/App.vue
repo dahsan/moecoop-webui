@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <v-app id="app">
     <v-toolbar>
       <img :src="logo" width="27"></img>
       <v-toolbar-title>生協の知恵袋</v-toolbar-title>
@@ -14,36 +14,91 @@
         <i class="fa fa-github" aria-hidden="true"></i>
       </a>
     </v-toolbar>
-    <v-tabs centered>
-      <v-tab-item ripple slot="activators" href="#binder-tab">
-        バインダー
-      </v-tab-item>
-      <v-tab-item ripple slot="activators" href="#skill-tab" disabled>
-        スキル
-      </v-tab-item>
-      <v-tab-item ripple slot="activators" href="#recipe-menu-tab" disabled>
-        レシピ材料
-      </v-tab-item>
-
-      <v-tab-content slot="content" id="binder-tab">
+    <main>
+      <v-content>
         <v-container fluid>
           <v-row>
-            <v-col md2 xs6>
-              <v-select label="キャラクター" v-model="selected" :items="characters" item-value="text"/>
+            <v-col md12>
+              <v-tabs centered>
+                <v-tab-item ripple slot="activators" href="#binder-tab">
+                  バインダー
+                </v-tab-item>
+                <v-tab-item ripple slot="activators" href="#skill-tab" disabled>
+                  スキル
+                </v-tab-item>
+                <v-tab-item ripple slot="activators" href="#recipe-menu-tab" disabled>
+                  レシピ材料
+                </v-tab-item>
+                <v-tab-content slot="content" id="binder-tab">
+                  <v-row>
+                    <v-col md2 xs6>
+                      <v-select label="キャラクター" v-model="selected" :items="characters" item-value="text" item-text="text">
+                      </v-select>
+                    </v-col>
+                    <v-col md1>
+                      <v-dialog v-model="dlg">
+                        <v-btn class="ml-0 black--text" floating small slot="activator">
+                          <v-icon>edit</v-icon>
+                        </v-btn>
+                        <v-card>
+                          <v-card-row>
+                            <v-card-title>
+                              キャラクター管理
+                            </v-card-title>
+                          </v-card-row>
+                          キャラクター一覧
+                          <v-card-row>
+                            <v-list dense>
+                              <v-list-item v-bind:key="item.text" v-for="(item, idx) in characters">
+                                <v-list-tile avatar>
+                                  <v-list-tile-content>
+                                    <v-list-tile-title v-text="item.text" />
+                                  </v-list-tile-content>
+                                  <v-list-tile-action>
+                                    <v-btn icon ripple small default>
+                                      <v-icon class="black--text">edit</v-icon>
+                                    </v-btn>
+                                  </v-list-tile-action>
+                                  <v-list-tile-action>
+                                    <v-btn icon ripple small default @click.native="deleteCharacter(item.text)" v-if="characters.length > 1">
+                                      <v-icon class="black--text">delete</v-icon>
+                                    </v-btn>
+                                    <v-btn icon ripple small default disabled v-else>
+                                      <v-icon class="black--text">delete</v-icon>
+                                    </v-btn>
+                                  </v-list-tile-action>
+                                </v-list-tile>
+                                <v-divider v-if="idx + 1 < characters.length"></v-divider>
+                              </v-list-item>
+                            </v-list>
+                          </v-card-row>
+                          <v-card-row actions>
+                            <v-btn class="green--text darken-1" flat="flat" @click.native="dlg = false">閉じる</v-btn>
+                          </v-card-row>
+                        </v-card>
+                      </v-dialog>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col xs12>
+                      <v-card>
+                        <binder></binder>
+                      </v-card>
+                    </v-col>
+                  </v-row>
+                </v-tab-content>
+              </v-tabs>
             </v-col>
           </v-row>
           <v-row>
-            <v-col xs12>
-              <v-card>
-                <binder></binder>
-              </v-card>
+            <v-col md12>
+              <p class="text-md-center"><v-chip class="primary white--text">広告</v-chip>{{adMessage}}</p>
             </v-col>
           </v-row>
         </v-container>
-      </v-tab-content>
-    </v-tabs>
-    <v-chip class="primary white--text">広告</v-chip>{{adMessage}}
-  </div>
+      </v-content>
+    </main>
+  </v-app>
 </template>
 
 <script>
@@ -61,6 +116,7 @@ export default {
         { text: 'もじょうにー' }
       ],
       selected: '',
+      dlg: false,
       logo: logo,
       adMessage: "ダイアロス生活協同組合は P 鯖と E 鯖で活動中！晩御飯からピッキングの相談までお気軽にどうぞ！",
     }
@@ -75,6 +131,15 @@ export default {
         }
       }
     })
+  },
+  methods: {
+    deleteCharacter: function(char) {
+      const s = this.selected
+      this.characters = this.characters.filter((e) => e.text != char)
+      if (s.text == char) {
+        this.selected = this.characters[0]
+      }
+    },
   },
   components: {
     Binder
