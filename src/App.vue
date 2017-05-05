@@ -81,9 +81,7 @@
                   </v-row>
                   <v-row>
                     <v-col xs12>
-                      <v-card>
-                        <binder></binder>
-                      </v-card>
+                      <binder></binder>
                     </v-col>
                   </v-row>
                 </v-tab-content>
@@ -92,7 +90,9 @@
           </v-row>
           <v-row>
             <v-col md12>
-              <p class="text-md-center"><v-chip class="primary white--text">広告</v-chip>{{adMessage}}</p>
+              <p class="text-md-center">
+                <v-chip class="primary white--text">広告</v-chip>{{adMessage}}
+              </p>
             </v-col>
           </v-row>
         </v-container>

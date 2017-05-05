@@ -1,29 +1,42 @@
 <template>
   <div id="info-card">
-    <b-card :header="recipe.レシピ名 + 'のレシピ情報'">
-      <b-tabs small>
-        <b-tab title="レシピ" active>
-          <recipe-card :recipe="recipe" class="justify-content-center">
+    <v-card class="elevation-1">
+      <v-card-row class="blue darken-1">
+        <v-card-title class="white--text">
+          {{recipe.レシピ名}}のレシピ情報
+        </v-card-title>
+      </v-card-row>
+
+      <v-card-text>
+        <v-card-row>
+          <recipe-card :recipe="recipe">
           </recipe-card>
-        </b-tab>
-        <b-tab title="アイテム1" v-if="recipe.追加情報.生成物.length >= 1">
-          <item-card :item="recipe.追加情報.生成物[0]" class="justify-content-center">
-          </item-card>
-        </b-tab>
-        <b-tab title="アイテム1" v-else disabled>
-        </b-tab>
-        <b-tab title="アイテム2" v-if="recipe.追加情報.生成物.length >= 2">
-          <item-card :item="recipe.追加情報.生成物[1]" class="justify-content-center">
-          </item-card>
-        </b-tab>
-        <b-tab title="アイテム2" v-else>
-        </b-tab>
-        <!-- <b-tab :title="'アイテム'+(idx+1)" v-for="(it, idx) in recipe.追加情報.生成物" :key="idx"> -->
-        <!--   <item-card :item="it" class="justify-content-center"> -->
-        <!--   </item-card> -->
-        <!-- </b-tab> -->
-      </b-tabs>
-    </b-card>
+        </v-card-row>
+      </v-card-text>
+
+      <!-- <b-tabs small> -->
+      <!--   <b-tab title="レシピ" active> -->
+      <!--     <recipe-card :recipe="recipe" class="justify-content-center"> -->
+      <!--     </recipe-card> -->
+      <!--   </b-tab> -->
+      <!--   <b-tab title="アイテム1" v-if="recipe.追加情報.生成物.length >= 1"> -->
+      <!--     <item-card :item="recipe.追加情報.生成物[0]" class="justify-content-center"> -->
+      <!--     </item-card> -->
+      <!--   </b-tab> -->
+      <!--   <b-tab title="アイテム1" v-else disabled> -->
+      <!--   </b-tab> -->
+      <!--   <b-tab title="アイテム2" v-if="recipe.追加情報.生成物.length >= 2"> -->
+      <!--     <item-card :item="recipe.追加情報.生成物[1]" class="justify-content-center"> -->
+      <!--     </item-card> -->
+      <!--   </b-tab> -->
+      <!--   <b-tab title="アイテム2" v-else> -->
+      <!--   </b-tab> -->
+      <!--   <\!-- <b-tab :title="'アイテム'+(idx+1)" v-for="(it, idx) in recipe.追加情報.生成物" :key="idx"> -\-> -->
+      <!--   <\!--   <item-card :item="it" class="justify-content-center"> -\-> -->
+      <!--   <\!--   </item-card> -\-> -->
+      <!--   <\!-- </b-tab> -\-> -->
+      <!-- </b-tabs> -->
+    </v-card>
   </div>
 </template>
 
@@ -43,9 +56,4 @@ export default {
 </script>
 
 <style scoped>
-  #info-card {
-    display: -webkit-flex;
-    display: flex;
-    width: 320px;
-  }
 </style>

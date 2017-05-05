@@ -20,7 +20,7 @@
       </v-row>
 
       <v-row>
-        <v-col md12>
+        <v-col xs12 md6>
           <v-data-table select-all no-data-text="該当レシピがありません" v-model="recipes"
                         :headers="[{ text: 'レシピ名', value: 'レシピ名'}]">
             <template slot="items" scope="r">
@@ -28,15 +28,16 @@
                 <v-checkbox></v-checkbox>
               </td>
               <td>
-                {{r.item.レシピ名}}
+                <v-btn light flat @click.native="recipe = r.item">{{r.item.レシピ名}}</v-btn>
               </td>
             </template>
           </v-data-table>
         </v-col>
+        <v-col md6>
+          <info-card :recipe="recipe" class="info-detail" v-show="'レシピ名' in recipe">
+          </info-card>
+        </v-col>
       </v-row>
-
-    <!-- <info-card :recipe="recipe" class="info-detail" v-show="'レシピ名' in recipe"> -->
-    <!-- </info-card> -->
     </v-container>
   </div>
 </template>
@@ -44,7 +45,7 @@
 <script>
 import _ from 'lodash'
 import { baseURL, restCall } from './rest'
-// import InfoCard from './InfoCard.vue'
+import InfoCard from './InfoCard.vue'
 
 export default {
   name: 'binder',
@@ -53,7 +54,7 @@ export default {
     selected: '',
     binders: [],
     recipes: [],
-    //recipe: {},
+    recipe: {},
   }),
   watch: {
     query: function() {
@@ -88,13 +89,13 @@ export default {
         }
       })
     },
-    // showDetail: function(item, index) {
-    //  this.recipe = item
-    // },
+    showDetail: function(item, index) {
+      this.recipe = item
+    },
   },
-  // components: {
-  //   InfoCard
-  // }
+  components: {
+    InfoCard
+  }
 }
 </script>
 

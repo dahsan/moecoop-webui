@@ -1,54 +1,54 @@
 <template>
-  <div id="recipe-card" class="row">
-    <table class="table-striped">
+  <div id="recipe-card">
+    <table>
       <thead>
         <tr>
           <th> 材料 </th>
           <th> 個数 </th>
         </tr>
-        <tr class="sep"><th></th><th></th></tr>
+        <separator />
       </thead>
       <tbody>
         <tr v-for="ing in detail.材料">
-          <td v-text="ing.アイテム名"></td>
-          <td v-text="ing.個数"></td>
+          <td class="text-md-center" v-text="ing.アイテム名"></td>
+          <td class="text-md-right" v-text="ing.個数"></td>
         </tr>
-        <tr class="sep"> <th></th><th></th></tr>
-        <tr class="sep"> <th></th><th></th></tr>
+        <separator />
         <tr>
-          <th class="elem"> 生成物 </th>
-          <th class="elem"> 個数 </th>
+          <th> 生成物 </th>
+          <th> 個数 </th>
         </tr>
+        <separator />
         <tr v-for="prod in detail.生成物">
-          <td v-text="prod.アイテム名"></td>
-          <td v-text="prod.個数"></td>
+          <td class="text-md-center" v-text="prod.アイテム名"></td>
+          <td class="text-md-right" v-text="prod.個数"></td>
         </tr>
-        <tr class="sep"> <th></th><th></th></tr>
-        <tr class="sep"> <th></th><th></th></tr>
+        <separator />
         <tr>
-          <th scope="row" class="elem"> テクニック </th>
-          <td class="elem" v-text="techStr"></td>
-        </tr>
-        <tr>
-          <th scope="row" class="elem"> 必要スキル </th>
-          <td class="elem" v-html="skillStr"></td>
+          <th> テクニック </th>
+          <td class="text-md-center" v-text="techStr"></td>
         </tr>
         <tr>
-          <th scope="row" class="elem"> 収録バインダー </th>
-          <td class="elem" v-html="binderStr"></td>
+          <th> 必要スキル </th>
+          <td class="text-md-center" v-html="skillStr"></td>
         </tr>
         <tr>
-          <th scope="row" class="elem"> レシピ必須 </th>
-          <td class="elem"> {{detail.レシピ必須 ? "はい" : "いいえ"}} </td>
+          <th> 収録バインダー </th>
+          <td class="text-md-center" v-html="binderStr"></td>
         </tr>
         <tr>
-          <th scope="row" class="elem"> ルーレット </th>
-          <td class="elem" v-html="rouletteStr"></td>
+          <th> レシピ必須 </th>
+          <td class="text-md-center"> {{detail.レシピ必須 ? "はい" : "いいえ"}} </td>
+        </tr>
+        <tr>
+          <th> ルーレット </th>
+          <td class="text-md-center" v-html="rouletteStr"></td>
         </tr>
         <tr v-if="detail.備考 != ''">
-          <th scope="row" class="elem"> 備考 </th>
-          <td class="elem" v-text="detail.備考"></td>
+          <th> 備考 </th>
+          <td class="text-md-center" v-text="detail.備考"></td>
         </tr>
+        <separator />
       </tbody>
     </table>
   </div>
@@ -56,6 +56,7 @@
 
 <script>
 import { baseURL, restCall } from './rest'
+import Separator from './Separator.vue'
 
 export default {
   name: 'recipe-card',
@@ -106,15 +107,12 @@ export default {
                             this.detail.ペナルティ型 ? "ペナルティ型" : ""].filter(s => s != "").join("<br />")
       }
     }
+  },
+  components: {
+    Separator
   }
 }
 </script>
 
 <style scoped>
-  .sep {
-    background-color: black;
-  }
-  .elem {
-    background-color: white;
-  }
 </style>
