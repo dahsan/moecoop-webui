@@ -28,12 +28,17 @@
                 <v-checkbox></v-checkbox>
               </td>
               <td>
-                <v-btn light flat @click.native="recipe = r.item">{{r.item.レシピ名}}</v-btn>
+                <v-btn light flat class="hidden-xs-only" @click.native="recipe = r.item">{{r.item.レシピ名}}</v-btn>
+                <v-dialog v-model="dlg" fullscreen :overlay=false class="hidden-sm-and-up">
+                  <v-btn light flat slot="activator" @click.native="recipe = r.item">{{r.item.レシピ名}}</v-btn>
+                  <info-card :recipe="recipe">
+                  </info-card>
+                </v-dialog>
               </td>
             </template>
           </v-data-table>
         </v-col>
-        <v-col md6>
+        <v-col md6 class="hidden-xs-only">
           <info-card :recipe="recipe" class="info-detail" v-show="'レシピ名' in recipe">
           </info-card>
         </v-col>
@@ -55,6 +60,7 @@ export default {
     binders: [],
     recipes: [],
     recipe: {},
+    dlg: false,
   }),
   watch: {
     query: function() {
