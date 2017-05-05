@@ -39,7 +39,7 @@
           </v-data-table>
         </v-col>
         <v-col md6 class="hidden-xs-only">
-          <info-card :recipe="recipe" class="info-detail" v-show="'レシピ名' in recipe">
+          <info-card :recipe="recipe" v-show="'レシピ名' in recipe">
           </info-card>
         </v-col>
       </v-row>
