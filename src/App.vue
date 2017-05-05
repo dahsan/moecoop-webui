@@ -91,7 +91,9 @@
           <v-row>
             <v-col md12>
               <p class="text-md-center">
-                <v-chip class="primary white--text">広告</v-chip>{{adMessage}}
+                <v-chip class="primary white--text hidden-xs-only">広告</v-chip>
+                <v-chip class="secondary white--text hidden-sm-and-up">広告</v-chip>
+                {{adMessage}}
               </p>
             </v-col>
           </v-row>
