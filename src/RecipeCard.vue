@@ -62,7 +62,16 @@ export default {
   name: 'recipe-card',
   props: ['recipe'],
   data: () => ({
-    detail: {},
+    detail: {
+      レシピ名: 'わからん',
+      テクニック: ['わからん'],
+      必要スキル: { 'わからん': 0 },
+      収録バインダー: [{バインダー名: 'わからん'}],
+      レシピ必須: false,
+      材料: { 'わからん': 0 },
+      生成物: { 'わからん': 0 },
+      備考: 'よくわからん(´・ω・`)',
+    },
     techStr: '',
     skillStr: '',
     binderStr: '',
