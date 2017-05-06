@@ -1,7 +1,7 @@
 <template>
   <v-card id="info-card">
     <v-toolbar>
-      <v-btn icon="icon">
+      <v-btn icon="icon" @click.native="closeDialog()" class="hidden-sm-and-up">
         <v-icon>close</v-icon>
       </v-btn>
       <v-toolbar-title v-text="recipe.レシピ名+'のレシピ情報'">
@@ -47,7 +47,12 @@ import ItemCard from './ItemCard.vue'
 
 export default {
   name: 'info-card',
-  props: ['recipe', 'dlg'],
+  props: ['recipe'],
+  methods: {
+    closeDialog: function() {
+      this.$emit('update:dlg', false)
+    }
+  },
   components: {
     RecipeCard,
     ItemCard
