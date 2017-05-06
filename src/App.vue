@@ -4,11 +4,11 @@
       <img :src="logo" width="27"></img>
       <v-toolbar-title>生協の知恵袋</v-toolbar-title>
       <v-spacer></v-spacer>
-      <a href="http://docs.fukuro.coop.moe/" class="mr-3 mt-1">
+      <a href="http://docs.fukuro.coop.moe/" class="mr-1">
         <v-icon class="white--text">help</v-icon>
       </a>
-      <a href="https://twitter.com/coop_moe" class="mr-3">
-        <i class="fa fa-twitter" aria-hidden="true"></i>
+      <a href="https://twitter.com/coop_moe" class="mr-2">
+        <img :src="twitter" width="28"></img>
       </a>
       <a href="https://github.com/coop-mojo/moecoop-webui">
         <i class="fa fa-github" aria-hidden="true"></i>
@@ -75,6 +75,7 @@
 import RecipeTab from './RecipeTab.vue'
 import InfoCard from './InfoCard.vue'
 import logo from './assets/moecoop.svg'
+import twitter from './assets/Twitter_Social_Icon_White.svg'
 import { baseURL, restCall } from './rest'
 
 export default {
@@ -91,6 +92,7 @@ export default {
       recipe: {},
       sCharacter: { text: '' },
       logo: logo,
+      twitter: twitter,
       adMessage: "ダイアロス生活協同組合は P 鯖と E 鯖で活動中！晩御飯からピッキングの相談までお気軽にどうぞ！",
     }
   },
