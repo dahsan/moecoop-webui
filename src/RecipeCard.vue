@@ -1,14 +1,12 @@
 <template>
   <div id="recipe-card">
     <table>
-      <thead>
+      <tbody>
         <tr>
           <th> 材料 </th>
           <th> 個数 </th>
         </tr>
         <separator />
-      </thead>
-      <tbody>
         <tr v-for="ing in detail.材料">
           <td class="text-md-center" v-text="ing.アイテム名"></td>
           <td class="text-md-right" v-text="ing.個数"></td>

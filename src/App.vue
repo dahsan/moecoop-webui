@@ -31,57 +31,25 @@
                 </v-tab-item>
                 <v-tab-content slot="content" id="binder-tab">
                   <v-row>
-                    <v-col md2 xs6>
-                      <v-select label="キャラクター" v-model="selected" :items="characters" item-value="text" item-text="text">
-                      </v-select>
+                    <v-col xs12 md6>
+                      <v-row>
+                        <v-col xs6 md5>
+                          <v-select label="キャラクター" v-model="sCharacter" :items="characters" item-value="text" item-text="text">
+                          </v-select>
+                        </v-col>
+                        <v-col md1>
+                          <v-btn class="ml-0 black--text" floating small>
+                            <v-icon>edit</v-icon>
+                          </v-btn>
+                        </v-col>
+                      </v-row>
+                      <recipe-tab title="バインダー" :categories="binders" :character="sCharacter" :recipe.sync="recipe">
+                      </recipe-tab>
                     </v-col>
-                    <v-col md1>
-                      <v-dialog v-model="dlg">
-                        <v-btn class="ml-0 black--text" floating small slot="activator">
-                          <v-icon>edit</v-icon>
-                        </v-btn>
-                        <v-card>
-                          <v-card-row>
-                            <v-card-title>
-                              キャラクター管理
-                            </v-card-title>
-                          </v-card-row>
-                          キャラクター一覧
-                          <v-card-row>
-                            <v-list dense>
-                              <v-list-item v-bind:key="item.text" v-for="(item, idx) in characters">
-                                <v-list-tile avatar>
-                                  <v-list-tile-content>
-                                    <v-list-tile-title v-text="item.text" />
-                                  </v-list-tile-content>
-                                  <v-list-tile-action>
-                                    <v-btn icon ripple small default>
-                                      <v-icon class="black--text">edit</v-icon>
-                                    </v-btn>
-                                  </v-list-tile-action>
-                                  <v-list-tile-action>
-                                    <v-btn icon ripple small default @click.native="deleteCharacter(item.text)" v-if="characters.length > 1">
-                                      <v-icon class="black--text">delete</v-icon>
-                                    </v-btn>
-                                    <v-btn icon ripple small default disabled v-else>
-                                      <v-icon class="black--text">delete</v-icon>
-                                    </v-btn>
-                                  </v-list-tile-action>
-                                </v-list-tile>
-                                <v-divider v-if="idx + 1 < characters.length"></v-divider>
-                              </v-list-item>
-                            </v-list>
-                          </v-card-row>
-                          <v-card-row actions>
-                            <v-btn class="green--text darken-1" flat="flat" @click.native="dlg = false">閉じる</v-btn>
-                          </v-card-row>
-                        </v-card>
-                      </v-dialog>
-                    </v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col xs12>
-                      <binder></binder>
+
+                    <v-col md6 class="hidden-xs-only">
+                      <info-card :recipe="recipe" v-show="'レシピ名' in recipe">
+                      </info-card>
                     </v-col>
                   </v-row>
                 </v-tab-content>
@@ -104,7 +72,8 @@
 </template>
 
 <script>
-import Binder from './Binder.vue'
+import RecipeTab from './RecipeTab.vue'
+import InfoCard from './InfoCard.vue'
 import logo from './assets/moecoop.svg'
 import { baseURL, restCall } from './rest'
 
@@ -117,14 +86,16 @@ export default {
         { text: 'かきあげ' },
         { text: 'もじょうにー' }
       ],
-      selected: '',
-      dlg: false,
+      binders: [],
+      skills: [],
+      recipe: {},
+      sCharacter: { text: '' },
       logo: logo,
       adMessage: "ダイアロス生活協同組合は P 鯖と E 鯖で活動中！晩御飯からピッキングの相談までお気軽にどうぞ！",
     }
   },
   mounted: function() {
-    this.selected = this.characters[0]
+    this.sCharacter = this.characters[0]
     restCall('GET', baseURL+"/information", (xhr) => {
       if (xhr.readyState==4 && xhr.status==200) {
         const msg = JSON.parse(xhr.response)["message"]
@@ -133,18 +104,27 @@ export default {
         }
       }
     })
+    restCall('GET', baseURL+'/binders', (xhr) => {
+      if (xhr.readyState==4 && xhr.status==200) {
+        const result = JSON.parse(xhr.response)
+        this.binders = [{text: '全てのバインダー', value: '/recipes'}].concat(
+          result['バインダー一覧'].map(b => ({ text: b.バインダー名, value: b.レシピ一覧 }))
+        )
+      }
+    })
   },
   methods: {
     deleteCharacter: function(char) {
-      const s = this.selected
+      const s = this.sCharacter
       this.characters = this.characters.filter((e) => e.text != char)
       if (s.text == char) {
-        this.selected = this.characters[0]
+        this.sCharacter = this.characters[0]
       }
     },
   },
   components: {
-    Binder
+    RecipeTab,
+    InfoCard
   }
 }
 

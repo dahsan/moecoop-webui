@@ -1,26 +1,25 @@
 <template>
-  <div id="binder">
+  <div id="recipe-tab">
     <v-container fluid>
       <v-row>
-        <v-col md2 xs6>
-          <v-select class="mt-0 mb-0" label="バインダー" v-model="selected" :items="binders" >
+        <v-col md5>
+          <v-select class="mt-0 mb-0" :label="title" v-model="sCategory" :items="categories">
           </v-select>
         </v-col>
-        <v-col md1 xs1>
+        <v-col md7>
           <p class="text-xs-left">から</p>
         </v-col>
       </v-row>
       <v-row>
-        <v-col md3 xs9>
+        <v-col md6>
           <v-text-field class="mt-0 mb-0" label="レシピ名" v-model="query" type="text"></v-text-field>
         </v-col>
-        <v-col md1 xs1>
+        <v-col md6>
           <p class="text-xs-left">を検索</p>
         </v-col>
       </v-row>
-
       <v-row>
-        <v-col xs12 md6>
+        <v-col md12>
           <v-data-table select-all no-data-text="該当レシピがありません" v-model="recipes"
                         :headers="[{ text: 'レシピ名', value: 'レシピ名'}]">
             <template slot="items" scope="r">
@@ -28,9 +27,9 @@
                 <v-checkbox></v-checkbox>
               </td>
               <td>
-                <v-btn light flat class="hidden-xs-only" @click.native="recipe = r.item">{{r.item.レシピ名}}</v-btn>
+                <v-btn light flat class="hidden-xs-only" @click.native="updateRecipe(r.item)">{{r.item.レシピ名}}</v-btn>
                 <v-dialog v-model="dlg" fullscreen :overlay=false class="hidden-sm-and-up">
-                  <v-btn light flat slot="activator" @click.native="recipe = r.item">{{r.item.レシピ名}}</v-btn>
+                  <v-btn light flat slot="activator" @click.native="updateRecipe(r.item)">{{r.item.レシピ名}}</v-btn>
                   <info-card :recipe="recipe">
                   </info-card>
                 </v-dialog>
@@ -38,48 +37,35 @@
             </template>
           </v-data-table>
         </v-col>
-        <v-col md6 class="hidden-xs-only">
-          <info-card :recipe="recipe" v-show="'レシピ名' in recipe">
-          </info-card>
-        </v-col>
       </v-row>
     </v-container>
   </div>
 </template>
 
 <script>
+import InfoCard from './InfoCard.vue'
 import _ from 'lodash'
 import { baseURL, restCall } from './rest'
-import InfoCard from './InfoCard.vue'
 
 export default {
-  name: 'binder',
+  name: 'recipe-tab',
+  props: ['title', 'categories', 'character', 'recipe'],
   data: () => ({
     query: '',
-    selected: '',
-    binders: [],
+    sCategory: '',
     recipes: [],
-    recipe: {},
     dlg: false,
   }),
   watch: {
+    categories: function() {
+      this.sCategory = this.categories[0]
+    },
     query: function() {
       this.lazyGetRecipes()
     },
-    selected: function() {
+    sCategory: function() {
       this.getRecipes()
     }
-  },
-  mounted: function() {
-    restCall('GET', baseURL+'/binders', (xhr) => {
-      if (xhr.readyState==4 && xhr.status==200) {
-        const result = JSON.parse(xhr.response)
-        this.binders = [{text: '全てのバインダー', value: '/recipes'}].concat(
-          result['バインダー一覧'].map(b => ({ text: b.バインダー名, value: b.レシピ一覧 }))
-        )
-        this.selected = this.binders[0]
-      }
-    })
   },
   methods: {
     lazyGetRecipes: _.debounce(
@@ -89,15 +75,15 @@ export default {
       500
     ),
     getRecipes: function() {
-      restCall('GET', baseURL+this.selected.value+'?migemo=true&fields=生成物&query='+this.query, (xhr) => {
+      restCall('GET', baseURL+this.sCategory.value+'?migemo=true&fields=生成物&query='+this.query, (xhr) => {
         if (xhr.readyState==4 && xhr.status==200) {
           this.recipes = JSON.parse(xhr.response)['レシピ一覧']
         }
       })
     },
-    showDetail: function(item, index) {
-      this.recipe = item
-    },
+    updateRecipe: function(item) {
+      this.$emit('update:recipe', item)
+    }
   },
   components: {
     InfoCard
