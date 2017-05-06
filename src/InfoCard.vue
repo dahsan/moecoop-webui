@@ -1,10 +1,12 @@
 <template>
   <v-card id="info-card">
-    <v-card-row class="blue darken-1">
-      <v-card-title class="white--text">
-        {{recipe.レシピ名}}のレシピ情報
-      </v-card-title>
-    </v-card-row>
+    <v-toolbar>
+      <v-btn icon="icon">
+        <v-icon>close</v-icon>
+      </v-btn>
+      <v-toolbar-title v-text="recipe.レシピ名+'のレシピ情報'">
+      </v-toolbar-title>
+    </v-toolbar>
 
     <v-card-text>
       <v-card-row>
@@ -45,7 +47,7 @@ import ItemCard from './ItemCard.vue'
 
 export default {
   name: 'info-card',
-  props: ['recipe'],
+  props: ['recipe', 'dlg'],
   components: {
     RecipeCard,
     ItemCard
