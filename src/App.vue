@@ -34,7 +34,7 @@
                     <v-col xs12 md6>
                       <v-row>
                         <v-col xs5 md5>
-                          <v-select label="キャラクター" v-model="sCharacter" :items="characters" item-value="text" item-text="text">
+                          <v-select class="mb-0" label="キャラクター" v-model="sCharacter" :items="characters" item-value="text" item-text="text">
                           </v-select>
                         </v-col>
                         <v-col md1>
