@@ -1,55 +1,59 @@
 <template>
-  <div id="recipe-card">
-    <table>
-      <tbody>
-        <tr>
-          <th> 材料 </th>
-          <th> 個数 </th>
-        </tr>
-        <separator />
-        <tr v-for="ing in detail.材料">
-          <td class="text-md-center" v-text="ing.アイテム名"></td>
-          <td class="text-md-right" v-text="ing.個数"></td>
-        </tr>
-        <separator />
-        <tr>
-          <th> 生成物 </th>
-          <th> 個数 </th>
-        </tr>
-        <separator />
-        <tr v-for="prod in detail.生成物">
-          <td class="text-md-center" v-text="prod.アイテム名"></td>
-          <td class="text-md-right" v-text="prod.個数"></td>
-        </tr>
-        <separator />
-        <tr>
-          <th> テクニック </th>
-          <td class="text-md-center" v-text="techStr"></td>
-        </tr>
-        <tr>
-          <th> 必要スキル </th>
-          <td class="text-md-center" v-html="skillStr"></td>
-        </tr>
-        <tr>
-          <th> 収録バインダー </th>
-          <td class="text-md-center" v-html="binderStr"></td>
-        </tr>
-        <tr>
-          <th> レシピ必須 </th>
-          <td class="text-md-center"> {{detail.レシピ必須 ? "はい" : "いいえ"}} </td>
-        </tr>
-        <tr>
-          <th> ルーレット </th>
-          <td class="text-md-center" v-html="rouletteStr"></td>
-        </tr>
-        <tr v-if="detail.備考 != ''">
-          <th> 備考 </th>
-          <td class="text-md-center" v-text="detail.備考"></td>
-        </tr>
-        <separator />
-      </tbody>
-    </table>
-  </div>
+  <v-container>
+    <v-row>
+      <v-col md12>
+        <table id="recipe-card">
+          <tbody>
+            <tr>
+              <th> 材料 </th>
+              <th> 個数 </th>
+            </tr>
+            <separator />
+            <tr v-for="ing in detail.材料">
+              <td class="text-md-center" v-text="ing.アイテム名"></td>
+              <td class="text-md-right" v-text="ing.個数"></td>
+            </tr>
+            <separator />
+            <tr>
+              <th> 生成物 </th>
+              <th> 個数 </th>
+            </tr>
+            <separator />
+            <tr v-for="prod in detail.生成物">
+              <td class="text-md-center" v-text="prod.アイテム名"></td>
+              <td class="text-md-right" v-text="prod.個数"></td>
+            </tr>
+            <separator />
+            <tr>
+              <th> テクニック </th>
+              <td class="text-md-center" v-text="techStr"></td>
+            </tr>
+            <tr>
+              <th> 必要スキル </th>
+              <td class="text-md-center" v-html="skillStr"></td>
+            </tr>
+            <tr>
+              <th> 収録バインダー </th>
+              <td class="text-md-center" v-html="binderStr"></td>
+            </tr>
+            <tr>
+              <th> レシピ必須 </th>
+              <td class="text-md-center"> {{detail.レシピ必須 ? "はい" : "いいえ"}} </td>
+            </tr>
+            <tr>
+              <th> ルーレット </th>
+              <td class="text-md-center" v-html="rouletteStr"></td>
+            </tr>
+            <tr v-if="detail.備考 != ''">
+              <th> 備考 </th>
+              <td class="text-md-center" v-text="detail.備考"></td>
+            </tr>
+            <separator />
+          </tbody>
+        </table>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
