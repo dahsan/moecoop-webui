@@ -21,7 +21,8 @@
       <v-row>
         <v-col md12>
           <v-data-table select-all no-data-text="該当レシピがありません" v-model="recipes"
-                        :headers="[{ text: 'レシピ名', value: 'レシピ名'}]">
+                        :headers="[{ text: 'レシピ名', value: 'レシピ名'}]"
+                        rows-per-page-text="レシピ表示数">
             <template slot="items" scope="r">
               <td>
                 <v-checkbox></v-checkbox>
