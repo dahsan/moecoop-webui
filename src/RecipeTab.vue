@@ -2,11 +2,11 @@
   <div id="recipe-tab">
     <v-container fluid>
       <v-row>
-        <v-col md5>
+        <v-col md6>
           <v-select class="mt-0 mb-0" :label="title" v-model="sCategory" :items="categories">
           </v-select>
         </v-col>
-        <v-col md7>
+        <v-col md6>
           <p class="text-xs-left">から</p>
         </v-col>
       </v-row>
