@@ -9,4 +9,7 @@ export default {
 </script>
 
 <style scoped>
+  table.table tbody td, table.table tbody th {
+    height: 0px;
+  }
 </style>

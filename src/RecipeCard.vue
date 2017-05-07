@@ -1,8 +1,8 @@
 <template>
-  <v-container>
+  <v-container id="recipe-card">
     <v-row>
       <v-col md12>
-        <table id="recipe-card">
+        <table>
           <tbody>
             <tr>
               <th> 材料 </th>
@@ -126,4 +126,11 @@ export default {
 </script>
 
 <style scoped>
+  table.table tbody td, table.table tbody th {
+    height: 0px;
+    padding: 0 0;
+  }
+  table.table tbody th {
+    text-align: center;
+  }
 </style>
