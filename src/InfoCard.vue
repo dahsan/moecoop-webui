@@ -1,9 +1,6 @@
 <template>
   <v-card id="info-card">
     <v-toolbar>
-      <v-btn icon="icon" @click.native="closeDialog()" class="hidden-sm-and-up">
-        <v-icon>close</v-icon>
-      </v-btn>
       <v-toolbar-title v-text="recipe.レシピ名+'のレシピ情報'">
       </v-toolbar-title>
     </v-toolbar>
@@ -12,6 +9,11 @@
       <v-card-row>
         <recipe-card :recipe="recipe">
         </recipe-card>
+      </v-card-row>
+      <v-card-row actions class="hidden-sm-and-up">
+        <v-btn @click.native="closeDialog()" class="black--text">
+          閉じる
+        </v-btn>
       </v-card-row>
     </v-card-text>
 
