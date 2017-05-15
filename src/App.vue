@@ -48,10 +48,10 @@
                     </v-col>
 
                     <v-col md6 class="hidden-xs-only">
-                      <info-card :recipe="recipe" :item.sync="item" v-show="'レシピ名' in recipe">
-                      </info-card>
-                      <info-item-card :item="item" v-show="'アイテム名' in item">
-                      </info-item-card>
+                      <recipe-card :recipe="recipe" :item.sync="item" v-show="'レシピ名' in recipe">
+                      </recipe-card>
+                      <item-card :item="item" v-show="'アイテム名' in item">
+                      </item-card>
                     </v-col>
                   </v-row>
                 </v-tab-content>
@@ -75,8 +75,8 @@
 
 <script>
 import RecipeTab from './RecipeTab.vue'
-import InfoCard from './InfoCard.vue'
-import InfoItemCard from './InfoItemCard.vue'
+import RecipeCard from './RecipeCard.vue'
+import ItemCard from './ItemCard.vue'
 import logo from './assets/moecoop.svg'
 import twitter from './assets/Twitter_Social_Icon_White.svg'
 import github from './assets/GitHub-Mark-Light-64px.png'
@@ -132,8 +132,8 @@ export default {
   },
   components: {
     RecipeTab,
-    InfoCard,
-    InfoItemCard
+    RecipeCard,
+    ItemCard
   }
 }
 

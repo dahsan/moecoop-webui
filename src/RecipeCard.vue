@@ -1,5 +1,5 @@
 <template>
-  <v-card id="info-card">
+  <v-card id="recipe-card">
     <v-toolbar>
       <v-toolbar-title v-text="recipe.レシピ名+'のレシピ情報'">
       </v-toolbar-title>
@@ -19,8 +19,8 @@
                 <v-btn @click.native="updateItem(ing)" class="small hidden-xs-only" light flat small>{{ing.アイテム名}}</v-btn>
                 <v-dialog v-model="itemDlg" fullscreen :overlay=false persistent class="hidden-sm-and-up">
                   <v-btn light flat slot="activator" @click.native="updateItem(ing)">{{ing.アイテム名}}</v-btn>
-                  <info-item-card :item="item" :itemDlg.sync="itemDlg">
-                  </info-item-card>
+                  <item-card :item="item" :itemDlg.sync="itemDlg">
+                  </item-card>
                 </v-dialog>
               </td>
               <td class="text-md-right" v-text="ing.個数"></td>
@@ -36,8 +36,8 @@
                 <v-btn @click.native="updateItem(prod)" class="small hidden-xs-only" light flat small>{{prod.アイテム名}}</v-btn>
                 <v-dialog v-model="itemDlg" fullscreen :overlay=false persistent class="hidden-sm-and-up">
                   <v-btn light flat slot="activator" @click.native="updateItem(prod)">{{prod.アイテム名}}</v-btn>
-                  <info-item-card :item="item" :itemDlg.sync="itemDlg">
-                  </info-item-card>
+                  <item-card :item="item" :itemDlg.sync="itemDlg">
+                  </item-card>
                 </v-dialog>
               </td>
               <td class="text-md-right" v-text="prod.個数"></td>
@@ -88,11 +88,11 @@
 <script>
 import _ from 'lodash'
 import Separator from './Separator.vue'
-import InfoItemCard from './InfoItemCard.vue'
+import ItemCard from './ItemCard.vue'
 import { baseURL, restCall } from './rest'
 
 export default {
-  name: 'info-card',
+  name: 'recipe-card',
   props: ['recipe', 'item'],
   data: () => ({
     detail: {
@@ -159,7 +159,7 @@ export default {
   },
   components: {
     Separator,
-    InfoItemCard
+    ItemCard
   }
 }
 </script>

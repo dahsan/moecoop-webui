@@ -31,8 +31,8 @@
                 <v-btn light flat class="hidden-xs-only" @click.native="updateRecipe(r.item)">{{r.item.レシピ名}}</v-btn>
                 <v-dialog v-model="dlg" fullscreen :overlay=false persistent class="hidden-sm-and-up">
                   <v-btn light flat slot="activator" @click.native="updateRecipe(r.item)">{{r.item.レシピ名}}</v-btn>
-                  <info-card :recipe="recipe" :recipeDlg.sync="dlg">
-                  </info-card>
+                  <recipe-card :recipe="recipe" :recipeDlg.sync="dlg">
+                  </recipe-card>
                 </v-dialog>
               </td>
             </template>
@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import InfoCard from './InfoCard.vue'
+import RecipeCard from './RecipeCard.vue'
 import _ from 'lodash'
 import { baseURL, restCall } from './rest'
 
@@ -87,7 +87,7 @@ export default {
     }
   },
   components: {
-    InfoCard
+    RecipeCard
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <v-card id="info-item-card">
+  <v-card id="item-card">
     <v-toolbar>
       <v-toolbar-title v-text="item.アイテム名+'のアイテム情報'">
       </v-toolbar-title>
@@ -61,7 +61,7 @@ import Separator from './Separator.vue'
 import { baseURL, restCall } from './rest'
 
 export default {
-  name: 'info-item-card',
+  name: 'item-card',
   props: ['item'],
   data: () => ({
     detail: {},
