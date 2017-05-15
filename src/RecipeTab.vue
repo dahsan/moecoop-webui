@@ -31,7 +31,7 @@
                 <v-btn light flat class="hidden-xs-only" @click.native="updateRecipe(r.item)">{{r.item.レシピ名}}</v-btn>
                 <v-dialog v-model="dlg" fullscreen :overlay=false persistent class="hidden-sm-and-up">
                   <v-btn light flat slot="activator" @click.native="updateRecipe(r.item)">{{r.item.レシピ名}}</v-btn>
-                  <info-card :recipe="recipe" :dlg.sync="dlg">
+                  <info-card :recipe="recipe" :recipeDlg.sync="dlg">
                   </info-card>
                 </v-dialog>
               </td>
