@@ -17,3 +17,7 @@ yarn run dev
 # ビルド
 yarn run build
 ```
+
+## 開発に参加したい人向け
+API の仕様については [swagger-ui](http://petstore.swagger.io/?url=https://raw.githubusercontent.com/coop-mojo/moecoop-common/master/api/swagger.yml) か [swagger-editor](http://editor.swagger.io/?url=https://raw.githubusercontent.com/coop-mojo/moecoop-common/master/api/swagger.yml) をご覧ください。
+
