@@ -8,10 +8,10 @@
         <v-icon class="white--text">help</v-icon>
       </a>
       <a href="https://twitter.com/coop_moe" class="mr-1">
-        <img :src="twitter" width="30"></img>
+        <img :src="twitter" width="30" height="30"></img>
       </a>
       <a href="https://github.com/coop-mojo/moecoop-webui">
-        <img :src="github" width="22"></img>
+        <img :src="github" width="22" height="22"></img>
       </a>
     </v-toolbar>
     <main>
