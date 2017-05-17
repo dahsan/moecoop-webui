@@ -1,7 +1,7 @@
 <template>
   <v-card id="item-card">
     <v-toolbar>
-      <v-toolbar-title v-text="item.アイテム名+'のアイテム情報'">
+      <v-toolbar-title v-text="item.アイテム名+'のアイテム情報'" v-if="item !== undefined">
       </v-toolbar-title>
     </v-toolbar>
 
@@ -64,7 +64,11 @@ export default {
   name: 'item-card',
   props: ['item'],
   data: () => ({
-    detail: {},
+    detail: {
+      特殊条件: [],
+      ペットアイテム: { 種別: '不明' },
+      info: '',
+    },
     effectStr: '',
     petItemStr: '不明',
   }),
