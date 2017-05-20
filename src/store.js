@@ -41,7 +41,7 @@ export default new Vuex.Store({
         } else if (xhr.status==404) {
           commit('setItem', {
             アイテム名: newItem.アイテム名,
-            英名: "わからん(´・ω・`)",
+            英名: "",
             info: "",
             重さ: 0.0,
             NPC売却価格: 0,
