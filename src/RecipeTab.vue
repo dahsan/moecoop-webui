@@ -31,7 +31,7 @@
                 <v-btn light flat class="hidden-xs-only" @click.native="updateRecipe(r.item)">{{r.item.レシピ名}}</v-btn>
                 <v-dialog v-model="dlg" fullscreen :overlay=false persistent class="hidden-sm-and-up">
                   <v-btn light flat slot="activator" @click.native="updateRecipe(r.item)">{{r.item.レシピ名}}</v-btn>
-                  <recipe-card :recipe="recipe" :recipeDlg.sync="dlg">
+                  <recipe-card :recipeDlg.sync="dlg">
                   </recipe-card>
                 </v-dialog>
               </td>
@@ -50,7 +50,7 @@ import { baseURL, restCall } from './rest'
 
 export default {
   name: 'recipe-tab',
-  props: ['title', 'categories', 'character', 'recipe'],
+  props: ['title', 'categories', 'character'],
   data: () => ({
     query: '',
     sCategory: '',
@@ -83,7 +83,7 @@ export default {
       })
     },
     updateRecipe: function(item) {
-      this.$emit('update:recipe', item)
+      this.$store.dispatch('setRecipe', item)
     }
   },
   components: {

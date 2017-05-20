@@ -43,14 +43,14 @@
                           </v-btn>
                         </v-col>
                       </v-row>
-                      <recipe-tab title="バインダー" :categories="binders" :character="sCharacter" :recipe.sync="recipe">
+                      <recipe-tab title="バインダー" :categories="binders" :character="sCharacter">
                       </recipe-tab>
                     </v-col>
 
                     <v-col md6 class="hidden-xs-only">
-                      <recipe-card :recipe="recipe" :item.sync="item" v-show="'レシピ名' in recipe">
+                      <recipe-card v-show="$store.state.recipe.レシピ名 != ''">
                       </recipe-card>
-                      <item-card :item="item" v-show="'アイテム名' in item">
+                      <item-card v-show="$store.state.item.アイテム名 != ''">
                       </item-card>
                     </v-col>
                   </v-row>
@@ -93,8 +93,6 @@ export default {
       ],
       binders: [],
       skills: [],
-      recipe: {},
-      item: {},
       sCharacter: { text: '' },
       logo: logo,
       twitter: twitter,
