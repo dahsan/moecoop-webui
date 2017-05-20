@@ -28,12 +28,8 @@
                 <v-checkbox></v-checkbox>
               </td>
               <td>
-                <v-btn light flat class="hidden-xs-only" @click.native="updateRecipe(r.item)">{{r.item.レシピ名}}</v-btn>
-                <v-dialog v-model="dlg" fullscreen :overlay=false persistent class="hidden-sm-and-up">
-                  <v-btn light flat slot="activator" @click.native="updateRecipe(r.item)">{{r.item.レシピ名}}</v-btn>
-                  <recipe-card :recipeDlg.sync="dlg">
-                  </recipe-card>
-                </v-dialog>
+                <recipe-button :recipe="r.item">
+                </recipe-button>
               </td>
             </template>
           </v-data-table>
@@ -45,6 +41,7 @@
 
 <script>
 import RecipeCard from './RecipeCard.vue'
+import RecipeButton from './RecipeButton.vue'
 import _ from 'lodash'
 import { baseURL, restCall } from './rest'
 
@@ -87,7 +84,8 @@ export default {
     }
   },
   components: {
-    RecipeCard
+    RecipeCard,
+    RecipeButton
   }
 }
 </script>

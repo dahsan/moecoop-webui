@@ -16,12 +16,8 @@
             <separator />
             <tr v-for="ing in recipe.材料">
               <td class="text-md-center">
-                <v-btn @click.native="updateItem(ing)" class="small hidden-xs-only" light flat small>{{ing.アイテム名}}</v-btn>
-                <v-dialog v-model="itemDlg" fullscreen :overlay=false persistent class="hidden-sm-and-up">
-                  <v-btn light flat slot="activator" @click.native="updateItem(ing)">{{ing.アイテム名}}</v-btn>
-                  <item-card :itemDlg.sync="itemDlg">
-                  </item-card>
-                </v-dialog>
+                <item-button :item="ing">
+                </item-button>
               </td>
               <td class="text-md-right" v-text="ing.個数"></td>
             </tr>
@@ -33,12 +29,8 @@
             <separator />
             <tr v-for="prod in recipe.生成物">
               <td class="text-md-center">
-                <v-btn @click.native="updateItem(prod)" class="small hidden-xs-only" light flat small>{{prod.アイテム名}}</v-btn>
-                <v-dialog v-model="itemDlg" fullscreen :overlay=false persistent class="hidden-sm-and-up">
-                  <v-btn light flat slot="activator" @click.native="updateItem(prod)">{{prod.アイテム名}}</v-btn>
-                  <item-card :itemDlg.sync="itemDlg">
-                  </item-card>
-                </v-dialog>
+                <item-button :item="prod">
+                </item-button>
               </td>
               <td class="text-md-right" v-text="prod.個数"></td>
             </tr>
@@ -88,7 +80,7 @@
 <script>
 import _ from 'lodash'
 import Separator from './Separator.vue'
-import ItemCard from './ItemCard.vue'
+import ItemButton from './ItemButton.vue'
 import { baseURL, restCall } from './rest'
 
 export default {
@@ -134,8 +126,8 @@ export default {
   },
   components: {
     Separator,
-    ItemCard
-  }
+    ItemButton
+}
 }
 </script>
 
@@ -146,10 +138,6 @@ export default {
   table.table tbody td:first-child, table.table tbody td:not(:first-child),
   table.table tbody th:first-child, table.table tbody th:not(:first-child) {
     height: 0px;
-    padding: 0 0px;
-  }
-  .small {
-    margin: 0px;
     padding: 0 0px;
   }
 </style>
