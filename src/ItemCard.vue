@@ -16,11 +16,14 @@
             <separator />
             <tr>
               <th> 重さ </th>
-              <td class="text-md-right"> {{(item.重さ+0.0).toFixed(2)}} </td>
+              <td class="text-md-center"> {{(item.重さ+0.0).toFixed(2)}} </td>
+            </tr>
+            <tr v-for="elem in detail">
+              <th v-text="elem.caption"></th><td class="text-md-center" v-text="elem.value"></td>
             </tr>
             <tr>
               <th> NPC売却価格 </th>
-              <td class="text-md-right"> {{item.NPC売却価格}}g </td>
+              <td class="text-md-center"> {{item.NPC売却価格}} g </td>
             </tr>
             <tr>
               <th> 転送可 </th>
@@ -69,6 +72,7 @@ export default {
   data: () => ({
     effectStr: '',
     petItemStr: '不明',
+    detail: [],
   }),
   computed: {
     item() {
@@ -88,6 +92,54 @@ export default {
       }
       else{
         this.petItemStr = this.item.ペットアイテム.種別 + '(' + (this.item.ペットアイテム.効果+0.0).toFixed(1)+')'
+      }
+      this.updateDetail()
+    },
+    updateDetail: function() {
+      this.detail = []
+      switch(this.item.アイテム種別) {
+      case '食べ物':
+      case '飲み物':
+      case '酒':{
+        const info = this.item.飲食物情報
+        this.detail.push({align: 'right', caption: '効果', value: (info.効果+0.0).toFixed(1)})
+        if (info.付加効果 != null) {
+          this.detail.push({align: 'center', caption: '付加効果', value: info.付加効果.バフ名})
+          if (info.付加効果.バフグループ != '') {
+            const eff = info.付加効果.効果
+            var effStrs = Object.keys(eff).map(e => e+': '+ (eff[e] > 0 ? '+' : '') + eff[e])
+            if (info.付加効果.その他効果 != '')
+            {
+              effStrs.push(info.付加効果.その他効果)
+            }
+            this.detail.push({align: 'center', caption: '', value: effStrs.join(', ')})
+            this.detail.push({align: 'center', caption: 'バフグループ', value: info.付加効果.バフグループ})
+            this.detail.push({align: 'center', caption: '効果時間', value: info.付加効果.効果時間+' 秒'})
+          }
+        }
+        break
+      }
+      case '消耗品':{
+        break
+      }
+      case '武器':{
+        break
+      }
+      case '防具':{
+        break
+      }
+      case '弾':{
+        break
+      }
+      case '盾':{
+        break
+      }
+      case 'アセット':{
+        break
+      }
+      case 'その他':
+      case '不明':
+      default:
       }
     },
     closeDialog: function() {
