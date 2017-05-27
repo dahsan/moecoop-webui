@@ -117,9 +117,6 @@ export default {
                             this.recipe.ペナルティ型 ? "ペナルティ型" : ""].filter(s => s != "").join("<br />")
       }
     },
-    updateItem: function(it) {
-      this.$store.dispatch('setItem', it)
-    },
     closeDialog: function() {
       this.$emit('update:recipeDlg', false)
     }
