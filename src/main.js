@@ -13,3 +13,12 @@ new Vue({
   store,
   render: h => h(App),
 })
+
+if (module.hot) {
+  module.hot.accept(['./store'], () => {
+    store.hotUpdate({
+      mutations: require('./store').mutations,
+      actions: require('./store').actions,
+    })
+  })
+}
