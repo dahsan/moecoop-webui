@@ -203,6 +203,29 @@ export default {
         break
       }
       case '弾':{
+        const info = this.item.弾情報
+        if (info) {
+          this.detail.push({caption: 'ダメージ', value: (info.ダメージ+0.0).toFixed(1)})
+          this.detail.push({caption: 'ダメージ', value: (info.有効レンジ+0.0).toFixed(1)})
+          this.detail.push({caption: '角度補正角', value: info.角度補正角})
+          this.detail.push({caption: '必要スキル', value: info.必要スキル.map(sk => sk.スキル名+' ('+(sk.スキル値+0.0).toFixed(1)+')').join(', ')})
+          this.detail.push({caption: '装備スロット', value: '矢/弾'})
+          if (info.使用可能シップ[0].シップ名 != 'なし') {
+            this.detail.push({caption: '使用可能シップ', value: info.使用可能シップ.map(s => s.シップ名+'系').join(', ')})
+          }
+
+          if (Object.keys(info.追加効果).length > 0) {
+            const eff = info.追加効果
+            this.detail.push({
+              caption: '追加効果',
+              value: Object.keys(eff).map(k => k+': '+(eff[k] > 0 ? '+' : '')+(eff[k]+0.0).toFixed(1)).join(', ')
+            })
+          }
+
+          if (info.付与効果 != '') {
+            this.detail.push({caption: '付与効果', value: info.付与効果})
+          }
+        }
         break
       }
       case '盾':{
