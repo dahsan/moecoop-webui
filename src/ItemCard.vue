@@ -229,6 +229,40 @@ export default {
         break
       }
       case '盾':{
+        const info = this.item.盾情報
+        if (info) {
+          this.detail.push({caption: 'アーマークラス', value: info.アーマークラス.map(at => at.状態+': '+(at.効果+0.0).toFixed(1)).join(', ')})
+          this.detail.push({caption: info.消耗タイプ, value: info.耐久})
+          this.detail.push({caption: '必要スキル', value: info.必要スキル.map(sk => sk.スキル名+' ('+(sk.スキル値+0.0).toFixed(1)+')').join(', ')})
+          this.detail.push({caption: '回避', value: info.回避+ ' %'})
+          this.detail.push({caption: '素材', value: info.素材})
+          if (info.使用可能シップ[0].シップ名 != 'なし') {
+            this.detail.push({caption: '使用可能シップ', value: info.使用可能シップ.map(s => s.シップ名+'系').join(', ')})
+          }
+
+          if (info.付加効果 != '') {
+            this.detail.push({caption: '付加効果', value: info.付加効果})
+          }
+
+          if (Object.keys(info.追加効果).length > 0) {
+            const eff = info.追加効果
+            this.detail.push({
+              caption: '追加効果',
+              value: Object.keys(eff).map(k => k+': '+(eff[k] > 0 ? '+' : '')+(eff[k]+0.0).toFixed(1)).join(', ')
+            })
+          }
+
+          if (info.効果アップ.length > 0) {
+            this.detail.push({caption: '効果アップ', value: info.効果アップ.join(', ')})
+          }
+
+          if (info.魔法チャージ) {
+            this.detail.push({caption: '魔法チャージ', value: '可能'})
+          }
+          if (info.属性チャージ) {
+            this.detail.push({caption: '属性チャージ', value: '可能'})
+          }
+        }
         break
       }
       case 'アセット':{
