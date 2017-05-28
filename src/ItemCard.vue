@@ -102,27 +102,67 @@ export default {
       case '飲み物':
       case '酒':{
         const info = this.item.飲食物情報
-        this.detail.push({align: 'right', caption: '効果', value: (info.効果+0.0).toFixed(1)})
-        if (info.付加効果 != null) {
-          this.detail.push({align: 'center', caption: '付加効果', value: info.付加効果.バフ名})
-          if (info.付加効果.バフグループ != '') {
-            const eff = info.付加効果.効果
-            var effStrs = Object.keys(eff).map(e => e+': '+ (eff[e] > 0 ? '+' : '') + eff[e])
-            if (info.付加効果.その他効果 != '')
-            {
-              effStrs.push(info.付加効果.その他効果)
+        if (info) {
+          this.detail.push({caption: '効果', value: (info.効果+0.0).toFixed(1)})
+          if (info.付加効果 != null) {
+            this.detail.push({caption: '付加効果', value: info.付加効果.バフ名})
+            if (info.付加効果.バフグループ != '') {
+              const eff = info.付加効果.効果
+              var effStrs = Object.keys(eff).map(e => e+': '+ (eff[e] > 0 ? '+' : '') + eff[e])
+              if (info.付加効果.その他効果 != '')
+              {
+                effStrs.push(info.付加効果.その他効果)
+              }
+              this.detail.push({caption: '', value: effStrs.join(', ')})
+              this.detail.push({caption: 'バフグループ', value: info.付加効果.バフグループ})
+              this.detail.push({caption: '効果時間', value: info.付加効果.効果時間+' 秒'})
             }
-            this.detail.push({align: 'center', caption: '', value: effStrs.join(', ')})
-            this.detail.push({align: 'center', caption: 'バフグループ', value: info.付加効果.バフグループ})
-            this.detail.push({align: 'center', caption: '効果時間', value: info.付加効果.効果時間+' 秒'})
           }
         }
         break
       }
       case '消耗品':{
+        // TODO
         break
       }
       case '武器':{
+        const info = this.item.武器情報
+        if (info) {
+          this.detail.push({caption: 'ダメージ', value: info.攻撃力.map(at => at.状態+': '+(at.効果+0.0).toFixed(1)).join(', ')})
+          this.detail.push({caption: '攻撃間隔', value: info.攻撃間隔})
+          this.detail.push({caption: '有効レンジ', value: (info.有効レンジ+0.0).toFixed(1)})
+          this.detail.push({caption: info.消耗タイプ, value: info.耐久})
+          this.detail.push({caption: '必要スキル', value: info.必要スキル.map(sk => sk.スキル名+' ('+(sk.スキル値+0.0).toFixed(1)+')').join(', ')})
+          this.detail.push({caption: '装備スロット', value: info.装備スロット+' ('+(info.両手装備 ? '両手' : '片手')+')'})
+          this.detail.push({caption: '素材', value: info.素材})
+          if (info.装備可能シップ[0].シップ名 != 'なし') {
+            this.detail.push({caption: '装備可能シップ', value: info.装備可能シップ.map(s => s.シップ名+'系').join(', ')})
+          }
+
+          if (Object.keys(info.付加効果).length > 0) {
+            const eff = info.付加効果
+            this.detail.push({caption: '付加効果', value: Object.keys(eff).map(k => k+': '+eff[k]+' %').join(', ')})
+          }
+
+          if (Object.keys(info.追加効果).length > 0) {
+            const eff = info.追加効果
+            this.detail.push({
+              caption: '追加効果',
+              value: Object.keys(eff).map(k => k+': '+(eff[k] > 0 ? '+' : '')+(eff[k]+0.0).toFixed(1)).join(', ')
+            })
+          }
+
+          if (info.効果アップ.length > 0) {
+            this.detail.push({caption: '効果アップ', value: info.効果アップ.join(', ')})
+          }
+
+          if (info.魔法チャージ) {
+            this.detail.push({caption: '魔法チャージ', value: '可能'})
+          }
+          if (info.属性チャージ) {
+            this.detail.push({caption: '属性チャージ', value: '可能'})
+          }
+        }
         break
       }
       case '防具':{
