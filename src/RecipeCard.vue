@@ -10,59 +10,59 @@
         <table>
           <tbody>
             <tr>
-              <th> 材料 </th>
-              <th> 個数 </th>
+              <th class="text-xs-center"> 材料 </th>
+              <th class="text-xs-center"> 個数 </th>
             </tr>
             <separator />
             <tr v-for="ing in recipe.材料">
-              <td class="text-md-center">
+              <td class="text-xs-center">
                 <item-button :item="ing">
                 </item-button>
               </td>
-              <td class="text-md-right" v-text="ing.個数"></td>
+              <td class="text-xs-right" v-text="ing.個数"></td>
             </tr>
             <separator />
             <tr>
-              <th> 生成物 </th>
-              <th> 個数 </th>
+              <th class="text-xs-center"> 生成物 </th>
+              <th class="text-xs-center"> 個数 </th>
             </tr>
             <separator />
             <tr v-for="prod in recipe.生成物">
-              <td class="text-md-center">
+              <td class="text-xs-center">
                 <item-button :item="prod">
                 </item-button>
               </td>
-              <td class="text-md-right" v-text="prod.個数"></td>
+              <td class="text-xs-right" v-text="prod.個数"></td>
             </tr>
             <separator />
             <tr>
-              <th> テクニック </th>
-              <td class="text-md-center" v-text="techStr"></td>
+              <th class="text-xs-center"> テクニック </th>
+              <td class="text-xs-center" v-text="techStr"></td>
             </tr>
             <tr>
-              <th> 必要スキル </th>
-              <td class="text-md-center" v-html="skillStr"></td>
+              <th class="text-xs-center"> 必要スキル </th>
+              <td class="text-xs-center" v-html="skillStr"></td>
             </tr>
             <tr>
-              <th> 収録バインダー </th>
-              <td class="text-md-center" v-if="binderStr == 'なし'">
+              <th class="text-xs-center"> 収録バインダー </th>
+              <td class="text-xs-center" v-if="binderStr == 'なし'">
                 {{binderStr}}
               </td>
-              <td class="text-md-center" v-else>
+              <td class="text-xs-center" v-else>
                 <v-btn class="small" light flat small>{{binderStr}}</v-btn>
               </td>
             </tr>
             <tr>
-              <th> レシピ必須 </th>
-              <td class="text-md-center"> {{recipe.レシピ必須 ? "はい" : "いいえ"}} </td>
+              <th class="text-xs-center"> レシピ必須 </th>
+              <td class="text-xs-center"> {{recipe.レシピ必須 ? "はい" : "いいえ"}} </td>
             </tr>
             <tr>
-              <th> ルーレット </th>
-              <td class="text-md-center" v-html="rouletteStr"></td>
+              <th class="text-xs-center"> ルーレット </th>
+              <td class="text-xs-center" v-html="rouletteStr"></td>
             </tr>
             <tr v-if="recipe.備考 != ''">
-              <th> 備考 </th>
-              <td class="text-md-center" v-text="recipe.備考"></td>
+              <th class="text-xs-center"> 備考 </th>
+              <td class="text-xs-left" v-text="recipe.備考"></td>
             </tr>
             <separator />
           </tbody>
@@ -129,9 +129,6 @@ export default {
 </script>
 
 <style scoped>
-  table.table tbody th {
-    text-align: center;
-  }
   table.table tbody td:first-child, table.table tbody td:not(:first-child),
   table.table tbody th:first-child, table.table tbody th:not(:first-child) {
     height: 0px;
