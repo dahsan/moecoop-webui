@@ -24,7 +24,7 @@
                         :headers="[{ text: 'レシピ名', value: 'レシピ名'}]"
                         rows-per-page-text="レシピ表示数">
             <template slot="items" scope="r">
-              <td v-if="character != undefind && character.name != 'しらたま'">
+              <td v-if="character != undefined && character.name != 'しらたま'">
                 <v-checkbox></v-checkbox>
               </td>
               <td>
