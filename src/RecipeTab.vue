@@ -73,7 +73,6 @@ export default {
       500
     ),
     getRecipes: function() {
-      console.log("char: "+this.character)
       restCall('GET', baseURL+this.sCategory.value+'?migemo=true&fields=生成物&query='+this.query, (xhr) => {
         if (xhr.readyState==4 && xhr.status==200) {
           this.recipes = JSON.parse(xhr.response)['レシピ一覧']
