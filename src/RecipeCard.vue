@@ -7,67 +7,97 @@
 
     <v-card-text>
       <v-card-row>
-        <table>
-          <tbody>
-            <tr>
-              <th class="text-xs-center"> 材料 </th>
-              <th class="text-xs-center"> 個数 </th>
-            </tr>
-            <separator />
-            <tr v-for="ing in recipe.材料">
-              <td class="text-xs-center">
-                <item-button :item="ing">
-                </item-button>
-              </td>
-              <td class="text-xs-right" v-text="ing.個数"></td>
-            </tr>
-            <separator />
-            <tr>
-              <th class="text-xs-center"> 生成物 </th>
-              <th class="text-xs-center"> 個数 </th>
-            </tr>
-            <separator />
-            <tr v-for="prod in recipe.生成物">
-              <td class="text-xs-center">
-                <item-button :item="prod">
-                </item-button>
-              </td>
-              <td class="text-xs-right" v-text="prod.個数"></td>
-            </tr>
-            <separator />
-            <tr>
-              <th class="text-xs-center"> テクニック </th>
-              <td class="text-xs-center" v-text="techStr"></td>
-            </tr>
-            <tr>
-              <th class="text-xs-center"> 必要スキル </th>
-              <td class="text-xs-center" v-html="skillStr"></td>
-            </tr>
-            <tr>
-              <th class="text-xs-center"> 収録バインダー </th>
-              <td class="text-xs-center" v-if="binderStr == 'なし'">
-                {{binderStr}}
-              </td>
-              <td class="text-xs-center" v-else>
-                <v-btn class="small" light flat small>{{binderStr}}</v-btn>
-              </td>
-            </tr>
-            <tr>
-              <th class="text-xs-center"> レシピ必須 </th>
-              <td class="text-xs-center"> {{recipe.レシピ必須 ? "はい" : "いいえ"}} </td>
-            </tr>
-            <tr>
-              <th class="text-xs-center"> ルーレット </th>
-              <td class="text-xs-center" v-html="rouletteStr"></td>
-            </tr>
-            <tr v-if="recipe.備考 != ''">
-              <th class="text-xs-center"> 備考 </th>
-              <td class="text-xs-left" v-text="recipe.備考"></td>
-            </tr>
-            <separator />
-          </tbody>
-        </table>
+        <v-card-column class="header text-xs-center">
+          材料
+        </v-card-column>
+        <v-card-column class="header text-xs-center">
+          個数
+        </v-card-column>
       </v-card-row>
+      <v-divider />
+      <v-card-row v-for="ing in recipe.材料">
+        <v-card-column class="text-xs-center">
+          <item-button :item="ing">
+          </item-button>
+        </v-card-column>
+        <v-card-column class="text-xs-right" v-text="ing.個数">
+        </v-card-column>
+      </v-card-row>
+      <v-divider />
+      <v-card-row>
+        <v-card-column class="header text-xs-center">
+          生成物
+        </v-card-column>
+        <v-card-column class="header text-xs-center">
+          個数
+        </v-card-column>
+      </v-card-row>
+      <v-divider />
+      <v-card-row v-for="prod in recipe.生成物">
+        <v-card-column class="text-xs-center">
+          <item-button :item="prod">
+          </item-button>
+        </v-card-column>
+        <v-card-column class="text-xs-right" v-text="prod.個数">
+        </v-card-column>
+      </v-card-row>
+      <v-divider />
+
+      <v-card-row>
+        <v-card-column class="header text-xs-center">
+          テクニック
+        </v-card-column>
+        <v-card-column class="text-xs-center">
+          {{techStr}}
+        </v-card-column>
+      </v-card-row>
+
+      <v-card-row>
+        <v-card-column class="header text-xs-center">
+          必要スキル
+        </v-card-column>
+        <v-card-column class="text-xs-center">
+          {{skillStr}}
+        </v-card-column>
+      </v-card-row>
+
+      <v-card-row>
+        <v-card-column class="header text-xs-center">
+          収録バインダー
+        </v-card-column>
+        <v-card-column class="text-xs-center">
+          {{binderStr}}
+        </v-card-column>
+      </v-card-row>
+
+      <v-card-row>
+        <v-card-column class="header text-xs-center">
+          レシピ必須
+        </v-card-column>
+        <v-card-column class="text-xs-center">
+          {{recipe.レシピ必須 ? "はい" : "いいえ"}}
+        </v-card-column>
+      </v-card-row>
+
+      <v-card-row>
+        <v-card-column class="header text-xs-center">
+          ルーレット
+        </v-card-column>
+        <v-card-column class="text-xs-center">
+          {{rouletteStr}}
+        </v-card-column>
+      </v-card-row>
+
+      <v-card-row v-if="recipe.備考 != ''">
+        <v-card-column class="header text-xs-center">
+          備考
+        </v-card-column>
+        <v-card-column class="header text-xs-left">
+          {{recipe.備考}}
+        </v-card-column>
+      </v-card-row>
+      <v-divider />
+
       <v-card-row actions class="hidden-sm-and-up">
         <v-btn @click.native="closeDialog()" class="black--text">
           閉じる
@@ -124,14 +154,12 @@ export default {
   components: {
     Separator,
     ItemButton
-}
+  }
 }
 </script>
 
 <style scoped>
-  table.table tbody td:first-child, table.table tbody td:not(:first-child),
-  table.table tbody th:first-child, table.table tbody th:not(:first-child) {
-    height: 0px;
-    padding: 0 0px;
+  div.header {
+    font-weight: bold;
   }
 </style>
