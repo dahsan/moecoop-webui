@@ -24,7 +24,7 @@
                         :headers="[{ text: 'レシピ名', value: 'レシピ名'}]"
                         rows-per-page-text="レシピ表示数">
             <template slot="items" scope="r">
-              <td>
+              <td v-if="character != undefind && character.name != 'しらたま'">
                 <v-checkbox></v-checkbox>
               </td>
               <td>
@@ -73,6 +73,7 @@ export default {
       500
     ),
     getRecipes: function() {
+      console.log("char: "+this.character)
       restCall('GET', baseURL+this.sCategory.value+'?migemo=true&fields=生成物&query='+this.query, (xhr) => {
         if (xhr.readyState==4 && xhr.status==200) {
           this.recipes = JSON.parse(xhr.response)['レシピ一覧']

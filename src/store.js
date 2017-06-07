@@ -12,6 +12,12 @@ export const mutations = {
   setRecipe(state, newRecipe) {
     state.recipe = newRecipe
   },
+  addCharacter(state, newChar) {
+    state.characters[newChar.name] = newChar
+  },
+  deleteCharacter(state, char) {
+    state.characters.remove(char)
+  },
 }
 
 export const actions = {
@@ -71,6 +77,9 @@ export default new Vuex.Store({
       材料: { 'わからん': 0 },
       生成物: { 'わからん': 0 },
       備考: 'よくわからん(´・ω・`)',
+    },
+    characters: {
+      しらたま: { name: 'しらたま' },
     },
   },
   mutations: mutations,

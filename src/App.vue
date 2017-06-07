@@ -32,9 +32,9 @@
                 <v-tab-content slot="content" id="binder-tab">
                   <v-row>
                     <v-col xs12 md6>
-                      <v-row>
+                      <v-row v-if="characters.length > 1">
                         <v-col xs5 md5>
-                          <v-select class="mb-0" label="キャラクター" v-model="sCharacter" :items="characters" item-value="text" item-text="text">
+                          <v-select class="mb-0" label="キャラクター" v-model="sCharacter" :items="Object.values(characters)" item-text="name">
                           </v-select>
                         </v-col>
                         <v-col md1>
@@ -86,19 +86,19 @@ export default {
   name: 'app',
   data() {
     return {
-      characters: [
-        { text: 'しらたま' },
-        { text: 'かきあげ' },
-        { text: 'もじょうにー' }
-      ],
       binders: [],
       skills: [],
-      sCharacter: { text: '' },
+      sCharacter: { name: '' },
       logo: logo,
       twitter: twitter,
       github: github,
       adMessage: "ダイアロス生活協同組合は P 鯖と E 鯖で活動中！晩御飯からピッキングの相談までお気軽にどうぞ！",
     }
+  },
+  computed: {
+    characters() {
+      return this.$store.state.characters
+    },
   },
   mounted: function() {
     this.sCharacter = this.characters[0]
@@ -122,7 +122,7 @@ export default {
   methods: {
     deleteCharacter: function(char) {
       const s = this.sCharacter
-      this.characters = this.characters.filter((e) => e.text != char)
+      this.$store.commit('deleteCharacter', char)
       if (s.text == char) {
         this.sCharacter = this.characters[0]
       }
