@@ -92,7 +92,7 @@
         <v-card-column class="header text-xs-center">
           備考
         </v-card-column>
-        <v-card-column class="header text-xs-left">
+        <v-card-column class="text-xs-left">
           {{recipe.備考}}
         </v-card-column>
       </v-card-row>
@@ -161,5 +161,10 @@ export default {
 <style scoped>
   div.header {
     font-weight: bold;
+  }
+
+  /* v-card-row の高さ調整 */
+  .card__row {
+    min-height: 0px;
   }
 </style>
