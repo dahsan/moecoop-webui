@@ -7,53 +7,94 @@
 
     <v-card-text>
       <v-card-row>
-        <table>
-          <tbody>
-            <tr>
-              <th class="text-xs-center"> 英名 </th>
-              <td class="text-xs-center"> {{item.英名 == "" ? "わからん（´・ω・｀）" : item.英名}} </td>
-            </tr>
-            <separator />
-            <tr>
-              <th class="text-xs-center"> 重さ </th>
-              <td class="text-xs-center"> {{(item.重さ+0.0).toFixed(2)}} </td>
-            </tr>
-            <tr v-for="elem in detail">
-              <th class="text-xs-center" v-text="elem.caption"></th>
-              <td class="text-xs-center" v-text="elem.value"></td>
-            </tr>
-            <tr>
-              <th class="text-xs-center"> NPC売却価格 </th>
-              <td class="text-xs-center"> {{item.NPC売却価格}} g </td>
-            </tr>
-            <tr>
-              <th class="text-xs-center"> 転送可 </th>
-              <td class="text-xs-center"> {{item.転送可 ? "はい" : "いいえ"}} </td>
-            </tr>
-            <tr>
-              <th class="text-xs-center"> スタック可 </th>
-              <td class="text-xs-center"> {{item.スタック可 ? "はい" : "いいえ"}} </td>
-            </tr>
-            <tr v-if="item.特殊条件.length > 0">
-              <th class="text-xs-center"> 特殊条件 </th>
-              <td class="text-xs-center" v-html="effectStr"></td>
-            </tr>
-            <tr v-if="item.ペットアイテム.種別 != '犬も喰わない'">
-              <th class="text-xs-center"> ペットアイテム </th>
-              <td class="text-xs-center" v-text="petItemStr"></td>
-            </tr>
-            <tr v-if="item.info.length > 0">
-              <th class="text-xs-center"> info </th>
-              <td class="text-xs-left" v-html="item.info.replace(/\n/, '<br />')"></td>
-            </tr>
-            <tr v-if="item.備考.length > 0">
-              <th class="text-xs-center"> 備考 </th>
-              <td class="text-xs-left" v-html="item.備考.replace(/\n/, '<br />')"></td>
-            </tr>
-            <separator />
-          </tbody>
-        </table>
+        <v-card-column class="header text-xs-center">
+          英名
+        </v-card-column>
+        <v-card-column class="text-xs-center">
+          {{item.英名 == "" ? "わからん（´・ω・｀）" : item.英名}}
+        </v-card-column>
       </v-card-row>
+      <v-divider />
+
+      <v-card-row>
+        <v-card-column class="header text-xs-center">
+          重さ
+        </v-card-column>
+        <v-card-column class="text-xs-center">
+          {{(item.重さ+0.0).toFixed(2)}}
+        </v-card-column>
+      </v-card-row>
+
+      <v-card-row v-for="elem in detail">
+        <v-card-column class="header text-xs-center" v-text="elem.caption">
+        </v-card-column>
+        <v-card-column class="text-xs-center" v-text="elem.value">
+        </v-card-column>
+      </v-card-row>
+
+      <v-card-row>
+        <v-card-column class="header text-xs-center">
+          NPC売却価格
+        </v-card-column>
+        <v-card-column class="text-xs-center">
+          {{item.NPC売却価格}} g
+        </v-card-column>
+      </v-card-row>
+
+      <v-card-row>
+        <v-card-column class="header text-xs-center">
+          転送可
+        </v-card-column>
+        <v-card-column class="text-xs-center">
+          {{item.転送可 ? "はい" : "いいえ"}}
+        </v-card-column>
+      </v-card-row>
+
+      <v-card-row>
+        <v-card-column class="header text-xs-center">
+          スタック可
+        </v-card-column>
+        <v-card-column class="text-xs-center">
+          {{item.スタック可 ? "はい" : "いいえ"}}
+        </v-card-column>
+      </v-card-row>
+
+      <v-card-row v-if="item.特殊条件.length > 0">
+        <v-card-column class="header text-xs-center">
+          特殊条件
+        </v-card-column>
+        <v-card-column class="text-xs-center">
+          {{effectStr}}
+        </v-card-column>
+      </v-card-row>
+
+      <v-card-row v-if="item.ペットアイテム.種別 != '犬も喰わない'">
+        <v-card-column class="header text-xs-center">
+          ペットアイテム
+        </v-card-column>
+        <v-card-column class="text-xs-center">
+          {{petItemStr}}
+        </v-card-column>
+      </v-card-row>
+
+      <v-card-row v-if="item.info.length > 0">
+        <v-card-column class="header text-xs-center">
+          info
+        </v-card-column>
+        <v-card-column class="text-xs-center" v-html="item.info.replace(/\n/, '<br />')">
+        </v-card-column>
+      </v-card-row>
+
+      <v-card-row v-if="item.備考.length > 0">
+        <v-card-column class="header text-xs-center">
+          備考
+        </v-card-column>
+        <v-card-column class="text-xs-left" v-html="item.備考.replace(/\n/, '<br />')">
+        </v-card-column>
+      </v-card-row>
+
+      <v-divider />
+
       <v-card-row actions class="hidden-sm-and-up">
         <v-btn @click.native="closeDialog()" class="black--text">
           閉じる
@@ -285,9 +326,12 @@ export default {
 </script>
 
 <style scoped>
-  table.table tbody td:first-child, table.table tbody td:not(:first-child),
-  table.table tbody th:first-child, table.table tbody th:not(:first-child) {
-    height: 0px;
-    padding: 0 0px;
+  div.header {
+    font-weight: bold;
+  }
+
+  /* v-card-row の高さ調整 */
+  .card__row {
+    min-height: 0px;
   }
 </style>
