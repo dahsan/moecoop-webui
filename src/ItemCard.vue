@@ -25,7 +25,7 @@
         </v-card-column>
       </v-card-row>
 
-      <v-card-row v-for="elem in detail">
+      <v-card-row v-for="(elem, idx) in detail" :key="idx">
         <v-card-column class="header text-xs-center" v-text="elem.caption">
         </v-card-column>
         <v-card-column class="text-xs-center" v-text="elem.value">
