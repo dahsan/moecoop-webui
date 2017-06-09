@@ -15,7 +15,7 @@
         </v-card-column>
       </v-card-row>
       <v-divider />
-      <v-card-row v-for="ing in recipe.材料">
+      <v-card-row v-for="ing in recipe.材料" :key="ing.アイテム名">
         <v-card-column class="text-xs-center">
           <item-button :item="ing">
           </item-button>
@@ -33,7 +33,7 @@
         </v-card-column>
       </v-card-row>
       <v-divider />
-      <v-card-row v-for="prod in recipe.生成物">
+      <v-card-row v-for="prod in recipe.生成物" :key="prod.アイテム名">
         <v-card-column class="text-xs-center">
           <item-button :item="prod">
           </item-button>
