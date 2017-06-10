@@ -25,10 +25,11 @@
         </v-card-column>
       </v-card-row>
 
+      <!-- 各アイテム種別ごとの詳細情報 -->
       <v-card-row v-for="(elem, idx) in detail" :key="idx">
         <v-card-column class="header text-xs-center" v-text="elem.caption">
         </v-card-column>
-        <v-card-column class="text-xs-center" v-text="elem.value">
+        <v-card-column class="text-xs-center" v-html="elem.value">
         </v-card-column>
       </v-card-row>
 
@@ -145,15 +146,16 @@ export default {
         if (info) {
           this.detail.push({caption: '効果', value: (info.効果+0.0).toFixed(1)})
           if (info.付加効果 != null) {
-            this.detail.push({caption: '付加効果', value: info.付加効果.バフ名})
-            if (info.付加効果.バフグループ != '') {
+            if (info.付加効果.バフグループ == '') {
+              this.detail.push({caption: '付加効果', value: info.付加効果.バフ名})
+            } else {
               const eff = info.付加効果.効果
               var effStrs = Object.keys(eff).map(e => e+': '+ (eff[e] > 0 ? '+' : '') + eff[e])
               if (info.付加効果.その他効果 != '')
               {
                 effStrs.push(info.付加効果.その他効果)
               }
-              this.detail.push({caption: '', value: effStrs.join(', ')})
+              this.detail.push({caption: '付加効果', value: info.付加効果.バフ名+"<br />"+effStrs.join(', ')})
               this.detail.push({caption: 'バフグループ', value: info.付加効果.バフグループ})
               this.detail.push({caption: '効果時間', value: info.付加効果.効果時間+' 秒'})
             }
