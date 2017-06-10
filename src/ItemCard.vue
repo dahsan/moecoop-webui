@@ -63,8 +63,7 @@
         <v-card-column class="header text-xs-center">
           特殊条件
         </v-card-column>
-        <v-card-column class="text-xs-center">
-          {{effectStr}}
+        <v-card-column class="text-xs-center" v-html="effectStr">
         </v-card-column>
       </v-card-row>
 
@@ -72,8 +71,7 @@
         <v-card-column class="header text-xs-center">
           ペットアイテム
         </v-card-column>
-        <v-card-column class="text-xs-center">
-          {{petItemStr}}
+        <v-card-column class="text-xs-center" v-text="petItemStr">
         </v-card-column>
       </v-card-row>
 

@@ -47,8 +47,7 @@
         <v-card-column class="header text-xs-center">
           テクニック
         </v-card-column>
-        <v-card-column class="text-xs-center">
-          {{techStr}}
+        <v-card-column class="text-xs-center" v-text="techStr">
         </v-card-column>
       </v-card-row>
 
@@ -56,8 +55,7 @@
         <v-card-column class="header text-xs-center">
           必要スキル
         </v-card-column>
-        <v-card-column class="text-xs-center">
-          {{skillStr}}
+        <v-card-column class="text-xs-center" v-text="skillStr">
         </v-card-column>
       </v-card-row>
 
@@ -65,8 +63,7 @@
         <v-card-column class="header text-xs-center">
           収録バインダー
         </v-card-column>
-        <v-card-column class="text-xs-center">
-          {{binderStr}}
+        <v-card-column class="text-xs-center" v-text="binderStr">
         </v-card-column>
       </v-card-row>
 
@@ -83,8 +80,7 @@
         <v-card-column class="header text-xs-center">
           ルーレット
         </v-card-column>
-        <v-card-column class="text-xs-center">
-          {{rouletteStr}}
+        <v-card-column class="text-xs-center" v-text="rouletteStr">
         </v-card-column>
       </v-card-row>
 
@@ -92,8 +88,7 @@
         <v-card-column class="header text-xs-center">
           備考
         </v-card-column>
-        <v-card-column class="text-xs-left">
-          {{recipe.備考}}
+        <v-card-column class="text-xs-left" v-text="recipe.備考">
         </v-card-column>
       </v-card-row>
       <v-divider />
