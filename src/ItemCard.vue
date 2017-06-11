@@ -88,7 +88,7 @@
         <v-card-column class="header text-xs-center">
           備考
         </v-card-column>
-        <v-card-column class="text-xs-left" v-html="item.備考.replace(/\n/, '<br />')">
+        <v-card-column class="text-xs-center" v-html="item.備考.replace(/\n/, '<br />')">
         </v-card-column>
       </v-card-row>
 

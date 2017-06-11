@@ -20,7 +20,7 @@
           <item-button :item="ing">
           </item-button>
         </v-card-column>
-        <v-card-column class="text-xs-right" v-text="ing.個数">
+        <v-card-column class="text-xs-center" v-text="ing.個数">
         </v-card-column>
       </v-card-row>
       <v-divider />
@@ -38,7 +38,7 @@
           <item-button :item="prod">
           </item-button>
         </v-card-column>
-        <v-card-column class="text-xs-right" v-text="prod.個数">
+        <v-card-column class="text-xs-center" v-text="prod.個数">
         </v-card-column>
       </v-card-row>
       <v-divider />
@@ -88,7 +88,7 @@
         <v-card-column class="header text-xs-center">
           備考
         </v-card-column>
-        <v-card-column class="text-xs-left" v-text="recipe.備考">
+        <v-card-column class="text-xs-center" v-text="recipe.備考">
         </v-card-column>
       </v-card-row>
       <v-divider />
