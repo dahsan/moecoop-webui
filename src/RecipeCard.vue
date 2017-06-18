@@ -104,7 +104,6 @@
 
 <script>
 import _ from 'lodash'
-import Separator from './Separator.vue'
 import ItemButton from './ItemButton.vue'
 import { baseURL, restCall } from './rest'
 
@@ -147,7 +146,6 @@ export default {
     }
   },
   components: {
-    Separator,
     ItemButton
   }
 }

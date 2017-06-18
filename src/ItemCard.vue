@@ -105,7 +105,6 @@
 
 <script>
 import _ from 'lodash'
-import Separator from './Separator.vue'
 import { baseURL, restCall } from './rest'
 
 export default {
@@ -320,7 +319,6 @@ export default {
     }
   },
   components: {
-    Separator
   }
 }
 </script>
