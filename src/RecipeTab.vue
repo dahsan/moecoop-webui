@@ -3,11 +3,11 @@
     <v-container fluid>
       <v-row>
         <v-col md6>
-          <v-select class="mt-0 mb-0" :label="title" v-model="sCategory" :items="categories">
+          <v-select :label="title" v-model="sCategory" :items="categories">
           </v-select>
         </v-col>
         <v-col md6>
-          <p class="text-xs-left">から</p>
+          <p class="text-xs-left mt-4">から</p>
         </v-col>
       </v-row>
       <v-row>
@@ -40,7 +40,6 @@
 </template>
 
 <script>
-import RecipeCard from './RecipeCard.vue'
 import RecipeButton from './RecipeButton.vue'
 import _ from 'lodash'
 import { baseURL, restCall } from './rest'
@@ -59,10 +58,14 @@ export default {
       this.sCategory = this.categories[0]
     },
     query: function() {
-      this.lazyGetRecipes()
+      if (this.query != '') {
+        this.lazyGetRecipes()
+      }
     },
     sCategory: function() {
-      this.getRecipes()
+      if (this.query != '') {
+        this.getRecipes()
+      }
     }
   },
   methods: {
@@ -84,7 +87,6 @@ export default {
     }
   },
   components: {
-    RecipeCard,
     RecipeButton
   }
 }
