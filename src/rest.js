@@ -1,6 +1,5 @@
 
-// export const baseURL = 'https://moecoop-api.arukascloud.io'
-export const baseURL = 'http://104.155.150.94'
+export const baseURL = 'https://moecoop-api.arukascloud.io'
 
 export function restCall(method, url, callback) {
   const xhr = new XMLHttpRequest()
