@@ -23,15 +23,12 @@
                 <v-tab-item ripple slot="activators" href="#binder-tab">
                   バインダー
                 </v-tab-item>
-                <v-tab-item ripple slot="activators" href="#skill-tab" disabled>
-                  スキル
-                </v-tab-item>
-                <v-tab-item ripple slot="activators" href="#recipe-menu-tab" disabled>
+                <v-tab-item ripple slot="activators" href="#menu-recipe-tab">
                   レシピ材料
                 </v-tab-item>
                 <v-tab-content slot="content" id="binder-tab">
                   <v-row>
-                    <v-col xs12 md6>
+                    <v-col xs12 sm6 md7 lg8>
                       <v-row v-if="characters.length > 1">
                         <v-col xs5 md5>
                           <v-select class="mb-0" label="キャラクター" v-model="sCharacter" :items="Object.values(characters)" item-text="name">
@@ -47,11 +44,49 @@
                       </recipe-tab>
                     </v-col>
 
-                    <v-col md6 class="hidden-xs-only">
+                    <v-col sm6 md5 lg4 class="hidden-xs-only">
                       <recipe-card v-show="$store.state.recipe.レシピ名 != ''">
                       </recipe-card>
                       <item-card v-show="$store.state.item.アイテム名 != ''">
                       </item-card>
+                    </v-col>
+                  </v-row>
+                </v-tab-content>
+
+                <v-tab-content slot="content" id="menu-recipe-tab">
+                  <v-row>
+                    <v-col xs12 md8>
+                      <v-row v-if="characters.length > 1">
+                        <v-col xs5 md5>
+                          <v-select class="mb-0" label="キャラクター" v-model="sCharacter" :items="Object.values(characters)" item-text="name">
+                          </v-select>
+                        </v-col>
+                        <v-col md1>
+                          <v-btn class="ml-0 black--text" floating small>
+                            <v-icon>edit</v-icon>
+                          </v-btn>
+                        </v-col>
+                      </v-row>
+                      <menu-recipe-tab :character="sCharacter">
+                      </menu-recipe-tab>
+                    </v-col>
+
+                    <v-col md4 class="hidden-xs-only">
+                      <recipe-card v-show="$store.state.recipe.レシピ名 != ''">
+                      </recipe-card>
+                      <!-- <v-dialog v-model="rdlg" fullscreen :overlay=false persistent class="hidden-sm-and-up"> -->
+                      <!--   <v-btn light flat slot="activator"></v-btn> -->
+                      <!--   <recipe-card :recipeDlg.sync="rdlg"> -->
+                      <!--   </recipe-card> -->
+                      <!-- </v-dialog> -->
+
+                      <item-card v-show="$store.state.item.アイテム名 != ''">
+                      </item-card>
+                      <!-- <v-dialog v-model="idlg" fullscreen :overlay=false persistent class="hidden-sm-and-up"> -->
+                      <!--   <v-btn light flat slot="activator"></v-btn> -->
+                      <!--   <item-card :itemDlg.sync="idlg"> -->
+                      <!--   </item-card> -->
+                      <!-- </v-dialog> -->
                     </v-col>
                   </v-row>
                 </v-tab-content>
@@ -75,6 +110,7 @@
 
 <script>
 import RecipeTab from './RecipeTab.vue'
+import MenuRecipeTab from './MenuRecipeTab.vue'
 import RecipeCard from './RecipeCard.vue'
 import ItemCard from './ItemCard.vue'
 import logo from './assets/moecoop.svg'
@@ -93,13 +129,29 @@ export default {
       twitter: twitter,
       github: github,
       adMessage: "ダイアロス生活協同組合は P 鯖と E 鯖で活動中！晩御飯からピッキングの相談までお気軽にどうぞ！",
+      // rdlg: false,
+      // idlg: false,
     }
   },
   computed: {
     characters() {
       return this.$store.state.characters
     },
+    // recipe() {
+    //   return this.$store.state.recipe
+    // },
+    // item() {
+    //   return this.$store.state.item
+    // }
   },
+  // watch: {
+  //   recipe: function() {
+  //     this.rdlg = true
+  //   },
+  //   item: function() {
+  //     this.idlg = true
+  //   }
+  // },
   mounted: function() {
     this.sCharacter = this.characters[0]
     restCall('GET', baseURL+"/information", (xhr) => {
@@ -130,6 +182,7 @@ export default {
   },
   components: {
     RecipeTab,
+    MenuRecipeTab,
     RecipeCard,
     ItemCard
   }

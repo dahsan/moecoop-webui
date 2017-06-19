@@ -60,6 +60,16 @@
         </v-card-column>
       </v-card-row>
 
+      <v-card-row v-if="item.レシピ.length > 0">
+        <v-card-column class="header text-xs-center">
+          レシピ
+        </v-card-column>
+        <v-card-column class="text-xs-center">
+          <recipe-button :recipe="r" v-for="r in item.レシピ" :key="r.レシピ名">
+          </recipe-button>
+        </v-card-column>
+      </v-card-row>
+
       <v-card-row v-if="item.特殊条件.length > 0">
         <v-card-column class="header text-xs-center">
           特殊条件
@@ -104,6 +114,7 @@
 </template>
 
 <script>
+import RecipeButton from './RecipeButton.vue'
 import _ from 'lodash'
 import { baseURL, restCall } from './rest'
 
@@ -319,6 +330,7 @@ export default {
     }
   },
   components: {
+    RecipeButton
   }
 }
 </script>
