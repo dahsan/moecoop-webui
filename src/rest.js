@@ -1,5 +1,5 @@
 
-export const baseURL = 'https://moecoop-api.arukascloud.io'
+export const baseURL = 'http://api.fukuro.coop.moe'
 
 export function restCall(method, url, callback) {
   const xhr = new XMLHttpRequest()
