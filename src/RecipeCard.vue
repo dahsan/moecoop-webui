@@ -55,7 +55,7 @@
         <v-card-column class="header text-xs-center">
           必要スキル
         </v-card-column>
-        <v-card-column class="text-xs-center" v-text="skillStr">
+        <v-card-column class="text-xs-center" v-html="skillStr">
         </v-card-column>
       </v-card-row>
 
@@ -63,7 +63,7 @@
         <v-card-column class="header text-xs-center">
           収録バインダー
         </v-card-column>
-        <v-card-column class="text-xs-center" v-text="binderStr">
+        <v-card-column class="text-xs-center" v-html="binderStr">
         </v-card-column>
       </v-card-row>
 
@@ -132,7 +132,7 @@ export default {
       const skills = ("必要スキル" in this.recipe) ? this.recipe.必要スキル : {}
       this.skillStr = Object.keys(skills).map(k => k+'('+(skills[k]+0.0).toFixed(1)+')').join("<br />")
 
-      this.binderStr = (this.recipe.収録バインダー.length == 0) ? "なし" : this.recipe.収録バインダー.map(b => b.バインダー名).join("<br /")
+      this.binderStr = (this.recipe.収録バインダー.length == 0) ? "なし" : this.recipe.収録バインダー.map(b => b.バインダー名).join("<br />")
 
       if (!this.recipe.ギャンブル型 && !this.recipe.ペナルティ型) {
         this.rouletteStr = "通常"
