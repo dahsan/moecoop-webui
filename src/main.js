@@ -4,7 +4,7 @@ import Vuetify from 'vuetify'
 
 import store from './store'
 
-import 'vuetify/dist/vuetify.min.css'
+import '../node_modules/vuetify/src/stylus/main.styl'
 
 Vue.use(Vuetify)
 
