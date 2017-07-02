@@ -74,19 +74,9 @@
                     <v-col md4 class="hidden-xs-only">
                       <recipe-card v-show="$store.state.recipe.レシピ名 != ''">
                       </recipe-card>
-                      <!-- <v-dialog v-model="rdlg" fullscreen :overlay=false persistent class="hidden-sm-and-up"> -->
-                      <!--   <v-btn light flat slot="activator"></v-btn> -->
-                      <!--   <recipe-card :recipeDlg.sync="rdlg"> -->
-                      <!--   </recipe-card> -->
-                      <!-- </v-dialog> -->
 
                       <item-card v-show="$store.state.item.アイテム名 != ''">
                       </item-card>
-                      <!-- <v-dialog v-model="idlg" fullscreen :overlay=false persistent class="hidden-sm-and-up"> -->
-                      <!--   <v-btn light flat slot="activator"></v-btn> -->
-                      <!--   <item-card :itemDlg.sync="idlg"> -->
-                      <!--   </item-card> -->
-                      <!-- </v-dialog> -->
                     </v-col>
                   </v-row>
                 </v-tab-content>
@@ -116,7 +106,7 @@ import ItemCard from './ItemCard.vue'
 import logo from './assets/moecoop.svg'
 import twitter from './assets/Twitter_Social_Icon_White.svg'
 import github from './assets/GitHub-Mark-Light-64px.png'
-import { baseURL, restCall } from './rest'
+import { baseURL, getCall } from './rest'
 
 export default {
   name: 'app',
@@ -154,7 +144,7 @@ export default {
   // },
   mounted: function() {
     this.sCharacter = this.characters[0]
-    restCall('GET', baseURL+"/information", (xhr) => {
+    getCall(baseURL+"/information", (xhr) => {
       if (xhr.readyState==4 && xhr.status==200) {
         const msg = JSON.parse(xhr.response)["message"]
         if (msg.length > 0) {
@@ -162,7 +152,7 @@ export default {
         }
       }
     })
-    restCall('GET', baseURL+'/binders', (xhr) => {
+    getCall(baseURL+'/binders', (xhr) => {
       if (xhr.readyState==4 && xhr.status==200) {
         const result = JSON.parse(xhr.response)
         this.binders = [{text: '全てのバインダー', value: '/recipes'}].concat(
@@ -190,8 +180,14 @@ export default {
 
 </script>
 
-<style scoped>
+<style>
   .fa {
     color: white;
   }
+
+  /* Note: scoped に入れるとうまくいかない */
+  div.input-group__details {
+    min-height: 0px;
+  }
+
 </style>

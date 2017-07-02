@@ -3,7 +3,7 @@
     <v-container fluid>
       <v-row>
         <v-col md6>
-          <v-text-field class="mb-0" :label="fromIng ? '素材名' : '作成アイテム'" v-model="query" type="text"></v-text-field>
+          <v-text-field class="mb-0" :label="fromIng ? '素材名' : '作成アイテム'" v-model="query"></v-text-field>
         </v-col>
         <v-col md6>
           <p class="text-xs-left mt-4">を検索</p>
@@ -40,7 +40,7 @@
 <script>
 import ItemButton from './ItemButton.vue'
 import _ from 'lodash'
-import { baseURL, restCall } from './rest'
+import { baseURL, getCall } from './rest'
 
 export default {
   name: 'menu-recipe-tab',
@@ -66,7 +66,7 @@ export default {
       500
     ),
     getItems: function() {
-      restCall('GET', baseURL+'/items?migemo=true&only-products=true&from-ingredients='+this.fromIng+'&query='+this.query, (xhr) => {
+      getCall(baseURL+'/items?migemo=true&only-products=true&from-ingredients='+this.fromIng+'&query='+this.query, (xhr) => {
         if (xhr.readyState==4 && xhr.status==200) {
           this.items = JSON.parse(xhr.response)['アイテム一覧']
         }

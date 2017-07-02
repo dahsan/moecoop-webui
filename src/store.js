@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
-import { baseURL, restCall } from './rest'
+import { baseURL, getCall } from './rest'
 
 Vue.use(Vuex)
 
@@ -23,7 +23,7 @@ export const mutations = {
 
 export const actions = {
   setItem({ commit }, newItem) {
-    restCall('GET', baseURL+newItem.詳細, (xhr) => {
+    getCall(baseURL+newItem.詳細, (xhr) => {
       if (xhr.readyState==4 && xhr.status==200) {
         commit('setItem', JSON.parse(xhr.response))
       } else if (xhr.status==404) {
@@ -42,7 +42,7 @@ export const actions = {
     })
   },
   setRecipe({ commit }, newRecipe) {
-    restCall('GET', baseURL+newRecipe.詳細, (xhr) => {
+    getCall(baseURL+newRecipe.詳細, (xhr) => {
       if (xhr.readyState==4 && xhr.status==200) {
         commit('setRecipe', JSON.parse(xhr.response))
       } else if (xhr.status==404) {

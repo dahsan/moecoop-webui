@@ -12,7 +12,7 @@
       </v-row>
       <v-row>
         <v-col md6>
-          <v-text-field class="mt-0 mb-0" label="レシピ名" v-model="query" type="text"></v-text-field>
+          <v-text-field class="mt-0 mb-0" label="レシピ名" v-model="query"></v-text-field>
         </v-col>
         <v-col md6>
           <p class="text-xs-left">を検索</p>
@@ -42,7 +42,7 @@
 <script>
 import RecipeButton from './RecipeButton.vue'
 import _ from 'lodash'
-import { baseURL, restCall } from './rest'
+import { baseURL, getCall } from './rest'
 
 export default {
   name: 'recipe-tab',
@@ -76,7 +76,7 @@ export default {
       500
     ),
     getRecipes: function() {
-      restCall('GET', baseURL+this.sCategory.value+'?migemo=true&fields=生成物&query='+this.query, (xhr) => {
+      getCall(baseURL+this.sCategory.value+'?migemo=true&fields=生成物&query='+this.query, (xhr) => {
         if (xhr.readyState==4 && xhr.status==200) {
           this.recipes = JSON.parse(xhr.response)['レシピ一覧']
         }

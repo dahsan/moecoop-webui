@@ -44,6 +44,22 @@
 
       <v-card-row>
         <v-card-column class="header text-xs-center">
+          参考価格
+        </v-card-column>
+        <v-card-column class="text-xs-center">
+          {{item.参考価格}} g
+        </v-card-column>
+      </v-card-row>
+
+      <v-card-row class="mt-0 mb-0">
+        <v-card-column class="header text-xs-center" v-tooltip:left="{ html: 'まだ飾り！'}">
+          調達価格
+        </v-card-column>
+        <v-text-field light class="mt-0 mb-0" min="0" maxlength="8" suffix="g" type="number"></v-text-field>
+      </v-card-row>
+
+      <v-card-row>
+        <v-card-column class="header text-xs-center">
           転送可
         </v-card-column>
         <v-card-column class="text-xs-center">
@@ -116,7 +132,6 @@
 <script>
 import RecipeButton from './RecipeButton.vue'
 import _ from 'lodash'
-import { baseURL, restCall } from './rest'
 
 export default {
   name: 'item-card',
