@@ -55,7 +55,7 @@
         <v-card-column class="header text-xs-center" v-tooltip:left="{ html: 'まだ飾り！'}">
           調達価格
         </v-card-column>
-        <v-text-field light class="mt-0 mb-0" min="0" maxlength="8" suffix="g" type="number"></v-text-field>
+        <v-text-field light class="mt-0 mb-0" min="0" maxlength="8" suffix="g" type="number" disabled></v-text-field>
       </v-card-row>
 
       <v-card-row>
