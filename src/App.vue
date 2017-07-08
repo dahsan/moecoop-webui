@@ -20,11 +20,11 @@
           <v-row>
             <v-col md12>
               <v-tabs centered>
-                <v-tab-item ripple slot="activators" href="#binder-tab">
-                  バインダー
-                </v-tab-item>
                 <v-tab-item ripple slot="activators" href="#menu-recipe-tab">
                   レシピ材料
+                </v-tab-item>
+                <v-tab-item ripple slot="activators" href="#binder-tab">
+                  バインダー
                 </v-tab-item>
                 <v-tab-content slot="content" id="binder-tab">
                   <v-row>
