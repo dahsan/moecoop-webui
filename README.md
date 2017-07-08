@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/coop-mojo/moecoop-webui.svg?branch=master)](https://travis-ci.org/coop-mojo/moecoop-webui)
 
-> 生協の知恵袋のウェブUI版です
+生協の知恵袋のウェブUI版です
 
 ご利用は[こちら](http://fukuro.coop.moe/)からどうぞ！
 ## ビルド方法
