@@ -47,7 +47,8 @@
         <v-card-column class="header text-xs-center">
           テクニック
         </v-card-column>
-        <v-card-column class="text-xs-center" v-text="techStr">
+        <v-card-column class="text-xs-center">
+          {{recipe.テクニック.join(", ")}}
         </v-card-column>
       </v-card-row>
 
@@ -109,7 +110,6 @@ import ItemButton from './ItemButton.vue'
 export default {
   name: 'recipe-card',
   data: () => ({
-    techStr: '',
     skillStr: '',
     binderStr: '',
     rouletteStr: '',
@@ -127,7 +127,6 @@ export default {
   },
   methods: {
     updateRecipe: function() {
-      this.techStr = this.recipe.テクニック.join(", ")
       const skills = ("必要スキル" in this.recipe) ? this.recipe.必要スキル : {}
       this.skillStr = Object.keys(skills).map(k => k+'('+(skills[k]+0.0).toFixed(1)+')').join("<br />")
 
