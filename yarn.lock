@@ -5012,9 +5012,9 @@ vuetify@^0.11.1:
   dependencies:
     vue "^2.2.0"
 
-vuex-persistedstate@^1.4.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/vuex-persistedstate/-/vuex-persistedstate-1.4.1.tgz#d1b408e6ba6cda5e849226856820600996aef5ef"
+vuex-persistedstate@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/vuex-persistedstate/-/vuex-persistedstate-2.0.0.tgz#b84f530da4679bdf694c5ddf65c23033aa79b1bb"
   dependencies:
     lodash.merge "^4.6.0"
     object-path "^0.11.2"
