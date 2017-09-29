@@ -1,108 +1,71 @@
 <template>
-  <v-app id="app">
-    <v-toolbar>
-      <img :src="logo" width="27"></img>
-      <v-toolbar-title>生協の知恵袋</v-toolbar-title>
+  <v-app id="app" fixed-footer fill-height>
+    <main>
+      <v-tabs dark v-model="active">
+        <v-tabs-bar>
+          <v-tabs-slider class="yellow">
+          </v-tabs-slider>
+          <v-tabs-item href="#menu-recipe-tab">
+            レシピ材料
+          </v-tabs-item>
+          <v-tabs-item href="#binder-tab">
+            バインダー
+          </v-tabs-item>
+        </v-tabs-bar>
+        <v-container fluid>
+          <v-layout>
+            <v-flex md8>
+              <v-layout row wrap v-if="false">
+                <v-flex d-flex md3>
+                  <v-select label="キャラクター" v-model="sCharacter" :items="Object.values(characters)" item-text="name">
+                  </v-select>
+                </v-flex>
+                <v-flex md3>
+                  <v-btn fab small>
+                    <v-icon>edit</v-icon>
+                  </v-btn>
+                </v-flex>
+              </v-layout>
+
+              <v-tabs-items>
+                <v-tabs-content id="menu-recipe-tab">
+                  <menu-recipe-tab :character="sCharacter">
+                  </menu-recipe-tab>
+                </v-tabs-content>
+                <v-tabs-content id="binder-tab">
+                  <recipe-tab title="バインダー" :categories="binders" :character="sCharacter">
+                  </recipe-tab>
+                </v-tabs-content>
+              </v-tabs-items>
+            </v-flex>
+            <v-flex sm6 md5 lg4 class="hidden-xs-only">
+              <router-view name="item"></router-view>
+              <router-view name="recipe"></router-view>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-tabs>
+    </main>
+    <v-footer>
+      <img :src="logo" width="16"></img>
+      生協の知恵袋
       <v-spacer></v-spacer>
       <a href="http://docs.fukuro.coop.moe/" class="mr-1">
-        <v-icon class="white--text">help</v-icon>
+        <v-icon>fa-question-circle</v-icon>
       </a>
       <a href="https://twitter.com/coop_moe" class="mr-1">
-        <img :src="twitter" width="30" height="30"></img>
+        <v-icon>fa-twitter</v-icon>
       </a>
       <a href="https://github.com/coop-mojo/moecoop-webui">
-        <img :src="github" width="22" height="22"></img>
+        <v-icon>fa-github</v-icon>
       </a>
-    </v-toolbar>
-    <main>
-      <v-content>
-        <v-container fluid>
-          <v-row>
-            <v-col md12>
-              <v-tabs centered>
-                <v-tab-item ripple slot="activators" href="#menu-recipe-tab">
-                  レシピ材料
-                </v-tab-item>
-                <v-tab-item ripple slot="activators" href="#binder-tab">
-                  バインダー
-                </v-tab-item>
-                <v-tab-content slot="content" id="binder-tab">
-                  <v-row>
-                    <v-col xs12 sm6 md7 lg8>
-                      <v-row v-if="characters.length > 1">
-                        <v-col xs5 md5>
-                          <v-select class="mb-0" label="キャラクター" v-model="sCharacter" :items="Object.values(characters)" item-text="name">
-                          </v-select>
-                        </v-col>
-                        <v-col md1>
-                          <v-btn class="ml-0 black--text" floating small>
-                            <v-icon>edit</v-icon>
-                          </v-btn>
-                        </v-col>
-                      </v-row>
-                      <recipe-tab title="バインダー" :categories="binders" :character="sCharacter">
-                      </recipe-tab>
-                    </v-col>
-
-                    <v-col sm6 md5 lg4 class="hidden-xs-only">
-                      <recipe-card v-show="$store.state.recipe.レシピ名 != ''">
-                      </recipe-card>
-                      <item-card v-show="$store.state.item.アイテム名 != ''">
-                      </item-card>
-                    </v-col>
-                  </v-row>
-                </v-tab-content>
-
-                <v-tab-content slot="content" id="menu-recipe-tab">
-                  <v-row>
-                    <v-col xs12 md8>
-                      <v-row v-if="characters.length > 1">
-                        <v-col xs5 md5>
-                          <v-select class="mb-0" label="キャラクター" v-model="sCharacter" :items="Object.values(characters)" item-text="name">
-                          </v-select>
-                        </v-col>
-                        <v-col md1>
-                          <v-btn class="ml-0 black--text" floating small>
-                            <v-icon>edit</v-icon>
-                          </v-btn>
-                        </v-col>
-                      </v-row>
-                      <menu-recipe-tab :character="sCharacter">
-                      </menu-recipe-tab>
-                    </v-col>
-
-                    <v-col md4 class="hidden-xs-only">
-                      <recipe-card v-show="$store.state.recipe.レシピ名 != ''">
-                      </recipe-card>
-
-                      <item-card v-show="$store.state.item.アイテム名 != ''">
-                      </item-card>
-                    </v-col>
-                  </v-row>
-                </v-tab-content>
-              </v-tabs>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col md12>
-              <p class="text-md-center">
-                <v-chip class="primary white--text hidden-xs-only">広告</v-chip>
-                <v-chip class="secondary white--text hidden-sm-and-up">広告</v-chip>
-                {{adMessage}}
-              </p>
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-content>
-    </main>
+    </v-footer>
   </v-app>
 </template>
 
 <script>
 import RecipeTab from './RecipeTab.vue'
 import MenuRecipeTab from './MenuRecipeTab.vue'
-import RecipeCard from './RecipeCard.vue'
-import ItemCard from './ItemCard.vue'
 import logo from './assets/moecoop.svg'
 import twitter from './assets/Twitter_Social_Icon_White.svg'
 import github from './assets/GitHub-Mark-Light-64px.png'
@@ -112,6 +75,7 @@ export default {
   name: 'app',
   data() {
     return {
+      active: null,
       binders: [],
       skills: [],
       sCharacter: { name: '' },
@@ -119,29 +83,13 @@ export default {
       twitter: twitter,
       github: github,
       adMessage: "ダイアロス生活協同組合は P 鯖と E 鯖で活動中！晩御飯からピッキングの相談までお気軽にどうぞ！",
-      // rdlg: false,
-      // idlg: false,
     }
   },
   computed: {
     characters() {
       return this.$store.state.characters
     },
-    // recipe() {
-    //   return this.$store.state.recipe
-    // },
-    // item() {
-    //   return this.$store.state.item
-    // }
   },
-  // watch: {
-  //   recipe: function() {
-  //     this.rdlg = true
-  //   },
-  //   item: function() {
-  //     this.idlg = true
-  //   }
-  // },
   mounted: function() {
     this.sCharacter = this.characters[0]
     getCall(baseURL+"/information", (xhr) => {
@@ -173,17 +121,12 @@ export default {
   components: {
     RecipeTab,
     MenuRecipeTab,
-    RecipeCard,
-    ItemCard
   }
 }
 
 </script>
 
 <style>
-  .fa {
-    color: white;
-  }
 
   /* Note: scoped に入れるとうまくいかない */
   div.input-group__details {

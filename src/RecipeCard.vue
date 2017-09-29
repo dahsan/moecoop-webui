@@ -1,104 +1,104 @@
 <template>
   <v-card id="recipe-card">
-    <v-toolbar>
-      <v-toolbar-title v-text="recipe.レシピ名+'のレシピ情報'">
-      </v-toolbar-title>
-    </v-toolbar>
+    <v-card-title v-text="recipe.レシピ名+'のレシピ情報'">
+    </v-card-title>
 
     <v-card-text>
-      <v-card-row>
-        <v-card-column class="header text-xs-center">
+      <v-layout>
+        <v-flex md6 class="text-md-center caption">
           材料
-        </v-card-column>
-        <v-card-column class="header text-xs-center">
+        </v-flex>
+        <v-flex md6 class="text-md-center caption">
           個数
-        </v-card-column>
-      </v-card-row>
+        </v-flex>
+      </v-layout>
+
       <v-divider />
-      <v-card-row v-for="ing in recipe.材料" :key="ing.アイテム名">
-        <v-card-column class="text-xs-center">
+
+      <v-layout v-for="ing in recipe.材料" :key="ing.アイテム名">
+        <v-flex md6 class="text-md-center">
           <item-button :item="ing">
           </item-button>
-        </v-card-column>
-        <v-card-column class="text-xs-center" v-text="ing.個数">
-        </v-card-column>
-      </v-card-row>
+        </v-flex>
+        <v-flex md6 class="text-md-center" v-text="ing.個数">
+        </v-flex>
+      </v-layout>
+
       <v-divider />
-      <v-card-row>
-        <v-card-column class="header text-xs-center">
+
+      <v-layout>
+        <v-flex md6 class="text-md-center caption">
           生成物
-        </v-card-column>
-        <v-card-column class="header text-xs-center">
+        </v-flex>
+        <v-flex md6 class="text-md-center caption">
           個数
-        </v-card-column>
-      </v-card-row>
+        </v-flex>
+      </v-layout>
+
       <v-divider />
-      <v-card-row v-for="prod in recipe.生成物" :key="prod.アイテム名">
-        <v-card-column class="text-xs-center">
+
+      <v-layout v-for="prod in recipe.生成物" :key="prod.アイテム名">
+        <v-flex md6 class="text-md-center">
           <item-button :item="prod">
           </item-button>
-        </v-card-column>
-        <v-card-column class="text-xs-center" v-text="prod.個数">
-        </v-card-column>
-      </v-card-row>
+        </v-flex>
+        <v-flex md6 class="text-md-center" v-text="prod.個数">
+        </v-flex>
+      </v-layout>
+
       <v-divider />
 
-      <v-card-row>
-        <v-card-column class="header text-xs-center">
+      <v-layout>
+        <v-flex md6 class="text-md-center caption">
           テクニック
-        </v-card-column>
-        <v-card-column class="text-xs-center">
+        </v-flex>
+        <v-flex md6 class="text-md-center">
           {{recipe.テクニック.join(", ")}}
-        </v-card-column>
-      </v-card-row>
+        </v-flex>
+      </v-layout>
 
-      <v-card-row>
-        <v-card-column class="header text-xs-center">
+      <v-layout>
+        <v-flex md6 class="text-md-center caption">
           必要スキル
-        </v-card-column>
-        <v-card-column class="text-xs-center" v-html="skillStr">
-        </v-card-column>
-      </v-card-row>
+        </v-flex>
+        <v-flex md6 class="text-md-center" v-html="skillStr">
+        </v-flex>
+      </v-layout>
 
-      <v-card-row>
-        <v-card-column class="header text-xs-center">
+      <v-layout>
+        <v-flex md6 class="text-md-center caption">
           収録バインダー
-        </v-card-column>
-        <v-card-column class="text-xs-center" v-html="binderStr">
-        </v-card-column>
-      </v-card-row>
+        </v-flex>
+        <v-flex md6 class="text-md-center" v-html="binderStr">
+        </v-flex>
+      </v-layout>
 
-      <v-card-row>
-        <v-card-column class="header text-xs-center">
+      <v-layout>
+        <v-flex md6 class="text-md-center caption">
           レシピ必須
-        </v-card-column>
-        <v-card-column class="text-xs-center">
+        </v-flex>
+        <v-flex md6 class="text-md-center">
           {{recipe.レシピ必須 ? "はい" : "いいえ"}}
-        </v-card-column>
-      </v-card-row>
+        </v-flex>
+      </v-layout>
 
-      <v-card-row>
-        <v-card-column class="header text-xs-center">
+      <v-layout>
+        <v-flex md6 class="text-md-center caption">
           ルーレット
-        </v-card-column>
-        <v-card-column class="text-xs-center" v-text="rouletteStr">
-        </v-card-column>
-      </v-card-row>
+        </v-flex>
+        <v-flex md6 class="text-md-center" v-text="rouletteStr">
+        </v-flex>
+      </v-layout>
 
-      <v-card-row v-if="recipe.備考 != ''">
-        <v-card-column class="header text-xs-center">
+      <v-layout v-if="recipe.備考 != ''">
+        <v-flex md6 class="text-md-center caption">
           備考
-        </v-card-column>
-        <v-card-column class="text-xs-center" v-text="recipe.備考">
-        </v-card-column>
-      </v-card-row>
-      <v-divider />
+        </v-flex>
+        <v-flex md6 class="text-md-center" v-text="recipe.備考">
+        </v-flex>
+      </v-layout>
 
-      <v-card-row actions class="hidden-sm-and-up">
-        <v-btn @click.native="closeDialog()" class="black--text">
-          閉じる
-        </v-btn>
-      </v-card-row>
+      <v-divider />
     </v-card-text>
   </v-card>
 </template>
@@ -150,12 +150,8 @@ export default {
 </script>
 
 <style scoped>
-  div.header {
+  .caption {
     font-weight: bold;
-  }
-
-  /* v-card-row の高さ調整 */
-  .card__row {
-    min-height: 0px;
+    font-family: sans-serif;
   }
 </style>
