@@ -46,8 +46,8 @@
         </v-container>
       </v-tabs>
     </main>
-    <v-footer>
-      <img :src="logo" width="16"></img>
+    <v-footer absolute>
+      <img :src="logo" width="16" class="mr-1"></img>
       生協の知恵袋
       <v-spacer></v-spacer>
       <a href="http://docs.fukuro.coop.moe/" class="mr-1">
