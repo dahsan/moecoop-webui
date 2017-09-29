@@ -138,9 +138,6 @@ export default {
         this.rouletteStr = [this.recipe.ギャンブル型 ? "ギャンブル型" : "",
                             this.recipe.ペナルティ型 ? "ペナルティ型" : ""].filter(s => s != "").join("<br />")
       }
-    },
-    closeDialog: function() {
-      this.$emit('update:recipeDlg', false)
     }
   },
   components: {

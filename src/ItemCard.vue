@@ -335,9 +335,6 @@ export default {
       case '不明':
       default:
       }
-    },
-    closeDialog: function() {
-      this.$emit('update:itemDlg', false)
     }
   },
   components: {
