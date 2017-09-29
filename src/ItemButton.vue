@@ -13,7 +13,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn @click.native="dialog=false">
-              閉じるi
+              閉じる
             </v-btn>
           </v-card-actions>
         </v-card-text>
