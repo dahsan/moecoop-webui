@@ -57,12 +57,12 @@ export default {
       this.sCategory = this.categories[0]
     },
     query: function() {
-      if (this.query != '') {
+      if (this.sCategory.text != '全てのバインダー' || this.query != '') {
         this.lazyGetRecipes()
       }
     },
     sCategory: function() {
-      if (this.query != '') {
+      if (this.sCategory.text != '全てのバインダー' || this.query != '') {
         this.getRecipes()
       }
     }
@@ -75,7 +75,8 @@ export default {
       500
     ),
     getRecipes: function() {
-      getCall(baseURL+this.sCategory.value+'?migemo=true&fields=生成物&query='+this.query, (xhr) => {
+      const qstr = (this.query == '') ? '' : '&query='+this.query
+      getCall(baseURL+this.sCategory.value+'?migemo=true&fields=生成物'+qstr, (xhr) => {
         if (xhr.readyState==4 && xhr.status==200) {
           this.recipes = JSON.parse(xhr.response)['レシピ一覧']
         }
