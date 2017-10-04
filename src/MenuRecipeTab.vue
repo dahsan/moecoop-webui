@@ -5,7 +5,16 @@
         <v-text-field class="mb-0" :label="fromIng ? '素材名' : '作成アイテム'" v-model="query"></v-text-field>
       </v-flex>
       <v-flex md8>
-          <p class="text-xs-left mt-4">を検索</p>
+        <div>
+          <p class="text-xs-left mt-2 mb-0" v-if="loadingItems">
+            を検索
+            <v-progress-circular indeterminate class="primary--text">
+            </v-progress-circular>
+          </p>
+          <p class="text-xs-left mt-4 mb-0" v-else>
+            を検索
+          </p>
+        </div>
       </v-flex>
     </v-layout>
 
@@ -49,6 +58,7 @@ export default {
     query: '',
     fromIng: false,
     items: [],
+    loadingItems: false,
   }),
   watch: {
     query: function() {
@@ -65,10 +75,12 @@ export default {
       500
     ),
     getItems: function() {
+      this.loadingItems = true
       getCall(baseURL+'/items?migemo=true&only-products=true&from-ingredients='+this.fromIng+'&query='+this.query, (xhr) => {
         if (xhr.readyState==4 && xhr.status==200) {
           this.items = JSON.parse(xhr.response)['アイテム一覧']
         }
+        this.loadingItems = false
       })
     },
     updateRecipe: function(item) {
