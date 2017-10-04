@@ -340,7 +340,7 @@ export default {
     price: {
       get: function() {
         if (this.item == null || this.item.アイテム名 == '') {
-          return ''
+          return null
         } else {
           return this.$store.state.prices[this.item.アイテム名]
         }
