@@ -47,7 +47,7 @@
           参考価格
         </v-flex>
         <v-flex md6 class="text-md-center">
-          {{listPrice}} g
+          {{(price != null) ? price : item.参考価格}} g
         </v-flex>
       </v-layout>
 
@@ -132,21 +132,6 @@ import _ from 'lodash'
 
 export default {
   name: 'item-card',
-  data: () => ({
-    listPrice: null,
-  }),
-  watch: {
-    price: function() {
-      if (this.item.アイテム名 == '') {
-        this.listPrice = null
-      }
-      postCall(baseURL+'/items/'+this.item.アイテム名, { "調達価格": this.$store.state.prices }, (xhr) => {
-        if (xhr.readyState==4 && xhr.status==200) {
-          this.listPrice = JSON.parse(xhr.response)['参考価格']
-        }
-      })
-    },
-  },
   computed: {
     item() {
       return this.$store.state.item

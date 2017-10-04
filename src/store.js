@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
-import { baseURL, getCall } from './rest'
+import { baseURL, getCall, postCall } from './rest'
 
 Vue.use(Vuex)
 
@@ -14,22 +14,22 @@ export const mutations = {
     state.recipe = newRecipe
   },
   addCharacter(state, newChar) {
-    state.characters[newChar.name] = newChar
+    Vue.set(state.characters, newChar.name, newChar)
   },
   deleteCharacter(state, char) {
-    state.characters.remove(char)
+    Vue.delete(state.characters, char)
   },
   setPrice(state, payload) {
-    state.prices[payload.item] = payload.price
+    Vue.set(state.prices, payload.item, payload.price)
   },
   deletePrice(state, item) {
-    delete state.prices[item]
+    Vue.delete(state.prices, item)
   }
 }
 
 export const actions = {
-  setItem({ commit }, newItem) {
-    getCall(baseURL+newItem.詳細, (xhr) => {
+  setItem({ commit, state }, newItem) {
+    postCall(baseURL+newItem.詳細, { "調達価格": state.prices }, (xhr) => {
       if (xhr.readyState==4 && xhr.status==200) {
         commit('setItem', JSON.parse(xhr.response))
       } else if (xhr.status==404) {
@@ -39,6 +39,7 @@ export const actions = {
           info: "",
           重さ: 0.0,
           NPC売却価格: 0,
+          参考価格: 0,
           特殊条件: [],
           ペットアイテム: { 種別: '不明' },
           レシピ: [],
