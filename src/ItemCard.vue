@@ -56,7 +56,7 @@
           調達価格
         </v-flex>
         <v-flex md4 class="text-md-center">
-          <v-text-field light class="mt-0 mb-0" min="0" maxlength="8" suffix="g" type="number" disabled></v-text-field>
+          <v-text-field light class="mt-0 mb-0" min="0" maxlength="8" suffix="g" type="number" v-model="price"></v-text-field>
         </v-flex>
       </v-layout>
 
@@ -139,6 +139,22 @@ export default {
   computed: {
     item() {
       return this.$store.state.item
+    },
+    price: {
+      get: function() {
+        if (this.item == null || this.item.アイテム名 == '') {
+          return ''
+        } else {
+          return this.$store.state.prices[this.item.アイテム名]
+        }
+      },
+      set: function(val) {
+        if (val == '') {
+          this.$store.dispatch('deletePrice', this.item.アイテム名)
+        } else {
+          this.$store.dispatch('setPrice', { item: this.item.アイテム名, price: Number(val) })
+        }
+      }
     }
   },
   watch: {

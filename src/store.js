@@ -19,6 +19,12 @@ export const mutations = {
   deleteCharacter(state, char) {
     state.characters.remove(char)
   },
+  setPrice(state, payload) {
+    state.prices[payload.item] = payload.price
+  },
+  deletePrice(state, item) {
+    delete state.prices[item]
+  }
 }
 
 export const actions = {
@@ -59,6 +65,12 @@ export const actions = {
       }
     })
   },
+  setPrice({ commit }, payload) {
+    commit('setPrice', payload)
+  },
+  deletePrice({ commit }, item) {
+    commit('deletePrice', item)
+  },
 }
 
 export default new Vuex.Store({
@@ -83,6 +95,8 @@ export default new Vuex.Store({
     },
     characters: {
       しらたま: { name: 'しらたま' },
+    },
+    prices: {
     },
   },
   mutations: mutations,
