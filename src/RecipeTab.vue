@@ -15,7 +15,16 @@
         <v-text-field class="mt-0 mb-0" label="レシピ名" v-model="query"></v-text-field>
       </v-flex>
       <v-flex md7>
-        <p class="text-xs-left mt-4">を検索</p>
+        <div>
+          <p class="text-xs-left mt-2 mb-0" v-if="loadingRecipes">
+            を検索
+            <v-progress-circular indeterminate class="primary--text">
+            </v-progress-circular>
+          </p>
+          <p class="text-xs-left mt-4 mb-0" v-else>
+            を検索
+          </p>
+        </div>
       </v-flex>
     </v-layout>
 
@@ -51,6 +60,7 @@ export default {
     query: '',
     sCategory: '',
     recipes: [],
+    loadingRecipes: false,
   }),
   watch: {
     categories: function() {
@@ -75,11 +85,13 @@ export default {
       500
     ),
     getRecipes: function() {
+      this.loadingRecipes = true
       const qstr = (this.query == '') ? '' : '&query='+this.query
       getCall(baseURL+this.sCategory.value+'?migemo=true&fields=生成物'+qstr, (xhr) => {
         if (xhr.readyState==4 && xhr.status==200) {
           this.recipes = JSON.parse(xhr.response)['レシピ一覧']
         }
+        this.loadingRecipes = false
       })
     },
     updateRecipe: function(item) {
