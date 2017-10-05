@@ -67,8 +67,6 @@
 import RecipeTab from './RecipeTab.vue'
 import MenuRecipeTab from './MenuRecipeTab.vue'
 import logo from './assets/moecoop.svg'
-import twitter from './assets/Twitter_Social_Icon_White.svg'
-import github from './assets/GitHub-Mark-Light-64px.png'
 import { baseURL, getCall } from './rest'
 
 export default {
@@ -80,8 +78,6 @@ export default {
       skills: [],
       sCharacter: { name: '' },
       logo: logo,
-      twitter: twitter,
-      github: github,
       adMessage: "ダイアロス生活協同組合は P 鯖と E 鯖で活動中！晩御飯からピッキングの相談までお気軽にどうぞ！",
     }
   },
