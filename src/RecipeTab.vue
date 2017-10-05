@@ -90,8 +90,8 @@ export default {
       getCall(baseURL+this.sCategory.value+'?migemo=true&fields=生成物'+qstr, (xhr) => {
         if (xhr.readyState==4 && xhr.status==200) {
           this.recipes = JSON.parse(xhr.response)['レシピ一覧']
+          this.loadingRecipes = false
         }
-        this.loadingRecipes = false
       })
     },
     updateRecipe: function(item) {

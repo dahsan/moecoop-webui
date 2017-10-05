@@ -79,8 +79,8 @@ export default {
       getCall(baseURL+'/items?migemo=true&only-products=true&from-ingredients='+this.fromIng+'&query='+this.query, (xhr) => {
         if (xhr.readyState==4 && xhr.status==200) {
           this.items = JSON.parse(xhr.response)['アイテム一覧']
+          this.loadingItems = false
         }
-        this.loadingItems = false
       })
     },
     updateRecipe: function(item) {
