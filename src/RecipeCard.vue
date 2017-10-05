@@ -109,36 +109,27 @@ import ItemButton from './ItemButton.vue'
 
 export default {
   name: 'recipe-card',
-  data: () => ({
-    skillStr: '',
-    binderStr: '',
-    rouletteStr: '',
-    itemDlg: false,
-  }),
   computed: {
     recipe() {
       return this.$store.state.recipe
     },
-  },
-  watch: {
-    recipe: function() {
-      this.updateRecipe()
-    }
-  },
-  methods: {
-    updateRecipe: function() {
+    skillStr() {
       const skills = ("必要スキル" in this.recipe) ? this.recipe.必要スキル : {}
-      this.skillStr = Object.keys(skills).map(k => k+'('+(skills[k]+0.0).toFixed(1)+')').join("<br />")
-
-      this.binderStr = (this.recipe.収録バインダー.length == 0) ? "なし" : this.recipe.収録バインダー.map(b => b.バインダー名).join("<br />")
-
+      return Object.keys(skills).map(k => k+'('+(skills[k]+0.0).toFixed(1)+')').join("<br />")
+    },
+    binderStr() {
+      return (this.recipe.収録バインダー.length == 0)
+        ? "なし"
+        : this.recipe.収録バインダー.map(b => b.バインダー名).join("<br />")
+    },
+    rouletteStr() {
       if (!this.recipe.ギャンブル型 && !this.recipe.ペナルティ型) {
-        this.rouletteStr = "通常"
+        return "通常"
       } else {
-        this.rouletteStr = [this.recipe.ギャンブル型 ? "ギャンブル型" : "",
-                            this.recipe.ペナルティ型 ? "ペナルティ型" : ""].filter(s => s != "").join("<br />")
+        return [this.recipe.ギャンブル型 ? "ギャンブル型" : "",
+                this.recipe.ペナルティ型 ? "ペナルティ型" : ""].filter(s => s != "").join("<br />")
       }
-    }
+    },
   },
   components: {
     ItemButton
