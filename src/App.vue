@@ -39,8 +39,8 @@
               </v-tabs-items>
             </v-flex>
             <v-flex sm6 md5 lg4 class="hidden-xs-only">
-              <router-view name="item"></router-view>
-              <router-view name="recipe"></router-view>
+              <router-view name="item" v-if="item.アイテム名 != ''"></router-view>
+              <router-view name="recipe" v-if="recipe.レシピ名 != ''"></router-view>
             </v-flex>
           </v-layout>
         </v-container>
@@ -88,6 +88,12 @@ export default {
   computed: {
     characters() {
       return this.$store.state.characters
+    },
+    item() {
+      return this.$store.state.item
+    },
+    recipe() {
+      return this.$store.state.recipe
     },
   },
   mounted: function() {
