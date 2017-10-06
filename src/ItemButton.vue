@@ -25,13 +25,31 @@
 <script>
 export default {
   name: 'item-button',
-  props: ['item'],
+  props: {
+    item: Object,
+    both: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data: () => ({
     dialog: false,
   }),
+  computed: {
+    classes() {
+      return {
+        'both': this.both,
+      }
+    }
+  },
   methods: {
     updateItem: function(it) {
-      this.$store.dispatch('setItem', it)
+      this.$store.dispatch('setItem', it).then(() => {
+        const rs = this.$store.state.item.レシピ
+        if (this.both && rs.length > 0) {
+          this.$store.dispatch('setRecipe', rs[0])
+        }
+      })
     }
   }
 }

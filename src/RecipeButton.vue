@@ -25,13 +25,30 @@
 <script>
 export default {
   name: 'recipe-button',
-  props: ['recipe'],
+  props: {
+    recipe: Object,
+    both: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data: () => ({
     dialog: false,
   }),
+  computed: {
+    classes() {
+      return {
+        'both': this.both,
+      }
+    }
+  },
   methods: {
     updateRecipe: function(r) {
-      this.$store.dispatch('setRecipe', r)
+      this.$store.dispatch('setRecipe', r).then(() => {
+        if (this.both) {
+          this.$store.dispatch('setItem', this.$store.state.recipe.生成物[0])
+        }
+      })
     }
   }
 }

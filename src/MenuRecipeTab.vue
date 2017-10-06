@@ -36,7 +36,7 @@
               <v-checkbox></v-checkbox>
             </td>
             <td>
-              <item-button :item="r.item">
+              <item-button both :item="r.item">
               </item-button>
             </td>
           </template>

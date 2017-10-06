@@ -38,7 +38,7 @@
               <v-checkbox></v-checkbox>
             </td>
             <td>
-              <recipe-button :recipe="r.item">
+              <recipe-button both :recipe="r.item">
               </recipe-button>
             </td>
           </template>
