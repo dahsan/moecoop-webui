@@ -28,7 +28,7 @@ export const mutations = {
 }
 
 export const actions = {
-  async setItem({ commit, state }, newItem) {
+  setItem({ commit, state }, newItem) {
     postCall(baseURL+newItem.詳細, { "調達価格": state.prices }, (xhr) => {
       if (xhr.readyState==4 && xhr.status==200) {
         commit('setItem', JSON.parse(xhr.response))
@@ -48,7 +48,7 @@ export const actions = {
       }
     })
   },
-  async setRecipe({ commit }, newRecipe) {
+  setRecipe({ commit }, newRecipe) {
     getCall(baseURL+newRecipe.詳細, (xhr) => {
       if (xhr.readyState==4 && xhr.status==200) {
         commit('setRecipe', JSON.parse(xhr.response))
@@ -66,10 +66,10 @@ export const actions = {
       }
     })
   },
-  async setPrice({ commit }, payload) {
+  setPrice({ commit }, payload) {
     commit('setPrice', payload)
   },
-  async deletePrice({ commit }, item) {
+  deletePrice({ commit }, item) {
     commit('deletePrice', item)
   },
 }
