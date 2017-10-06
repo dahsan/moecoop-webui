@@ -1,6 +1,9 @@
 <template>
   <v-card id="item-card">
-    <v-card-title v-text="item.アイテム名+'のアイテム情報'">
+    <v-card-title>
+      <v-progress-circular v-if="loadingItem" indeterminate class="primary--text">
+      </v-progress-circular>
+      {{item.アイテム名+'のアイテム情報'}}
     </v-card-title>
 
     <v-card-text>
@@ -135,6 +138,9 @@ export default {
   computed: {
     item() {
       return this.$store.state.item
+    },
+    loadingItem() {
+      return this.$store.state.loadingItem
     },
     effectStr() {
       return this.item.特殊条件.map(sp => sp.詳細).join('<br />')

@@ -1,6 +1,9 @@
 <template>
   <v-card id="recipe-card">
-    <v-card-title v-text="recipe.レシピ名+'のレシピ情報'">
+    <v-card-title>
+      <v-progress-circular v-if="loadingRecipe" indeterminate class="primary--text">
+      </v-progress-circular>
+      {{recipe.レシピ名+'のレシピ情報'}}
     </v-card-title>
 
     <v-card-text>
@@ -112,6 +115,9 @@ export default {
   computed: {
     recipe() {
       return this.$store.state.recipe
+    },
+    loadingRecipe() {
+      return this.$store.state.loadingRecipe
     },
     skillStr() {
       const skills = ("必要スキル" in this.recipe) ? this.recipe.必要スキル : {}

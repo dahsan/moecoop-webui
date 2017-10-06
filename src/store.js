@@ -10,8 +10,14 @@ export const mutations = {
   setItem(state, newItem) {
     state.item = newItem
   },
+  setLoadingItem(state, s) {
+    state.loadingItem = s
+  },
   setRecipe(state, newRecipe) {
     state.recipe = newRecipe
+  },
+  setLoadingRecipe(state, s) {
+    state.loadingRecipe = s
   },
   addCharacter(state, newChar) {
     Vue.set(state.characters, newChar.name, newChar)
@@ -30,9 +36,11 @@ export const mutations = {
 export const actions = {
   setItem({ commit, state }, newItem) {
     return new Promise((resolve, reject) => {
+      commit('setLoadingItem', true)
       postCall(baseURL+newItem.詳細, { "調達価格": state.prices }, (xhr) => {
         if (xhr.readyState==4 && xhr.status==200) {
           commit('setItem', JSON.parse(xhr.response))
+          commit('setLoadingItem', false)
           resolve()
         } else if (xhr.status==404) {
           commit('setItem', {
@@ -47,6 +55,7 @@ export const actions = {
             レシピ: [],
             備考: "細かいことは\nわかりません(´・ω・`)",
           })
+          commit('setLoadingItem', false)
           resolve()
         }
       })
@@ -54,9 +63,11 @@ export const actions = {
   },
   setRecipe({ commit }, newRecipe) {
     return new Promise((resolve, reject) => {
+      commit('setLoadingRecipe', true)
       getCall(baseURL+newRecipe.詳細, (xhr) => {
         if (xhr.readyState==4 && xhr.status==200) {
           commit('setRecipe', JSON.parse(xhr.response))
+          commit('setLoadingRecipe', false)
           resolve()
         } else if (xhr.status==404) {
           commit('setRecipe', {
@@ -69,6 +80,7 @@ export const actions = {
             生成物: { 'わからん': 0 },
             備考: '細かいことは\nわかりません(´・ω・`)',
           })
+          commit('setLoadingRecipe', false)
           resolve()
         }
       })
@@ -98,6 +110,7 @@ export default new Vuex.Store({
       info: '',
       備考: '',
     },
+    loadingItem: false,
     recipe: {
       レシピ名: '',
       テクニック: ['わからん'],
@@ -108,6 +121,7 @@ export default new Vuex.Store({
       生成物: { 'わからん': 0 },
       備考: 'よくわからん(´・ω・`)',
     },
+    loadingRecipe: false,
     characters: {
       しらたま: { name: 'しらたま' },
     },
