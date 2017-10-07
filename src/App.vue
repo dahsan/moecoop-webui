@@ -6,7 +6,7 @@
           <v-tabs-slider class="yellow">
           </v-tabs-slider>
           <v-tabs-item href="#menu-recipe-tab">
-            レシピ材料
+            アイテム検索
           </v-tabs-item>
           <v-tabs-item href="#binder-tab">
             バインダー
