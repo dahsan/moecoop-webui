@@ -30,7 +30,10 @@ export const mutations = {
   },
   deletePrice(state, item) {
     Vue.delete(state.prices, item)
-  }
+  },
+  gotoTab(state, tab) {
+    state.tab = tab
+  },
 }
 
 export const actions = {
@@ -127,6 +130,7 @@ export default new Vuex.Store({
     },
     prices: {
     },
+    tab: null,
   },
   mutations: mutations,
   actions: actions,

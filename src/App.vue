@@ -11,6 +11,12 @@
           <v-tabs-item href="#binder-tab">
             バインダー
           </v-tabs-item>
+          <v-tabs-item href="#item-detail-tab" class="hidden-sm-and-up" v-if="item.アイテム名 != ''">
+            アイテム詳細
+          </v-tabs-item>
+          <v-tabs-item href="#recipe-detail-tab" class="hidden-sm-and-up" v-if="recipe.レシピ名 != ''">
+            レシピ詳細
+          </v-tabs-item>
         </v-tabs-bar>
         <v-container fluid>
           <v-layout>
@@ -35,6 +41,12 @@
                 <v-tabs-content id="binder-tab">
                   <recipe-tab title="バインダー" :categories="binders" :character="sCharacter">
                   </recipe-tab>
+                </v-tabs-content>
+                <v-tabs-content id="item-detail-tab">
+                  <router-view name="item"></router-view>
+                </v-tabs-content>
+                <v-tabs-content id="recipe-detail-tab">
+                  <router-view name="recipe"></router-view>
                 </v-tabs-content>
               </v-tabs-items>
             </v-flex>
@@ -73,7 +85,6 @@ export default {
   name: 'app',
   data() {
     return {
-      active: null,
       binders: [],
       skills: [],
       sCharacter: { name: '' },
@@ -90,6 +101,14 @@ export default {
     },
     recipe() {
       return this.$store.state.recipe
+    },
+    active: {
+      get: function() {
+        return this.$store.state.tab
+      },
+      set: function(newTab) {
+        this.$store.commit('gotoTab', newTab)
+      }
     },
   },
   mounted: function() {

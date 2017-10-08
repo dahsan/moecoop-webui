@@ -1,24 +1,9 @@
 <template>
   <div id="recipe-button">
     <v-btn light flat small primary class="small hidden-xs-only" @click.native="updateRecipe(recipe)">{{recipe.レシピ名}}</v-btn>
-    <v-dialog lazy v-model="dialog" fullscreen>
-      <v-btn light flat small primary slot="activator"
-             class="small hidden-sm-and-up"
-             @click.native="updateRecipe(recipe)">
-        {{recipe.レシピ名}}
-      </v-btn>
-      <v-card>
-        <v-card-text>
-          <router-view name="recipe"></router-view>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn @click.native="dialog=false" class="black--text">
-              閉じる
-            </v-btn>
-          </v-card-actions>
-        </v-card-text>
-      </v-card>
-    </v-dialog>
+    <v-btn light flat small primary class="small hidden-sm-and-up" @click.native="showRecipeDetailTab(recipe)">
+      {{recipe.レシピ名}}
+    </v-btn>
   </div>
 </template>
 
@@ -49,7 +34,11 @@ export default {
           this.$store.dispatch('setItem', this.$store.state.recipe.生成物[0])
         }
       })
-    }
+    },
+    showRecipeDetailTab: function(r) {
+      this.updateRecipe(r)
+      this.$store.commit('gotoTab', 'recipe-detail-tab')
+    },
   }
 }
 </script>

@@ -1,24 +1,11 @@
 <template>
   <div id="item-button">
-    <v-btn light flat small primary class="small hidden-xs-only" @click.native="updateItem(item)">{{item.アイテム名}}</v-btn>
-    <v-dialog v-model="dialog" fullscreen>
-      <v-btn light flat small primary slot="activator"
-             class="small hidden-sm-and-up"
-             @click.native="updateItem(item)">
-        {{item.アイテム名}}
-      </v-btn>
-      <v-card>
-        <v-card-text>
-          <router-view name="item"></router-view>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn @click.native="dialog=false">
-              閉じる
-            </v-btn>
-          </v-card-actions>
-        </v-card-text>
-      </v-card>
-    </v-dialog>
+    <v-btn light flat small primary class="small hidden-xs-only" @click.native="updateItem(item)">
+      {{item.アイテム名}}
+    </v-btn>
+    <v-btn light flat small primary class="small hidden-sm-and-up" @click.native="showItemDetailTab(item)">
+      {{item.アイテム名}}
+    </v-btn>
   </div>
 </template>
 
@@ -50,7 +37,11 @@ export default {
           this.$store.dispatch('setRecipe', rs[0])
         }
       })
-    }
+    },
+    showItemDetailTab: function(it) {
+      this.updateItem(it)
+      this.$store.commit('gotoTab', 'item-detail-tab')
+    },
   }
 }
 </script>
