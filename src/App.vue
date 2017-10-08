@@ -12,10 +12,10 @@
             バインダー
           </v-tabs-item>
           <v-tabs-item href="#item-detail-tab" class="hidden-sm-and-up" v-if="item.アイテム名 != ''">
-            アイテム詳細
+            アイテム
           </v-tabs-item>
           <v-tabs-item href="#recipe-detail-tab" class="hidden-sm-and-up" v-if="recipe.レシピ名 != ''">
-            レシピ詳細
+            レシピ
           </v-tabs-item>
         </v-tabs-bar>
         <v-container fluid>
@@ -42,10 +42,10 @@
                   <recipe-tab title="バインダー" :categories="binders" :character="sCharacter">
                   </recipe-tab>
                 </v-tabs-content>
-                <v-tabs-content id="item-detail-tab">
+                <v-tabs-content lazy id="item-detail-tab">
                   <router-view name="item"></router-view>
                 </v-tabs-content>
-                <v-tabs-content id="recipe-detail-tab">
+                <v-tabs-content lazy id="recipe-detail-tab">
                   <router-view name="recipe"></router-view>
                 </v-tabs-content>
               </v-tabs-items>
