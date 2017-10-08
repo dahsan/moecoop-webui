@@ -65,7 +65,12 @@ export default {
       if (this.query != '') {
         this.lazyGetItems()
       }
-    }
+    },
+    fromIng: function() {
+      if (this.query != '') {
+        this.getItems()
+      }
+    },
   },
   methods: {
     lazyGetItems: _.debounce(
