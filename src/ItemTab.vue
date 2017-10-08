@@ -1,5 +1,5 @@
 <template>
-  <div id="menu-recipe-tab">
+  <div id="item-tab">
     <v-layout>
       <v-flex md4>
         <v-text-field class="mb-0" :label="fromIng ? '素材名' : '作成アイテム'" v-model="query"></v-text-field>
@@ -52,7 +52,7 @@ import _ from 'lodash'
 import { baseURL, getCall } from './rest'
 
 export default {
-  name: 'menu-recipe-tab',
+  name: 'item-tab',
   props: ['character'],
   data: () => ({
     query: '',

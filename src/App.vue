@@ -5,7 +5,7 @@
         <v-tabs-bar>
           <v-tabs-slider class="yellow">
           </v-tabs-slider>
-          <v-tabs-item href="#menu-recipe-tab">
+          <v-tabs-item href="#item-tab">
             アイテム検索
           </v-tabs-item>
           <v-tabs-item href="#binder-tab">
@@ -28,9 +28,9 @@
               </v-layout>
 
               <v-tabs-items>
-                <v-tabs-content id="menu-recipe-tab">
-                  <menu-recipe-tab :character="sCharacter">
-                  </menu-recipe-tab>
+                <v-tabs-content id="item-tab">
+                  <item-tab :character="sCharacter">
+                  </item-tab>
                 </v-tabs-content>
                 <v-tabs-content id="binder-tab">
                   <recipe-tab title="バインダー" :categories="binders" :character="sCharacter">
@@ -65,7 +65,7 @@
 
 <script>
 import RecipeTab from './RecipeTab.vue'
-import MenuRecipeTab from './MenuRecipeTab.vue'
+import ItemTab from './ItemTab.vue'
 import logo from './assets/moecoop.svg'
 import { baseURL, getCall } from './rest'
 
@@ -121,8 +121,8 @@ export default {
     },
   },
   components: {
+    ItemTab,
     RecipeTab,
-    MenuRecipeTab,
   }
 }
 
