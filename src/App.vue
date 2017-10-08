@@ -1,7 +1,7 @@
 <template>
   <v-app id="app" fixed-footer fill-height>
     <main>
-      <v-tabs dark v-model="active">
+      <v-tabs dark fixed v-model="active">
         <v-tabs-bar>
           <v-tabs-slider class="yellow">
           </v-tabs-slider>
