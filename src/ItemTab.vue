@@ -22,7 +22,6 @@
       <v-flex md12>
         <v-checkbox class="mt-0" label="材料から検索" v-model="fromIng">
         </v-checkbox>
-        注意: まだ動かないよ！
       </v-flex>
     </v-layout>
 
