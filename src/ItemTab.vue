@@ -31,7 +31,7 @@
                       :headers="[{ text: 'アイテム名', value: 'アイテム名'}]"
                       rows-per-page-text="アイテム表示数">
           <template slot="items" scope="r">
-            <td>
+            <td v-if="useCharacterInfo">
               <v-checkbox></v-checkbox>
             </td>
             <td>
@@ -59,6 +59,11 @@ export default {
     items: [],
     loadingItems: false,
   }),
+  computed: {
+    useCharacterInfo() {
+      return this.$store.state.useCharacterInfo
+    },
+  },
   watch: {
     query: function() {
       if (this.query != '') {

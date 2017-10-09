@@ -7,8 +7,8 @@
     </v-card-title>
 
     <v-card-text>
-      <v-divider />
-      <v-layout>
+      <v-divider v-if="!useSimpleMode"/>
+      <v-layout v-if="!useSimpleMode">
         <v-flex md6 class="text-md-center caption">
           英名
         </v-flex>
@@ -107,7 +107,7 @@
         </v-flex>
       </v-layout>
 
-      <v-layout v-if="item.info.length > 0">
+      <v-layout v-if="item.info.length > 0 && !useSimpleMode">
         <v-flex md6 class="text-md-center caption">
           info
         </v-flex>
@@ -138,6 +138,9 @@ export default {
   computed: {
     item() {
       return this.$store.state.item
+    },
+    useSimpleMode() {
+      return this.$store.state.useSimpleMode
     },
     loadingItem() {
       return this.$store.state.loadingItem

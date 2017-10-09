@@ -17,19 +17,17 @@
           <v-tabs-item href="#recipe-detail-tab" class="hidden-sm-and-up" v-if="recipe.レシピ名 != ''">
             レシピ
           </v-tabs-item>
+          <v-tabs-item href="#config-tab">
+            設定
+          </v-tabs-item>
         </v-tabs-bar>
         <v-container fluid>
           <v-layout>
             <v-flex md8>
-              <v-layout row wrap v-if="false">
-                <v-flex d-flex md3>
+              <v-layout row wrap v-if="useCharacterInfo && (active == 'item-tab' || active == 'binder-tab')">
+                <v-flex xs8 md4>
                   <v-select label="キャラクター" v-model="sCharacter" :items="Object.values(characters)" item-text="name">
                   </v-select>
-                </v-flex>
-                <v-flex md3>
-                  <v-btn fab small>
-                    <v-icon>edit</v-icon>
-                  </v-btn>
                 </v-flex>
               </v-layout>
 
@@ -47,6 +45,10 @@
                 </v-tabs-content>
                 <v-tabs-content lazy id="recipe-detail-tab">
                   <router-view name="recipe"></router-view>
+                </v-tabs-content>
+                <v-tabs-content id="config-tab">
+                  <config-tab>
+                  </config-tab>
                 </v-tabs-content>
               </v-tabs-items>
             </v-flex>
@@ -78,6 +80,7 @@
 <script>
 import RecipeTab from './RecipeTab.vue'
 import ItemTab from './ItemTab.vue'
+import ConfigTab from './ConfigTab.vue'
 import logo from './assets/moecoop.svg'
 import { baseURL, getCall } from './rest'
 
@@ -93,6 +96,9 @@ export default {
     }
   },
   computed: {
+    useCharacterInfo() {
+      return this.$store.state.useCharacterInfo
+    },
     characters() {
       return this.$store.state.characters
     },
@@ -142,6 +148,7 @@ export default {
   components: {
     ItemTab,
     RecipeTab,
+    ConfigTab,
   }
 }
 

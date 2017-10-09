@@ -34,6 +34,12 @@ export const mutations = {
   gotoTab(state, tab) {
     state.tab = tab
   },
+  useSimpleMode(state, val) {
+    state.useSimpleMode = val
+  },
+  useCharacterInfo(state, val) {
+    state.useCharacterInfo = val
+  },
 }
 
 export const actions = {
@@ -131,6 +137,8 @@ export default new Vuex.Store({
     prices: {
     },
     tab: null,
+    useSimpleMode: false,
+    useCharacterInfo: false,
   },
   mutations: mutations,
   actions: actions,
