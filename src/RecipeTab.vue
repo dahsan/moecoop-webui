@@ -32,12 +32,13 @@
       <v-flex md12>
         <v-data-table select-all no-data-text="該当レシピがありません" :items="recipes"
                       :headers="[{ text: 'レシピ名', value: 'レシピ名'}]"
-                      rows-per-page-text="レシピ表示数">
+                      rows-per-page-text="レシピ表示数"
+                      hide-headers>
           <template slot="items" slot-scope="r">
-            <td>
+            <td v-if="useCharacterInfo">
               <v-checkbox></v-checkbox>
             </td>
-            <td>
+            <td class="text-md-center">
               <recipe-button both :recipe="r.item">
               </recipe-button>
             </td>
