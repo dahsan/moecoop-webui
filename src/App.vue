@@ -26,7 +26,7 @@
             <v-flex md8>
               <v-layout row wrap v-if="useCharacterInfo && (active == 'item-tab' || active == 'binder-tab')">
                 <v-flex xs8 md4>
-                  <v-select label="キャラクター" v-model="sCharacter" :items="Object.values(characters)" item-text="name">
+                  <v-select label="キャラクター" v-model="sCharacter" :items="characters" item-text="name">
                   </v-select>
                 </v-flex>
               </v-layout>

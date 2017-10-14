@@ -131,9 +131,9 @@ export default new Vuex.Store({
       備考: 'よくわからん(´・ω・`)',
     },
     loadingRecipe: false,
-    characters: {
-      しらたま: { name: 'しらたま' },
-    },
+    characters: [
+      { name: 'しらたま', url: '' },
+    ],
     prices: {
     },
     tab: null,
