@@ -55,7 +55,7 @@
       </v-layout>
 
       <v-layout>
-        <v-flex md6 class="text-md-center caption" v-tooltip:left="{ html: 'まだ飾り！'}">
+        <v-flex md6 class="text-md-center caption">
           調達価格
         </v-flex>
         <v-flex md4 class="text-md-center">
