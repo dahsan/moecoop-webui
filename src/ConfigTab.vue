@@ -9,7 +9,7 @@
     所持キャラクターのスキル値やバインダーの登録情報を検索結果に反映させます。
 
     <v-data-table :headers="charHeaders" :items="characters" v-if="false">
-      <template slot="items" scope="props">
+      <template slot="items" slot-scope="props">
         <td v-text="props.item.name" class="text-md-center"></td>
         <td class="text-md-center">
           <v-text-field v-model="props.item.url">

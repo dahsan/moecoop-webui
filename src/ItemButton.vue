@@ -1,9 +1,9 @@
 <template>
   <div id="item-button">
-    <v-btn light flat small primary class="small hidden-xs-only" @click.native="updateItem(item)">
+    <v-btn light flat small color="primary" class="small hidden-xs-only" @click.native="updateItem(item)">
       {{item.アイテム名}}
     </v-btn>
-    <v-btn light flat small primary class="small hidden-sm-and-up" @click.native="showItemDetailTab(item)">
+    <v-btn light flat small color="primary" class="small hidden-sm-and-up" @click.native="showItemDetailTab(item)">
       {{item.アイテム名}}
     </v-btn>
   </div>

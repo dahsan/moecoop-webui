@@ -33,7 +33,7 @@
         <v-data-table select-all no-data-text="該当レシピがありません" :items="recipes"
                       :headers="[{ text: 'レシピ名', value: 'レシピ名'}]"
                       rows-per-page-text="レシピ表示数">
-          <template slot="items" scope="r">
+          <template slot="items" slot-scope="r">
             <td>
               <v-checkbox></v-checkbox>
             </td>

@@ -1,7 +1,7 @@
 <template>
   <div id="recipe-button">
-    <v-btn light flat small primary class="small hidden-xs-only" @click.native="updateRecipe(recipe)">{{recipe.レシピ名}}</v-btn>
-    <v-btn light flat small primary class="small hidden-sm-and-up" @click.native="showRecipeDetailTab(recipe)">
+    <v-btn light flat small color="primary" class="small hidden-xs-only" @click.native="updateRecipe(recipe)">{{recipe.レシピ名}}</v-btn>
+    <v-btn light flat small color="primary" class="small hidden-sm-and-up" @click.native="showRecipeDetailTab(recipe)">
       {{recipe.レシピ名}}
     </v-btn>
   </div>

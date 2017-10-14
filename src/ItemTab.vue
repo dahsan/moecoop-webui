@@ -30,7 +30,7 @@
         <v-data-table no-data-text="該当アイテムがありません" :items="items"
                       :headers="[{ text: 'アイテム名', value: 'アイテム名'}]"
                       rows-per-page-text="アイテム表示数">
-          <template slot="items" scope="r">
+          <template slot="items" slot-scope="r">
             <td v-if="useCharacterInfo">
               <v-checkbox></v-checkbox>
             </td>
