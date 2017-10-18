@@ -45,6 +45,28 @@ export const mutations = {
   useCharacterInfo(state, val) {
     state.useCharacterInfo = val
   },
+  initItem(state) {
+    state.item = {
+      アイテム名: '',
+      特殊条件: [],
+      ペットアイテム: { 種別: '不明' },
+      レシピ: [],
+      info: '',
+      備考: '',
+    }
+  },
+  initRecipe(state) {
+    state.recipe = {
+      レシピ名: '',
+      テクニック: ['わからん'],
+      必要スキル: { 'わからん': 0 },
+      収録バインダー: [{バインダー名: 'わからん'}],
+      レシピ必須: false,
+      材料: { 'わからん': 0 },
+      生成物: [{'アイテム名': 'わからん'}],
+      備考: 'よくわからん(´・ω・`)',
+    }
+  },
 }
 
 export const actions = {

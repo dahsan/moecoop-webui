@@ -4,6 +4,10 @@
       <v-progress-circular v-if="loadingItem" indeterminate class="primary--text">
       </v-progress-circular>
       {{item.アイテム名+'のアイテム情報'}}
+      <v-spacer></v-spacer>
+      <v-btn light flat small icon class="small hidden-xs-only" @click.native="initItem()">
+        <v-icon>close</v-icon>
+      </v-btn>
     </v-card-title>
 
     <v-card-text>
@@ -135,6 +139,11 @@ import _ from 'lodash'
 
 export default {
   name: 'item-card',
+  methods: {
+    initItem: function() {
+      this.$store.commit('initItem')
+    },
+  },
   computed: {
     item() {
       return this.$store.state.item

@@ -4,6 +4,10 @@
       <v-progress-circular v-if="loadingRecipe" indeterminate class="primary--text">
       </v-progress-circular>
       {{recipe.レシピ名+'のレシピ情報'}}
+      <v-spacer></v-spacer>
+      <v-btn light flat small icon class="small hidden-xs-only" @click.native="initRecipe()">
+        <v-icon>close</v-icon>
+      </v-btn>
     </v-card-title>
 
     <v-card-text>
@@ -112,6 +116,11 @@ import ItemButton from './ItemButton.vue'
 
 export default {
   name: 'recipe-card',
+  methods: {
+    initRecipe: function() {
+      this.$store.commit('initRecipe')
+    },
+  },
   computed: {
     recipe() {
       return this.$store.state.recipe
