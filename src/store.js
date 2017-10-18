@@ -25,6 +25,11 @@ export const mutations = {
   deleteCharacter(state, char) {
     Vue.delete(state.characters, char)
   },
+  setCharacterURL(state, payload) {
+    var newVal = { name: payload.char, url: payload.url }
+    const idx = state.characters.findIndex((e, i, cs) => { return e.name == payload.char })
+    Vue.set(state.characters, idx, newVal)
+  },
   setPrice(state, payload) {
     Vue.set(state.prices, payload.item, payload.price)
   },

@@ -6,13 +6,60 @@
 
     <v-checkbox label="キャラクター情報を反映させる" disabled v-model="useCharacterInfo">
     </v-checkbox>
-    所持キャラクターのスキル値やバインダーの登録情報を検索結果に反映させます。
+    所持キャラクターのスキル値やバインダーの登録情報を検索結果に反映させます。<br />
 
-    <v-data-table :headers="charHeaders" :items="characters" v-if="false">
+    <h5 class="mt-5 mb-5">以下は新機能お試し画面！(気分が味わえます)</h5>
+
+    <v-layout class="mt-4">
+      <v-flex md5>
+        <h6>登録キャラクター一覧(その1)</h6>
+      </v-flex>
+      <v-flex md2>
+        <v-btn small @click.native.stop="createDialog = true" class="mt-0 ml-0">追加</v-btn>
+        <v-dialog v-model="createDialog">
+          <v-card>
+            <v-card-title class="headline">キャラクターの追加</v-card-title>
+            <v-card-text>
+              <v-text-field label="キャラクター名">
+              </v-text-field>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn small @click.native="createDialog = false">追加する</v-btn>
+              <v-btn small @click.native="createDialog = false">やっぱりやめる</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-flex>
+      <v-flex md2>
+        <v-btn small @click.native.stop="deleteDialog = true" class="mt-0 ml-0">選択したのを削除</v-btn>
+        <v-dialog v-model="deleteDialog">
+          <v-card>
+            <v-card-title class="headline">確認</v-card-title>
+            <v-card-text>本当に削除しますか？</v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn small @click.native="deleteDialog = false">はい</v-btn>
+              <v-btn small @click.native="deleteDialog = false">やっぱりやめる</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-flex>
+    </v-layout>
+    <!-- :headers="charHeaders" -->
+    <v-data-table
+                  :headers="[
+                            { text: '名前', value: 'name' },
+                            { text: 'スキルURL', value: 'url', align: 'center' },
+                            { text: 'URL編集', align: 'center' },
+                            ]"
+                  :items="characters">
       <template slot="items" slot-scope="props">
-        <td v-text="props.item.name" class="text-md-center"></td>
+        <td class="text-md-left">
+          <v-checkbox :label="props.item.name" v-model="checked"></v-checkbox>
+        </td>
         <td class="text-md-center">
-          <v-text-field v-model="props.item.url">
+          <v-text-field v-model="props.item.url" @input="updateURL(props.item)">
           </v-text-field>
         </td>
         <td class="text-md-center">
@@ -20,7 +67,122 @@
         </td>
       </template>
     </v-data-table>
-  </div>
+
+    <v-layout class="mt-4">
+      <v-flex md5>
+        <h6>登録キャラクター一覧(その2)</h6>
+      </v-flex>
+      <v-flex md2>
+        <v-btn small @click.native.stop="createDialog = true" class="mt-0 ml-0">追加</v-btn>
+        <v-dialog v-model="createDialog">
+          <v-card>
+            <v-card-title class="headline">キャラクターの追加</v-card-title>
+            <v-card-text>
+              <v-text-field label="キャラクター名">
+              </v-text-field>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn small @click.native="createDialog = false">追加する</v-btn>
+              <v-btn small @click.native="createDialog = false">やっぱりやめる</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-flex>
+    </v-layout>
+    <v-data-table
+                  :headers="[
+                            { text: '名前', value: 'name', align: 'center' },
+                            { text: 'スキルURL', value: 'url', align: 'center' },
+                            { text: 'URL編集', align: 'center' },
+                            { text: '削除ボタン', align: 'center' },
+                            ]"
+                  :items="characters">
+      <template slot="items" slot-scope="props">
+        <td v-text="props.item.name" class="text-md-center"></td>
+        <td class="text-md-center">
+          <v-text-field v-model="props.item.url" @input="updateURL(props.item)">
+          </v-text-field>
+        </td>
+        <td class="text-md-center">
+          <v-btn small @click.native="gotoSkillPon(props.item.url)">スキるぽん</v-btn>
+        </td>
+        <td class="text-md-center">
+          <v-btn small @click.native.stop="deleteDialog = true">削除</v-btn>
+          <v-dialog v-model="deleteDialog">
+            <v-card>
+              <v-card-title class="headline">確認</v-card-title>
+              <v-card-text>本当に削除しますか？</v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn small @click.native="deleteDialog = false">はい</v-btn>
+                <v-btn small @click.native="deleteDialog = false">やっぱりやめる</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </td>
+      </template>
+    </v-data-table>
+
+
+    <v-layout class="mt-4">
+      <v-flex md5>
+        <h6>登録キャラクター一覧(その3)</h6>
+      </v-flex>
+      <v-flex md2>
+        <v-btn small @click.native.stop="createDialog = true" class="mt-0 ml-0">追加</v-btn>
+        <v-dialog v-model="createDialog">
+          <v-card>
+            <v-card-title class="headline">キャラクターの追加</v-card-title>
+            <v-card-text>
+              <v-text-field label="キャラクター名">
+              </v-text-field>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn small @click.native="createDialog = false">追加する</v-btn>
+              <v-btn small @click.native="createDialog = false">やっぱりやめる</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-flex>
+    </v-layout>
+    <v-expansion-panel>
+      <v-expansion-panel-content v-for="(char, i) in characters" :key="i">
+        <div slot="header">
+          {{char.name}}
+          <v-btn small @click.native="gotoSkillPon(char.url)">スキるぽん</v-btn>
+          <v-btn small @click.native.stop="deleteDialog = true">キャラクターの削除</v-btn>
+          <v-dialog v-model="deleteDialog">
+            <v-card>
+              <v-card-title class="headline">確認</v-card-title>
+              <v-card-text>本当に削除しますか？</v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn small @click.native="deleteDialog = false">はい</v-btn>
+                <v-btn small @click.native="deleteDialog = false">やっぱりやめる</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </div>
+        <v-card>
+          <v-card-text>
+            <v-layout>
+              <v-flex md2>
+                <v-subheader class="mt-2">
+                  スキル URL
+                </v-subheader>
+              </v-flex>
+              <v-flex md7>
+                <v-text-field v-model="char.url" @input="updateURL(char)">
+                </v-text-field>
+              </v-flex>
+            </v-layout>
+          </v-card-text>
+        </v-card>
+      </v-expansion-panel-content>
+    </v-expansion-panel>
+</div>
 </template>
 
 <script>
@@ -28,9 +190,12 @@
 export default {
   name: 'config-tab',
   data: () => ({
+    createDialog: false,
+    deleteDialog: false,
+    checked: false,
     charHeaders: [
       { text: '名前', value: 'name', align: 'center' },
-      { text: 'キャラクターURL', value: 'url', align: 'center' },
+      { text: 'スキルURL', value: 'url', align: 'center' },
       { text: 'URL編集', align: 'center' },
     ],
   }),
@@ -62,6 +227,9 @@ export default {
         url = skillPonURL
       }
       window.open(url)
+    },
+    updateURL: function(charInfo) {
+      this.$store.commit('setCharacterURL', charInfo)
     },
   },
 }
