@@ -68,7 +68,7 @@ export default {
   watch: {
     query: function() {
       if (this.query != '') {
-        this.getItems()
+        this.lazyGetItems()
       }
     },
     fromIng: function() {
@@ -78,6 +78,12 @@ export default {
     },
   },
   methods: {
+    lazyGetItems: _.debounce(
+      function() {
+        this.getItems()
+      },
+      500
+    ),
     getItems: function() {
       this.loadingItems = true
       getCall(baseURL+'/items?migemo=true&only-products=true&from-ingredients='+this.fromIng+'&query='+this.query, (xhr) => {
