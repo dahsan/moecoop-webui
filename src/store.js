@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
 import { baseURL, getCall, postCall } from './rest'
+import calcSkillFromURL from './skill'
 
 Vue.use(Vuex)
 
@@ -20,13 +21,16 @@ export const mutations = {
     state.loadingRecipe = s
   },
   addCharacter(state, newChar) {
+    var dat = calcSkillFromURL(payload.url)
+    newChar['skill'] = dat.skill
     Vue.set(state.characters, newChar.name, newChar)
   },
   deleteCharacter(state, char) {
     Vue.delete(state.characters, char)
   },
   setCharacterURL(state, payload) {
-    var newVal = { name: payload.char, url: payload.url }
+    var dat = calcSkillFromURL(payload.url)
+    var newVal = { name: payload.char, url: payload.url, race: dat.race, skill: dat.skill }
     const idx = state.characters.findIndex((e, i, cs) => { return e.name == payload.char })
     Vue.set(state.characters, idx, newVal)
   },
@@ -159,7 +163,7 @@ export default new Vuex.Store({
     },
     loadingRecipe: false,
     characters: [
-      { name: 'しらたま', url: '' },
+      { name: 'しらたま', url: '', skills: {} },
     ],
     prices: {
     },
