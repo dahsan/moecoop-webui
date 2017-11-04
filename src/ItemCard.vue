@@ -63,7 +63,7 @@
           調達価格
         </v-flex>
         <v-flex md4 class="text-md-center">
-          <v-text-field light class="mt-0 mb-0" min="0" maxlength="8" suffix="g" type="number" v-model="price"></v-text-field>
+          <v-text-field light class="mt-0 mb-0" min="0" maxlength="8" suffix="g" type="number" mask="###########" v-model="price"></v-text-field>
         </v-flex>
       </v-layout>
 

@@ -11,6 +11,9 @@
           <v-tabs-item href="#binder-tab">
             バインダー
           </v-tabs-item>
+          <v-tabs-item href="#recipe-menu-tab">
+            レシピ一括(仮)
+          </v-tabs-item>
           <v-tabs-item href="#item-detail-tab" class="hidden-sm-and-up" v-if="item.アイテム名 != ''">
             アイテム
           </v-tabs-item>
@@ -39,6 +42,10 @@
                 <v-tabs-content id="binder-tab">
                   <recipe-tab title="バインダー" :categories="binders" :character="sCharacter">
                   </recipe-tab>
+                </v-tabs-content>
+                <v-tabs-content id="recipe-menu-tab">
+                  <recipe-menu-tab :character="sCharacter">
+                  </recipe-menu-tab>
                 </v-tabs-content>
                 <v-tabs-content lazy id="item-detail-tab">
                   <router-view name="item"></router-view>
@@ -80,6 +87,7 @@
 <script>
 import RecipeTab from './RecipeTab.vue'
 import ItemTab from './ItemTab.vue'
+import RecipeMenuTab from './RecipeMenuTab.vue'
 import ConfigTab from './ConfigTab.vue'
 import logo from './assets/moecoop.svg'
 import { baseURL, getCall } from './rest'
@@ -148,6 +156,7 @@ export default {
   components: {
     ItemTab,
     RecipeTab,
+    RecipeMenuTab,
     ConfigTab,
   }
 }
