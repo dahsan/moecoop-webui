@@ -35,8 +35,9 @@
             <recipe-button both :recipe="r.item">
             </recipe-button>
           </td>
-          <!-- <td v-if="false"> -->
-          <!-- </td> -->
+          <td>
+            {{r.item.コンバイン数}}回
+          </td>
         </template>
       </v-data-table>
       <v-divider></v-divider>
@@ -56,8 +57,9 @@
             <item-button both :item="r.item">
             </item-button>
           </td>
-          <!-- <td v-if="false"> -->
-          <!-- </td> -->
+          <td>
+            {{r.item.個数}}個
+          </td>
         </template>
       </v-data-table>
       <v-divider></v-divider>
@@ -77,8 +79,9 @@
             <item-button both :item="r.item">
             </item-button>
           </td>
-          <!-- <td v-if="false"> -->
-          <!-- </td> -->
+          <td>
+            {{r.item.個数}}個
+          </td>
         </template>
       </v-data-table>
       <v-divider></v-divider>
@@ -106,16 +109,39 @@ export default {
     },
   },
   watch: {
+    // targets_: function() {
+    //   if (this.targets_.length > 0) {
+    //     postCall(baseURL+'/menu-recipes/preparation', {
+    //       "作成アイテム": this.targets_.map(t => t.アイテム名)
+    //     }, (xhr) => {
+    //       if (xhr.readyState == 4 && xhr.status == 200) {
+    //         let ret = JSON.parse(xhr.response)
+    //         this.recipes = ret.必要レシピ
+    //         this.items = ret.必要素材
+    //         this.leftovers = ret.必要素材
+    //       } else if (xhr.status == 404) {
+            
+    //       }
+    //     })
+    //   }
+    // },
     targets_: function() {
       if (this.targets_.length > 0) {
-        postCall(baseURL+'/menu-recipes/preparation', {
-          "作成アイテム": this.targets_.map(t => t.アイテム名)
+        let items = this.targets_.reduce(
+          (o, it) => Object.assign(o, {[it.アイテム名]: it.個数}), {}
+        )
+        // console.log(items)
+        postCall(baseURL+'/menu-recipes', {
+          "作成アイテム": items,
+          "所持アイテム": {},
+          "使用レシピ": {},
+          "直接調達アイテム": [],
         }, (xhr) => {
           if (xhr.readyState == 4 && xhr.status == 200) {
             let ret = JSON.parse(xhr.response)
             this.recipes = ret.必要レシピ
             this.items = ret.必要素材
-            this.leftovers = ret.必要素材
+            this.leftovers = ret.余り物
           } else if (xhr.status == 404) {
             
           }

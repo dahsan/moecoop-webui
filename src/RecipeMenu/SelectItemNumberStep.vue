@@ -34,6 +34,7 @@ export default {
   props: ['targets'],
   methods: {
     setTargetNumber: function(item) {
+      item.個数 = Number(item.個数)
       this.$emit('setTargetNumber', item)
     },
   },
