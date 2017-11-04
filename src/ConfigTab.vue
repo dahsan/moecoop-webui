@@ -8,7 +8,7 @@
     </v-checkbox>
     所持キャラクターのスキル値やバインダーの登録情報を検索結果に反映させます。<br />
 
-    <v-layout class="mt-4">
+    <v-layout class="mt-4" v-if="false">
       <v-flex md5>
         <h6>登録キャラクター一覧</h6>
       </v-flex>
@@ -30,7 +30,7 @@
         </v-dialog>
       </v-flex>
     </v-layout>
-    <v-expansion-panel>
+    <v-expansion-panel v-if="false">
       <v-expansion-panel-content v-for="(char, i) in characters" :key="i">
         <div slot="header">
           {{char.name}}
