@@ -53,12 +53,19 @@
                     hide-headers
                     hide-actions>
         <template slot="items" slot-scope="r">
+          <td>
+            <v-btn flat icon small :color="owned[r.item.アイテム名] == r.item.個数 ? 'green' : 'grey lighten-2'"
+                   @click="owned[r.item.アイテム名] = r.item.個数">
+              <v-icon>check</v-icon>
+            </v-btn>
+          </td>
           <td class="text-md-center">
             <item-button both :item="r.item">
             </item-button>
           </td>
           <td>
-            {{r.item.個数}}個
+            <v-text-field v-model="owned[r.item.アイテム名]" :suffix="'/'+String(r.item.個数)+'個'" type="number" :min="0" :max="r.item.個数">
+            </v-text-field>
           </td>
         </template>
       </v-data-table>
@@ -66,7 +73,7 @@
     </v-flex>
   </v-layout>
 
-  <v-layout class="mt-5">
+  <v-layout class="mt-5" v-if="leftovers.length > 0">
     <v-flex md12>
       <h6>余り物</h6>
       <v-data-table no-data-text="余ったアイテムはありません" :items="leftovers"
@@ -102,6 +109,7 @@ export default {
     recipes: [],
     items: [],
     leftovers: [],
+    owned: {},
   }),
   computed: {
     targets_: function() {
@@ -142,6 +150,9 @@ export default {
             this.recipes = ret.必要レシピ
             this.items = ret.必要素材
             this.leftovers = ret.余り物
+            this.owned = ret.必要素材.reduce(
+              (o, it) => Object.assign(o, {[it.アイテム名]: 0}), {}
+            )
           } else if (xhr.status == 404) {
             
           }
