@@ -21,7 +21,7 @@ export const mutations = {
     state.loadingRecipe = s
   },
   addCharacter(state, newChar) {
-    var dat = calcSkillFromURL(payload.url)
+    const dat = calcSkillFromURL(payload.url)
     newChar['skill'] = dat.skill
     Vue.set(state.characters, newChar.name, newChar)
   },
@@ -29,8 +29,8 @@ export const mutations = {
     Vue.delete(state.characters, char)
   },
   setCharacterURL(state, payload) {
-    var dat = calcSkillFromURL(payload.url)
-    var newVal = { name: payload.char, url: payload.url, race: dat.race, skill: dat.skill }
+    const dat = calcSkillFromURL(payload.url)
+    const newVal = { name: payload.char, url: payload.url, race: dat.race, skill: dat.skill }
     const idx = state.characters.findIndex((e, i, cs) => { return e.name == payload.char })
     Vue.set(state.characters, idx, newVal)
   },

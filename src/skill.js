@@ -27,11 +27,11 @@ export function calcSkillFromURL(url) {
       const race = Races[Number(tpl[0])]
 
       // スキル
-      var str = tpl[1]
-      var skills = {}
+      let str = tpl[1]
+      let skills = {}
       while(str.length != 0)
       {
-        var regex = /^(\d{1,2})([a-zA-F]{2})/g
+        let regex = /^(\d{1,2})([a-zA-F]{2})/g
         const m = regex.exec(str)
         if (m === null) {
           throw "Invalid format"

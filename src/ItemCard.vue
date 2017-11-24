@@ -190,7 +190,7 @@ export default {
       }
     },
     foodDetail() {
-      var ret = []
+      let ret = []
       const info = this.item.飲食物情報
       if (info) {
         ret.push({caption: '効果', value: (info.効果+0.0).toFixed(1)})
@@ -213,7 +213,7 @@ export default {
       return ret
     },
     weaponDetail() {
-      var ret = []
+      let ret = []
       const info = this.item.武器情報
       if (info) {
         ret.push({caption: 'ダメージ', value: info.攻撃力.map(at => at.状態+': '+(at.効果+0.0).toFixed(1)).join(', ')})
@@ -254,7 +254,7 @@ export default {
       return ret
     },
     armorDetail() {
-      var ret = []
+      let ret = []
       const info = this.item.防具情報
       if (info) {
         ret.push({caption: 'アーマークラス', value: info.アーマークラス.map(at => at.状態+': '+(at.効果+0.0).toFixed(1)).join(', ')})
@@ -292,7 +292,7 @@ export default {
       return ret
     },
     bulletDetail() {
-      var ret = []
+      let ret = []
       const info = this.item.弾情報
       if (info) {
         ret.push({caption: 'ダメージ', value: (info.ダメージ+0.0).toFixed(1)})
@@ -319,7 +319,7 @@ export default {
       return ret
     },
     shieldDetail() {
-      var ret = []
+      let ret = []
       const info = this.item.盾情報
       if (info) {
         ret.push({caption: 'アーマークラス', value: info.アーマークラス.map(at => at.状態+': '+(at.効果+0.0).toFixed(1)).join(', ')})
