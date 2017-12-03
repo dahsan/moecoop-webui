@@ -36,7 +36,6 @@ import ItemButton from './ItemButton.vue'
 import _ from 'lodash'
 import { baseURL, getCall } from './rest'
 import SelectItemStep from './RecipeMenu/SelectItemStep.vue'
-import SelectItemNumberStep from './RecipeMenu/SelectItemNumberStep.vue'
 import RecipeResultStep from './RecipeMenu/RecipeResultStep.vue'
 
 export default {
@@ -44,10 +43,6 @@ export default {
   props: ['character'],
   data: () => ({
     step: 0,
-    query: '',
-    fromIng: false,
-    items: [],
-    loadingItems: false,
     targets: [],
   }),
   computed: {
@@ -55,34 +50,7 @@ export default {
       return this.$store.state.useCharacterInfo
     },
   },
-  watch: {
-    query: function() {
-      if (this.query != '') {
-        this.lazyGetItems()
-      }
-    },
-    fromIng: function() {
-      if (this.query != '') {
-        this.getItems()
-      }
-    },
-  },
   methods: {
-    lazyGetItems: _.debounce(
-      function() {
-        this.getItems()
-      },
-      500
-    ),
-    getItems: function() {
-      this.loadingItems = true
-      getCall(baseURL+'/items?migemo=true&only-products=true&from-ingredients='+this.fromIng+'&query='+this.query, (xhr) => {
-        if (xhr.readyState==4 && xhr.status==200) {
-          this.items = JSON.parse(xhr.response)['アイテム一覧']
-          this.loadingItems = false
-        }
-      })
-    },
     setStep: function(step) {
       this.step = step
     },
@@ -93,7 +61,6 @@ export default {
   components: {
     ItemButton,
     SelectItemStep,
-    SelectItemNumberStep,
     RecipeResultStep,
   }
 }
