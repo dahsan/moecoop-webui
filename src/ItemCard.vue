@@ -1,11 +1,11 @@
 <template>
   <v-card id="item-card">
     <v-card-title>
-      <v-progress-circular v-if="loadingItem" indeterminate class="primary--text">
+      <v-progress-circular v-if="loadingItem" indeterminate color="primary">
       </v-progress-circular>
       {{item.アイテム名+'のアイテム情報'}}
       <v-spacer></v-spacer>
-      <v-btn light flat small icon class="small hidden-xs-only" @click.native="initItem()">
+      <v-btn flat small icon class="small hidden-xs-only" @click.native="initItem()">
         <v-icon>close</v-icon>
       </v-btn>
     </v-card-title>
@@ -63,7 +63,7 @@
           調達価格
         </v-flex>
         <v-flex md4 class="text-md-center">
-          <v-text-field light class="mt-0 mb-0" min="0" maxlength="8" suffix="g" type="number" mask="###########" v-model="price"></v-text-field>
+          <v-text-field class="mt-0 mb-0" min="0" maxlength="8" suffix="g" type="number" mask="###########" v-model="price"></v-text-field>
         </v-flex>
       </v-layout>
 

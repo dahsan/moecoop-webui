@@ -8,7 +8,7 @@
         <div>
           <p class="text-xs-left mt-2 mb-0" v-if="loadingItems">
             を検索
-            <v-progress-circular indeterminate class="primary--text">
+            <v-progress-circular indeterminate color="primary">
             </v-progress-circular>
           </p>
           <p class="text-xs-left mt-4 mb-0" v-else>

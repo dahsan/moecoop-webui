@@ -1,7 +1,7 @@
 <template>
-  <v-app id="app" fixed-footer fill-height>
+  <v-app id="app" fixed-footer fill-height :dark="useDarkTheme">
     <main>
-      <v-tabs dark v-model="active">
+      <v-tabs v-model="active">
         <v-tabs-bar>
           <v-tabs-slider class="yellow">
           </v-tabs-slider>
@@ -104,6 +104,9 @@ export default {
     }
   },
   computed: {
+    useDarkTheme() {
+      return this.$store.state.useDarkTheme
+    },
     useCharacterInfo() {
       return this.$store.state.useCharacterInfo
     },

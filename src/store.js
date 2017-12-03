@@ -46,6 +46,10 @@ export const mutations = {
   useSimpleMode(state, val) {
     state.useSimpleMode = val
   },
+  useDarkTheme(state, val) {
+    state.useDarkTheme = val
+    state.linkColor = val ? 'orange' : 'blue'
+  },
   useCharacterInfo(state, val) {
     state.useCharacterInfo = val
   },
@@ -142,6 +146,8 @@ export const actions = {
 
 export default new Vuex.Store({
   state: {
+    useDarkTheme: false,
+    linkColor: 'blue',
     item: {
       アイテム名: '',
       特殊条件: [],

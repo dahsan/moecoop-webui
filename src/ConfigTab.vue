@@ -4,6 +4,10 @@
     </v-checkbox>
     アイテム情報のうち、性能とは関係ない英名および info の項目を非表示にします。
 
+    <v-checkbox label="ダークモード" v-model="useDarkTheme">
+    </v-checkbox>
+    背景を黒っぽくします。
+
     <v-checkbox label="キャラクター情報を反映させる" disabled v-model="useCharacterInfo">
     </v-checkbox>
     所持キャラクターのスキル値やバインダーの登録情報を検索結果に反映させます。<br />
@@ -97,6 +101,14 @@ export default {
       },
       set: function(val) {
         this.$store.commit('useSimpleMode', val)
+      }
+    },
+    useDarkTheme: {
+      get: function() {
+        return this.$store.state.useDarkTheme
+      },
+      set: function(val) {
+        this.$store.commit('useDarkTheme', val)
       }
     },
     characters() {

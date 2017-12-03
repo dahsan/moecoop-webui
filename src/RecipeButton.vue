@@ -1,7 +1,7 @@
 <template>
   <div id="recipe-button">
-    <v-btn light flat small color="primary" class="small hidden-xs-only" @click.native="updateRecipe(recipe)">{{recipe.レシピ名}}</v-btn>
-    <v-btn light flat small color="primary" class="small hidden-sm-and-up" @click.native="showRecipeDetailTab(recipe)">
+    <v-btn flat small :color="link" class="small hidden-xs-only" @click.native="updateRecipe(recipe)">{{recipe.レシピ名}}</v-btn>
+    <v-btn flat small :color="link" class="small hidden-sm-and-up" @click.native="showRecipeDetailTab(recipe)">
       {{recipe.レシピ名}}
     </v-btn>
   </div>
@@ -25,7 +25,10 @@ export default {
       return {
         'both': this.both,
       }
-    }
+    },
+    link() {
+      return this.$store.state.linkColor
+    },
   },
   methods: {
     updateRecipe: function(r) {

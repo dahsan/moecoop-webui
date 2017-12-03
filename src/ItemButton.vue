@@ -1,9 +1,9 @@
 <template>
   <div id="item-button">
-    <v-btn light flat small color="primary" class="small hidden-xs-only" @click.native="updateItem(item)">
+    <v-btn flat small :color="link" class="small hidden-xs-only" @click.native="updateItem(item)">
       {{item.アイテム名}}
     </v-btn>
-    <v-btn light flat small color="primary" class="small hidden-sm-and-up" @click.native="showItemDetailTab(item)">
+    <v-btn flat small :color="link" class="small hidden-sm-and-up" @click.native="showItemDetailTab(item)">
       {{item.アイテム名}}
     </v-btn>
   </div>
@@ -27,7 +27,10 @@ export default {
       return {
         'both': this.both,
       }
-    }
+    },
+    link() {
+      return this.$store.state.linkColor
+    },
   },
   methods: {
     updateItem: function(it) {
