@@ -3,7 +3,7 @@
   <v-layout class="mt-4">
     <v-flex md12>
       <h6>作成候補</h6>
-      <v-data-table no-data-text="作成候補はありません" :items="targets_"
+      <v-data-table no-data-text="作成候補はありません" :items="targets"
                     :headers="[{ text: 'アイテム名', value: 'アイテム名'}]"
                     rows-per-page-text="アイテム表示数"
                     hide-headers
@@ -14,7 +14,7 @@
             </item-button>
           </th>
           <td>
-            {{r.item.個数}}個
+            {{r.item.個数}} 個
           </td>
         </template>
       </v-data-table>
@@ -36,7 +36,7 @@
             </recipe-button>
           </td>
           <td>
-            {{r.item.コンバイン数}}回
+            {{r.item.コンバイン数}} 回
           </td>
         </template>
       </v-data-table>
@@ -87,12 +87,18 @@
             </item-button>
           </td>
           <td>
-            {{r.item.個数}}個
+            {{r.item.個数}} 個
           </td>
         </template>
       </v-data-table>
       <v-divider></v-divider>
     </v-flex>
+  </v-layout>
+
+  <v-layout>
+    <v-spacer></v-spacer>
+    <!-- <v-btn small @click.native="step = 2">個数を決め直す</v-btn> -->
+    <v-btn small @click.native="gotoFirstStep()">最初からやり直す</v-btn>
   </v-layout>
 </div>
 </template>
@@ -104,7 +110,7 @@ import { baseURL, getCall, postCall } from '../rest'
 
 export default {
   name: 'recipe-result-step',
-  props: ['targets'],
+  props: ['targets', 'step'],
   data: () => ({
     recipes: [],
     items: [],
@@ -112,55 +118,37 @@ export default {
     owned: {},
   }),
   computed: {
-    targets_: function() {
-      return this.targets.filter(t => t.個数 > 0)
-    },
   },
   watch: {
-    // targets_: function() {
-    //   if (this.targets_.length > 0) {
-    //     postCall(baseURL+'/menu-recipes/preparation', {
-    //       "作成アイテム": this.targets_.map(t => t.アイテム名)
-    //     }, (xhr) => {
-    //       if (xhr.readyState == 4 && xhr.status == 200) {
-    //         let ret = JSON.parse(xhr.response)
-    //         this.recipes = ret.必要レシピ
-    //         this.items = ret.必要素材
-    //         this.leftovers = ret.必要素材
-    //       } else if (xhr.status == 404) {
-            
-    //       }
-    //     })
-    //   }
-    // },
-    targets_: function() {
-      if (this.targets_.length > 0) {
-        let items = this.targets_.reduce(
-          (o, it) => Object.assign(o, {[it.アイテム名]: it.個数}), {}
-        )
-        // console.log(items)
-        postCall(baseURL+'/menu-recipes', {
-          "作成アイテム": items,
-          "所持アイテム": {},
-          "使用レシピ": {},
-          "直接調達アイテム": [],
-        }, (xhr) => {
-          if (xhr.readyState == 4 && xhr.status == 200) {
-            let ret = JSON.parse(xhr.response)
-            this.recipes = ret.必要レシピ
-            this.items = ret.必要素材
-            this.leftovers = ret.余り物
-            this.owned = ret.必要素材.reduce(
-              (o, it) => Object.assign(o, {[it.アイテム名]: 0}), {}
-            )
-          } else if (xhr.status == 404) {
-            
-          }
-        })
-      }
+    targets: function() {
+      let items = this.targets.reduce(
+        (o, it) => Object.assign(o, {[it.アイテム名]: it.個数}), {}
+      )
+      // console.log(items)
+      postCall(baseURL+'/menu-recipes', {
+        "作成アイテム": items,
+        "所持アイテム": {},
+        "使用レシピ": {},
+        "直接調達アイテム": [],
+      }, (xhr) => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          let ret = JSON.parse(xhr.response)
+          this.recipes = ret.必要レシピ
+          this.items = ret.必要素材
+          this.leftovers = ret.余り物
+          this.owned = ret.必要素材.reduce(
+            (o, it) => Object.assign(o, {[it.アイテム名]: 0}), {}
+          )
+        } else if (xhr.status == 404) {
+          
+        }
+      })
     },
   },
   methods: {
+    gotoFirstStep: function() {
+      this.$emit('setStep', 1)
+    },
   },
   components: {
     ItemButton,

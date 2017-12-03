@@ -33,12 +33,20 @@
                     rows-per-page-text="アイテム表示数"
                     hide-headers>
         <template slot="items" slot-scope="r">
-          <th class="text-md-center">
+          <td>
+            <v-btn icon small @click.native="addCandidate(r.item)"
+                   :disabled="!candidateNumExists(r.item)">
+              <v-icon>add</v-icon>
+            </v-btn>
+          </td>
+          <td class="text-md-center">
             <item-button both :item="r.item">
             </item-button>
-          </th>
+          </td>
           <td>
-            <v-btn small @click.native="addTarget(r.item)">候補に追加</v-btn>
+            <v-text-field min="0" maxlength="8" suffix="個" type="number"
+                          mask="######" v-model="nums[r.item.アイテム名]">
+            </v-text-field>
           </td>
         </template>
       </v-data-table>
@@ -48,23 +56,36 @@
   <v-layout class="mt-4">
     <v-flex md12>
       <h6>作成候補</h6>
-      <v-data-table no-data-text="作成候補はありません" :items="targets"
+      <v-data-table no-data-text="作成候補はありません" :items="candidates"
                     :headers="[{ text: 'アイテム名', value: 'アイテム名'}]"
                     rows-per-page-text="アイテム表示数"
                     hide-headers
                     hide-actions>
         <template slot="items" slot-scope="r">
-          <th class="text-md-center">
+          <td>
+            <v-btn icon small @click.native="removeCandidate(r.item)">
+              <v-icon>clear</v-icon>
+            </v-btn>
+          </td>
+          <td class="text-md-center">
             <item-button both :item="r.item">
             </item-button>
-          </th>
-          <td>
-            <v-btn small @click.native="removeTarget(r.item)">候補から削除</v-btn>
+          </td>
+          <td class="text-md-center">
+            {{nums[r.item.アイテム名]}} 個
           </td>
         </template>
       </v-data-table>
       <v-divider></v-divider>
     </v-flex>
+  </v-layout>
+
+  <v-layout>
+    <v-spacer></v-spacer>
+    <v-btn small @click.native="gotoNextStep()"
+           :disabled="validCandidates.length == 0">
+      作成数を選ぶ
+    </v-btn>
   </v-layout>
 </div>
 </template>
@@ -76,13 +97,24 @@ import { baseURL, getCall } from '../rest'
 
 export default {
   name: 'select-item-step',
-  props: ['targets'],
+  props: ['targets', 'step'],
   data: () => ({
     query: '',
     fromIng: false,
     items: [],
     loadingItems: false,
+    candidates: [],
+    nums: {},
   }),
+  computed: {
+    validCandidates() {
+      return this.candidates.filter((elm, i, a) => this.candidateNumExists(elm))
+        .map((elm, i, a) => {
+          elm.個数 = Number(this.nums[elm.アイテム名])
+          return elm
+        })
+    },
+  },
   watch: {
     query: function() {
       if (this.query != '') {
@@ -111,11 +143,23 @@ export default {
         }
       })
     },
-    addTarget: function(item) {
-      this.$emit('addTarget', item)
+    addCandidate: function(item) {
+      if (!this.candidates.find((elm, i, a) => elm.アイテム名 === item.アイテム名)) {
+        this.candidates.push(item)
+      }
     },
-    removeTarget: function(item) {
-      this.$emit('removeTarget', item)
+    removeCandidate: function(item) {
+      const idx = this.candidates.findIndex((elm, i, a) => elm.アイテム名 === item.アイテム名)
+      if (idx !== -1) {
+        this.candidates.splice(idx, 1)
+      }
+    },
+    candidateNumExists: function(item) {
+      return (item.アイテム名 in this.nums) && (this.nums[item.アイテム名] > 0)
+    },
+    gotoNextStep: function() {
+      this.$emit('setStep', 4)
+      this.$emit('setTargets', this.validCandidates)
     },
   },
   components: {
