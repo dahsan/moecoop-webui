@@ -6,7 +6,7 @@
       <v-divider></v-divider>
       <v-stepper-step step="2" :complete="step > 2" :editable="step > 2">作成数を選ぶ</v-stepper-step>
       <v-divider></v-divider>
-      <v-stepper-step step="3" :complete="step > 3">作成する</v-stepper-step>
+      <v-stepper-step step="4" :complete="step > 4">作成する</v-stepper-step>
     </v-stepper-header>
 
     <v-stepper-content step="1">
@@ -27,14 +27,14 @@
       <v-layout>
         <v-spacer></v-spacer>
         <v-btn small @click.native="step = 1">アイテムを選択し直す</v-btn>
-        <v-btn small @click.native="step = 3"
+        <v-btn small @click.native="step = 4"
                :disabled="targets.find((e, i, a) => e.個数 > 0) === undefined">
           アイテムを作成する
         </v-btn>
       </v-layout>
     </v-stepper-content>
 
-    <v-stepper-content step="3">
+    <v-stepper-content step="4">
       <recipe-result-step :targets.sync="targets">
       </recipe-result-step>
       <v-layout>
