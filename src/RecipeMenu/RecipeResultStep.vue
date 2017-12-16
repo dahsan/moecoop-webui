@@ -2,7 +2,7 @@
 <div id="recipe-result-step">
   <v-layout class="mt-4">
     <v-flex md12>
-      作成候補
+      作成アイテム
       <v-data-table :items="targets"
                     :headers="[{ text: 'アイテム名', value: 'アイテム名'}]"
                     rows-per-page-text="アイテム表示数"
@@ -24,7 +24,7 @@
 
   <v-layout class="mt-5">
     <v-flex md12>
-      必要レシピ
+      使用するレシピ
       <v-data-table no-data-text="必要なレシピはありません" :items="recipes"
                     :headers="[{ text: 'レシピ', value: 'レシピ名'}]"
                     :pagination.sync="pagination"
@@ -47,7 +47,7 @@
 
   <v-layout class="mt-5">
     <v-flex md12>
-      必要アイテム
+      用意済みの素材
       <v-data-table no-data-text="必要なアイテムはありません" :items="items"
                     :headers="[{ text: 'アイテム', value: 'アイテム名'}]"
                     :pagination.sync="pagination"

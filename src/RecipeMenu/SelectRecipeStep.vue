@@ -25,12 +25,12 @@
   <v-layout class="mt-4">
     <v-flex md12>
       <p class="text-xs-left mt-2 mb-0" v-if="loadingItems">
-        使用レシピ
+        使用するレシピ
         <v-progress-circular indeterminate color="primary">
         </v-progress-circular>
       </p>
       <p class="text-xs-left mt-4 mb-0" v-else>
-        使用レシピ
+        使用するレシピ
       </p>
       <v-data-table :items="Object.keys(choiceMap)"
                     :headers="[{ text: 'アイテム名', value: 'アイテム名'}]"
@@ -65,12 +65,12 @@
   <v-layout class="mt-4">
     <v-flex md12>
       <p class="text-xs-left mt-2 mb-0" v-if="loadingItems">
-        使用素材
+        用意済みの素材
         <v-progress-circular indeterminate color="primary">
         </v-progress-circular>
       </p>
       <p class="text-xs-left mt-4 mb-0" v-else>
-        使用素材
+        用意済みの素材
       </p>
 
       <v-data-table :items="items"
