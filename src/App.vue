@@ -3,7 +3,7 @@
     <main>
       <v-tabs v-model="active">
         <v-tabs-bar>
-          <v-tabs-slider class="yellow">
+          <v-tabs-slider :color="linkColor">
           </v-tabs-slider>
           <v-tabs-item href="#item-tab">
             アイテム検索
@@ -126,6 +126,9 @@ export default {
       set: function(newTab) {
         this.$store.commit('gotoTab', newTab)
       }
+    },
+    linkColor() {
+      return this.$store.state.linkColor
     },
   },
   mounted: function() {
