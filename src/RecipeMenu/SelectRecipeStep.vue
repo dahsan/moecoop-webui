@@ -41,7 +41,7 @@
         <template slot="items" slot-scope="r">
           <td class="text-md-center">
             {{r.item}} を作成するレシピ
-            <v-radio-group row v-model="choiceMap[r.item]">
+            <v-radio-group v-model="choiceMap[r.item]">
               <template v-if="r.item in recipePreference">
                 <v-radio v-for="r1 in recipeOptions[r.item]"
                          :label="r1" :value="r1" :key="r1"
