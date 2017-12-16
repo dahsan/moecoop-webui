@@ -53,6 +53,16 @@ export const mutations = {
   useCharacterInfo(state, val) {
     state.useCharacterInfo = val
   },
+  setRecipePreference(state, payload) {
+    Vue.delete(state.recipePreference, payload.item)
+    Vue.set(state.recipePreference, payload.item, payload.recipe)
+  },
+  addLeafItem(state, it) {
+    state.leafItems.push(it)
+  },
+  removeLeafItem(state, it) {
+    state.leafItems = state.leafItems.filter((elm, i, a) => elm != it)
+  },
   initItem(state) {
     state.item = {
       アイテム名: '',
@@ -142,6 +152,24 @@ export const actions = {
       resolve()
     })
   },
+  setRecipePreference({ commit, state }, payload) {
+    return new Promise((resolve, reject) => {
+      commit('setRecipePreference', payload)
+      resolve()
+    })
+  },
+  addLeafItem({ commit }, item) {
+    return new Promise((resolve, reject) => {
+      commit('addLeafItem', item)
+      resolve()
+    })
+  },
+  removeLeafItem({ commit }, item) {
+    return new Promise((resolve, reject) => {
+      commit('removeLeafItem', item)
+      resolve()
+    })
+  },
 }
 
 export default new Vuex.Store({
@@ -176,6 +204,46 @@ export default new Vuex.Store({
     tab: null,
     useSimpleMode: false,
     useCharacterInfo: false,
+    recipePreference: {
+      '魚の餌': '魚の餌(ヘビの肉)',
+      '砂糖': '砂糖(臼)',
+      '塩': '塩(岩塩)',
+      'パン粉': 'パン粉',
+      'パン生地': 'パン生地',
+      'パイ生地': 'パイ生地(ミニ ウォーター ボトル)',
+      'ゼラチン': 'ゼラチン(オークの骨)',
+      '切り身魚のチーズ焼き': '切り身魚のチーズ焼き',
+      'お雑煮': 'お雑煮',
+      '味噌汁': '味噌汁',
+      'ざるそば': 'ざるそば',
+      'ベーコン': 'ベーコン',
+      'ショート ケーキ': 'ショート ケーキ',
+      '揚げ玉': 'かき揚げ',
+      '焼き鳥': '焼き鳥',
+      'かけそば': 'かけそば',
+      'そば湯': 'ざるそば',
+      'モチ': 'モチ(ミニ ウォーター ボトル)',
+      'パルプ': 'パルプ(木の板材)',
+      '小さな紙': '小さな紙(調合)',
+      '髪染め液': '髪染め液',
+      '染色液': '染色液',
+      '染色液(大)': '染色液(大)',
+      'クロノスの涙': 'クロノスの涙',
+      'クロノスの光': 'クロノスの光',
+      '骨': '骨(タイガー ボーン)',
+      'ボーン チップ': 'ボーン チップ(タイガー ボーン)',
+      '鉄の棒': '鉄の棒(アイアンインゴット)',
+      'カッパーインゴット': 'カッパーインゴット(鉱石)',
+      'ブロンズインゴット': 'ブロンズインゴット(鉱石)',
+      'アイアンインゴット': 'アイアンインゴット(鉱石)',
+      'スチールインゴット': 'スチールインゴット(鉱石)',
+      'ブラスインゴット': 'ブラスインゴット(鉱石)',
+      'シルバーインゴット': 'シルバーインゴット(鉱石)',
+      'ゴールドインゴット': 'ゴールドインゴット(鉱石)',
+      'ミスリルインゴット': 'ミスリルインゴット(鉱石)',
+      'オリハルコンインゴット': 'オリハルコンインゴット(鉱石)',
+    },
+    leafItems: [],
   },
   mutations: mutations,
   actions: actions,

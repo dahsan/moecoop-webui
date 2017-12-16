@@ -27,7 +27,7 @@
 
   <v-layout class="mt-4">
     <v-flex md12>
-      <h6>検索結果</h6>
+      検索結果
       <v-data-table no-data-text="該当アイテムがありません" :items="items"
                     :headers="[{ text: 'アイテム名', value: 'アイテム名'}]"
                     rows-per-page-text="アイテム表示数"
@@ -55,7 +55,7 @@
 
   <v-layout class="mt-4">
     <v-flex md12>
-      <h6>作成候補</h6>
+      作成候補
       <v-data-table no-data-text="作成候補はありません" :items="candidates"
                     :headers="[{ text: 'アイテム名', value: 'アイテム名'}]"
                     rows-per-page-text="アイテム表示数"
@@ -82,9 +82,13 @@
 
   <v-layout>
     <v-spacer></v-spacer>
-    <v-btn small @click.native="gotoNextStep()"
+    <v-btn small @click.native="setStep(2)"
            :disabled="validCandidates.length == 0">
-      作成数を選ぶ
+      レシピ・使用素材を選ぶ
+    </v-btn>
+    <v-btn color="primary" @click.native="setStep(3)"
+           :disabled="validCandidates.length == 0">
+      作成する
     </v-btn>
   </v-layout>
 </div>
@@ -97,7 +101,7 @@ import { baseURL, getCall } from '../rest'
 
 export default {
   name: 'select-item-step',
-  props: ['targets', 'step'],
+  props: ['step'],
   data: () => ({
     query: '',
     fromIng: false,
@@ -157,9 +161,9 @@ export default {
     candidateNumExists: function(item) {
       return (item.アイテム名 in this.nums) && (this.nums[item.アイテム名] > 0)
     },
-    gotoNextStep: function() {
-      this.$emit('setStep', 4)
+    setStep: function(n) {
       this.$emit('setTargets', this.validCandidates)
+      this.$emit('update:step', n)
     },
   },
   components: {

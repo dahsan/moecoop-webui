@@ -2,8 +2,8 @@
 <div id="recipe-result-step">
   <v-layout class="mt-4">
     <v-flex md12>
-      <h6>作成候補</h6>
-      <v-data-table no-data-text="作成候補はありません" :items="targets"
+      作成候補
+      <v-data-table :items="targets"
                     :headers="[{ text: 'アイテム名', value: 'アイテム名'}]"
                     rows-per-page-text="アイテム表示数"
                     hide-headers
@@ -24,9 +24,10 @@
 
   <v-layout class="mt-5">
     <v-flex md12>
-      <h6>必要レシピ</h6>
+      必要レシピ
       <v-data-table no-data-text="必要なレシピはありません" :items="recipes"
                     :headers="[{ text: 'レシピ', value: 'レシピ名'}]"
+                    :pagination.sync="pagination"
                     rows-per-page-text="レシピ表示数"
                     hide-headers
                     hide-actions>
@@ -46,16 +47,17 @@
 
   <v-layout class="mt-5">
     <v-flex md12>
-      <h6>必要アイテム</h6>
+      必要アイテム
       <v-data-table no-data-text="必要なアイテムはありません" :items="items"
                     :headers="[{ text: 'アイテム', value: 'アイテム名'}]"
+                    :pagination.sync="pagination"
                     rows-per-page-text="アイテム表示数"
                     hide-headers
                     hide-actions>
         <template slot="items" slot-scope="r">
           <td>
-            <v-btn flat icon small :color="owned[r.item.アイテム名] == r.item.個数 ? 'green' : 'grey lighten-2'"
-                   @click="owned[r.item.アイテム名] = r.item.個数">
+            <v-btn flat icon small :color="prepared[r.item.アイテム名] == r.item.個数-owned[r.item.アイテム名] ? 'green' : 'grey lighten-2'"
+                   @click="prepared[r.item.アイテム名] = r.item.個数-owned[r.item.アイテム名]">
               <v-icon>check</v-icon>
             </v-btn>
           </td>
@@ -64,7 +66,7 @@
             </item-button>
           </td>
           <td>
-            <v-text-field v-model="owned[r.item.アイテム名]" :suffix="'/'+String(r.item.個数)+'個'" type="number" :min="0" :max="r.item.個数">
+            <v-text-field v-model="prepared[r.item.アイテム名]" :suffix="suffixes[r.item.アイテム名]" type="number" :min="0" :max="r.item.個数-owned[r.item.アイテム名]">
             </v-text-field>
           </td>
         </template>
@@ -75,13 +77,14 @@
 
   <v-layout class="mt-5" v-if="leftovers.length > 0">
     <v-flex md12>
-      <h6>余り物</h6>
+      余り物
       <v-data-table no-data-text="余ったアイテムはありません" :items="leftovers"
                     :headers="[{ text: 'アイテム', value: 'アイテム名'}]"
+                    :pagination.sync="pagination"
                     rows-per-page-text="アイテム表示数"
                     hide-headers
                     hide-actions>
-        <template slot="items" slot-scope="r">
+nh        <template slot="items" slot-scope="r">
           <td class="text-md-center">
             <item-button both :item="r.item">
             </item-button>
@@ -97,8 +100,8 @@
 
   <v-layout>
     <v-spacer></v-spacer>
-    <!-- <v-btn small @click.native="step = 2">個数を決め直す</v-btn> -->
-    <v-btn small @click.native="gotoFirstStep()">最初からやり直す</v-btn>
+    <v-btn small @click.native="setStep(2)">レシピ・使用素材を決め直す</v-btn>
+    <v-btn small @click.native="setStep(1)">最初からやり直す</v-btn>
   </v-layout>
 </div>
 </template>
@@ -110,44 +113,75 @@ import { baseURL, getCall, postCall } from '../rest'
 
 export default {
   name: 'recipe-result-step',
-  props: ['targets', 'step'],
+  props: ['targets', 'owned', 'step'],
   data: () => ({
     recipes: [],
     items: [],
     leftovers: [],
-    owned: {},
+    prepared: {},
+    loadingResult: false,
+    pagination: { sortBy: null },
   }),
   computed: {
+    recipePreference() {
+      return this.$store.state.recipePreference
+    },
+    leafItems() {
+      return this.$store.state.leafItems
+    },
+    suffixes() {
+      return this.items.reduce(
+        (o, it) => {
+          let name = it.アイテム名
+          let base = '/'+String(it.個数-this.owned[name])
+          if (name in this.owned && this.owned[name] > 0) {
+            base += '+'+String(this.owned[name])
+          }
+          base += ' 個'
+          o[name] = base
+          return o
+        },
+        {}
+      )
+    },
   },
   watch: {
-    targets: function() {
+    step: function() {
+      if (this.step == 3) {
+        this.load()
+      }
+    },
+  },
+  methods: {
+    load: function() {
       let items = this.targets.reduce(
         (o, it) => Object.assign(o, {[it.アイテム名]: it.個数}), {}
       )
-      // console.log(items)
+
+      this.loadingResult = true
       postCall(baseURL+'/menu-recipes', {
         "作成アイテム": items,
-        "所持アイテム": {},
-        "使用レシピ": {},
-        "直接調達アイテム": [],
+        "所持アイテム": this.owned,
+        "使用レシピ": this.recipePreference,
+        "直接調達アイテム": this.leafItems,
       }, (xhr) => {
         if (xhr.readyState == 4 && xhr.status == 200) {
           let ret = JSON.parse(xhr.response)
           this.recipes = ret.必要レシピ
-          this.items = ret.必要素材
+          this.items = ret.必要素材.filter((elm, i, a) => !this.targets.find(e => e.アイテム名 == elm.アイテム名))
           this.leftovers = ret.余り物
-          this.owned = ret.必要素材.reduce(
-            (o, it) => Object.assign(o, {[it.アイテム名]: 0}), {}
-          )
+          this.loadingResult = false
+          this.items.forEach((elm, i, a) => {
+            if (!(elm.アイテム名 in this.owned)) {
+              this.owned[elm.アイテム名] = 0
+            }
+          })
         } else if (xhr.status == 404) {
-          
         }
       })
     },
-  },
-  methods: {
-    gotoFirstStep: function() {
-      this.$emit('setStep', 1)
+    setStep: function(n) {
+      this.$emit('update:step', n)
     },
   },
   components: {
