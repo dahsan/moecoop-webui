@@ -24,7 +24,14 @@
 
   <v-layout class="mt-4">
     <v-flex md12>
-      使用レシピ
+      <p class="text-xs-left mt-2 mb-0" v-if="loadingItems">
+        使用レシピ
+        <v-progress-circular indeterminate color="primary">
+        </v-progress-circular>
+      </p>
+      <p class="text-xs-left mt-4 mb-0" v-else>
+        使用レシピ
+      </p>
       <v-data-table :items="Object.keys(choiceMap)"
                     :headers="[{ text: 'アイテム名', value: 'アイテム名'}]"
                     :pagination.sync="pagination"
@@ -115,7 +122,7 @@ export default {
     itemCandidates: {},
     owned: {},
     loadingItems: false,
-    pagination: { sortBy: null },
+    pagination: { sortBy: null, rowsPerPage: -1 },
   }),
   mounted: function() {
     getCall(baseURL+'/menu-recipes/options', (xhr) => {
@@ -149,7 +156,7 @@ export default {
           } else {
             map[name] = "素材から作る"
           }
-      })
+        })
       return map
     },
     validOwned() {

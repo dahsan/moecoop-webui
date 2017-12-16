@@ -120,7 +120,7 @@ export default {
     leftovers: [],
     prepared: {},
     loadingResult: false,
-    pagination: { sortBy: null },
+    pagination: { sortBy: null, rowsPerPage: -1 },
   }),
   computed: {
     recipePreference() {
