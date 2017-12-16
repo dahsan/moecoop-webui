@@ -24,7 +24,7 @@
       </recipe-result-step>
     </v-stepper-content>
   </v-stepper>
-  </div>
+</div>
 </template>
 
 <script>
