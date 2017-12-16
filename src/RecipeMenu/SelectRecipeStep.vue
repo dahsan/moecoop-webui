@@ -196,6 +196,11 @@ export default {
           let ret = JSON.parse(xhr.response)
           this.recipes = ret.必要レシピ
           this.items = ret.必要素材.filter((elm, i, a) => !this.targets.find(e => e.アイテム名 == elm.アイテム名))
+          this.items.forEach((elm, i, a) => {
+            if (elm.アイテム名 in this.owned) {
+              this.owned[elm.アイテム名] = Math.min(elm.個数, this.owned[elm.アイテム名])
+            }
+          })
           this.loadingItems = false
         } else if (xhr.status == 404) {
         }
