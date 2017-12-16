@@ -25,12 +25,12 @@
   <v-layout>
     <v-flex md12>
       <p class="text-xs-left mb-0" v-if="loadingItems">
-        使用するレシピ
+        作成方法
         <v-progress-circular indeterminate color="primary">
         </v-progress-circular>
       </p>
       <p class="text-xs-left mt-3 mb-0" v-else>
-        使用するレシピ
+        作成方法
       </p>
       <v-data-table :items="Object.keys(choiceMap)"
                     :headers="[{ text: 'アイテム名', value: 'アイテム名'}]"
@@ -40,7 +40,7 @@
                     hide-actions>
         <template slot="items" slot-scope="r">
           <td class="text-md-center">
-            {{r.item}} を作成するレシピ
+            {{r.item}} の作成方法
             <v-radio-group class="pt-1" v-model="choiceMap[r.item]">
               <template v-if="r.item in recipePreference">
                 <v-radio v-for="r1 in recipeOptions[r.item]"
@@ -48,11 +48,11 @@
                          @change="setPreference(r.item, r1)">
                 </v-radio>
               </template>
-              <v-radio v-else label="素材から作る" value="素材から作る"
-                       @change="setPreference(r.item, '素材から作る')">
+              <v-radio v-else label="自分で作る" value="自分で作る"
+                       @change="setPreference(r.item, '自分で作る')">
               </v-radio>
-              <v-radio label="直接用意する" value="直接用意する"
-                       @change="setPreference(r.item, '直接用意する')">
+              <v-radio label="買ってくる" value="買ってくる"
+                       @change="setPreference(r.item, '買ってくる')">
               </v-radio>
             </v-radio-group>
           </td>
@@ -65,12 +65,12 @@
   <v-layout>
     <v-flex md12>
       <p class="text-xs-left mb-0" v-if="loadingItems">
-        用意済みの素材
+        手持ちの素材
         <v-progress-circular indeterminate color="primary">
         </v-progress-circular>
       </p>
       <p class="text-xs-left mt-3 mb-0" v-else>
-        用意済みの素材
+        手持ちの素材
       </p>
 
       <v-data-table :items="items"
@@ -150,11 +150,11 @@ export default {
         }).forEach((elm, i, a) => {
           let name = elm.アイテム名
           if (this.leafItems.find(it => it == name)) {
-            map[name] = "直接用意する"
+            map[name] = "買ってくる"
           } else if (name in this.recipePreference) {
             map[name] = this.recipePreference[name]
           } else {
-            map[name] = "素材から作る"
+            map[name] = "自分で作る"
           }
         })
       return map
@@ -220,12 +220,12 @@ export default {
     },
     setPreference: function(it, r) {
       switch (r) {
-      case "直接用意する":
+      case "買ってくる":
         if (!this.leafItems.find((e, i, a) => e == it)) {
           this.$store.dispatch('addLeafItem', it)
         }
         break;
-      case "素材から作る":
+      case "自分で作る":
         if (this.leafItems.find((e, i, a) => e == it)) {
           this.$store.dispatch('removeLeafItem', it)
         }
