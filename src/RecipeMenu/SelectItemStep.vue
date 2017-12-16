@@ -25,7 +25,7 @@
     </v-flex>
   </v-layout>
 
-  <v-layout class="mt-4">
+  <v-layout>
     <v-flex md12>
       検索結果
       <v-data-table no-data-text="該当アイテムがありません" :items="items"
@@ -53,7 +53,7 @@
     </v-flex>
   </v-layout>
 
-  <v-layout class="mt-4">
+  <v-layout class="mt-1">
     <v-flex md12>
       作成候補
       <v-data-table no-data-text="作成候補はありません" :items="candidates"

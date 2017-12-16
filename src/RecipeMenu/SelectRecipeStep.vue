@@ -1,6 +1,6 @@
 <template>
 <div id="select-recipe-step">
-  <v-layout class="mt-4">
+  <v-layout>
     <v-flex md12>
       作成候補
       <v-data-table :items="targets"
@@ -22,14 +22,14 @@
     </v-flex>
   </v-layout>
 
-  <v-layout class="mt-4">
+  <v-layout>
     <v-flex md12>
-      <p class="text-xs-left mt-2 mb-0" v-if="loadingItems">
+      <p class="text-xs-left mb-0" v-if="loadingItems">
         使用するレシピ
         <v-progress-circular indeterminate color="primary">
         </v-progress-circular>
       </p>
-      <p class="text-xs-left mt-4 mb-0" v-else>
+      <p class="text-xs-left mt-3 mb-0" v-else>
         使用するレシピ
       </p>
       <v-data-table :items="Object.keys(choiceMap)"
@@ -41,7 +41,7 @@
         <template slot="items" slot-scope="r">
           <td class="text-md-center">
             {{r.item}} を作成するレシピ
-            <v-radio-group v-model="choiceMap[r.item]">
+            <v-radio-group class="pt-1" v-model="choiceMap[r.item]">
               <template v-if="r.item in recipePreference">
                 <v-radio v-for="r1 in recipeOptions[r.item]"
                          :label="r1" :value="r1" :key="r1"
@@ -62,14 +62,14 @@
     </v-flex>
   </v-layout>
 
-  <v-layout class="mt-4">
+  <v-layout>
     <v-flex md12>
-      <p class="text-xs-left mt-2 mb-0" v-if="loadingItems">
+      <p class="text-xs-left mb-0" v-if="loadingItems">
         用意済みの素材
         <v-progress-circular indeterminate color="primary">
         </v-progress-circular>
       </p>
-      <p class="text-xs-left mt-4 mb-0" v-else>
+      <p class="text-xs-left mt-3 mb-0" v-else>
         用意済みの素材
       </p>
 

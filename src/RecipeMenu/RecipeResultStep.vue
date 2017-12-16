@@ -1,6 +1,6 @@
 <template>
 <div id="recipe-result-step">
-  <v-layout class="mt-4">
+  <v-layout>
     <v-flex md12>
       作成アイテム
       <v-data-table :items="targets"
@@ -22,7 +22,7 @@
     </v-flex>
   </v-layout>
 
-  <v-layout class="mt-5">
+  <v-layout class="mt-1">
     <v-flex md12>
       使用するレシピ
       <v-data-table no-data-text="必要なレシピはありません" :items="recipes"
@@ -45,7 +45,7 @@
     </v-flex>
   </v-layout>
 
-  <v-layout class="mt-5">
+  <v-layout class="mt-1">
     <v-flex md12>
       用意済みの素材
       <v-data-table no-data-text="必要なアイテムはありません" :items="items"
@@ -75,7 +75,7 @@
     </v-flex>
   </v-layout>
 
-  <v-layout class="mt-5" v-if="leftovers.length > 0">
+  <v-layout class="mt-1" v-if="leftovers.length > 0">
     <v-flex md12>
       余り物
       <v-data-table no-data-text="余ったアイテムはありません" :items="leftovers"
