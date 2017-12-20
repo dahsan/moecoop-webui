@@ -9,17 +9,17 @@
       <v-stepper-step step="3" :complete="step > 3">作成する</v-stepper-step>
     </v-stepper-header>
 
-    <v-stepper-content step="1">
+    <v-stepper-content step="1" class="pa-1">
       <select-item-step :step.sync="step" @setTargets="t => setTargets(t)">
       </select-item-step>
     </v-stepper-content>
 
-    <v-stepper-content step="2">
+    <v-stepper-content step="2" class="pa-1">
       <select-recipe-step :targets="targets" :step.sync="step" @setOwned="o => setOwned(o)">
       </select-recipe-step>
     </v-stepper-content>
 
-    <v-stepper-content step="3">
+    <v-stepper-content step="3" class="pa-1">
       <recipe-result-step :targets="targets" :owned="owned" :step.sync="step">
       </recipe-result-step>
     </v-stepper-content>
