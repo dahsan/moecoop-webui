@@ -42,13 +42,13 @@
           <td class="text-md-center">
             <item-button both :item="r.item">
             </item-button>
-            <v-text-field min="0" maxlength="8" suffix="個" type="number"
+            <v-text-field min="0" maxlength="6" suffix="個" type="number"
                           mask="######" v-model="nums[r.item.アイテム名]"
-                          class="hidden-sm-and-up pt-0">
+                          class="hidden-sm-and-up pt-0 numField">
             </v-text-field>
           </td>
           <td class="hidden-xs-only">
-            <v-text-field min="0" maxlength="8" suffix="個" type="number" class="pt-0"
+            <v-text-field min="0" maxlength="8" suffix="個" type="number" class="pt-0 numField"
                           mask="######" v-model="nums[r.item.アイテム名]">
             </v-text-field>
           </td>
@@ -177,4 +177,8 @@ export default {
 </script>
 
 <style scope>
+  .numField {
+    width: 90px;
+    margin: 0 auto;
+  }
 </style>

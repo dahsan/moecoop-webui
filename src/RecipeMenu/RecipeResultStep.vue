@@ -66,7 +66,7 @@
             </item-button>
           </td>
           <td>
-            <v-text-field v-model="prepared[r.item.アイテム名]" :suffix="suffixes[r.item.アイテム名]" type="number" :min="0" :max="r.item.個数-owned[r.item.アイテム名]">
+            <v-text-field class="pt-0 numField" v-model="prepared[r.item.アイテム名]" :suffix="suffixes[r.item.アイテム名]" type="number" :min="0" :max="r.item.個数-owned[r.item.アイテム名]">
             </v-text-field>
           </td>
         </template>
@@ -84,7 +84,7 @@
                     rows-per-page-text="アイテム表示数"
                     hide-headers
                     hide-actions>
-nh        <template slot="items" slot-scope="r">
+        <template slot="items" slot-scope="r">
           <td class="text-md-center">
             <item-button both :item="r.item">
             </item-button>
@@ -192,4 +192,8 @@ export default {
 </script>
 
 <style scope>
+  .numField {
+    width: 130px;
+    margin: 0 auto;
+  }
 </style>

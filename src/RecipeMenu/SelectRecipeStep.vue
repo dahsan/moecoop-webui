@@ -85,7 +85,7 @@
             </item-button>
           </td>
           <td>
-            <v-text-field :min="0" :max="r.item.個数" :suffix="'/'+String(r.item.個数)+'個'" type="number"
+            <v-text-field class="pt-0 numField" :min="0" :max="r.item.個数" :suffix="'/'+String(r.item.個数)+'個'" type="number"
                           mask="######" v-model="owned[r.item.アイテム名]">
             </v-text-field>
           </td>
@@ -257,4 +257,8 @@ export default {
 </script>
 
 <style scoped>
+  .numField {
+    width: 130px;
+    margin: 0 auto;
+  }
 </style>
