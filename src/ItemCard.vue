@@ -62,8 +62,8 @@
         <v-flex md6 class="text-md-center caption">
           調達価格
         </v-flex>
-        <v-flex md4 class="text-md-center">
-          <v-text-field class="pt-0" min="0" maxlength="8" suffix="g" type="number" mask="###########" v-model="price"></v-text-field>
+        <v-flex md6>
+          <v-text-field class="pt-0 priceField" min="0" maxlength="8" suffix="g" type="number" mask="########" v-model="price"></v-text-field>
         </v-flex>
       </v-layout>
 
@@ -383,5 +383,10 @@ export default {
   .caption {
     font-weight: bold;
     font-family: sans-serif;
+  }
+
+  .priceField {
+    width: 90px;
+    margin: 0 auto;
   }
 </style>
