@@ -25,7 +25,7 @@
       </v-flex>
     </v-layout>
 
-    <v-layout>
+    <v-layout class="pr-1">
       <v-flex md12>
         <v-data-table no-data-text="該当アイテムがありません" :items="items"
                       :headers="[{ text: 'アイテム名', value: 'アイテム名'}]"
