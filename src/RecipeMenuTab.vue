@@ -2,11 +2,11 @@
 <div id="menu-recipe-tab">
   <v-stepper v-model="step">
     <v-stepper-header>
-      <v-stepper-step step="1" :complete="step > 1" :editable="step > 1">アイテムを選ぶ</v-stepper-step>
+      <v-stepper-step class="pa-2" step="1" :complete="step > 1" :editable="step > 1">アイテムを選ぶ</v-stepper-step>
       <v-divider></v-divider>
-      <v-stepper-step step="2" :complete="step > 2" :editable="step > 2">レシピ・使用素材を選ぶ<small>オプション</small></v-stepper-step>
+      <v-stepper-step class="pa-2" step="2" :complete="step > 2" :editable="step > 2">レシピ・使用素材を選ぶ<small>オプション</small></v-stepper-step>
       <v-divider></v-divider>
-      <v-stepper-step step="3" :complete="step > 3">作成する</v-stepper-step>
+      <v-stepper-step class="pa-2" step="3" :complete="step > 3">作成する</v-stepper-step>
     </v-stepper-header>
 
     <v-stepper-content step="1" class="pa-1">

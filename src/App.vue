@@ -24,7 +24,7 @@
             設定
           </v-tabs-item>
         </v-tabs-bar>
-        <v-container fluid class="pl-2 pt-0">
+        <v-container fluid class="pl-2 pr-2 pt-0 pb-0">
           <v-layout>
             <v-flex md8>
               <v-layout row wrap v-if="useCharacterInfo && (active == 'item-tab' || active == 'binder-tab')">

@@ -1,6 +1,6 @@
 <template>
   <div id="recipe-tab">
-    <v-layout>
+    <v-layout class="pb-0 mb-0">
       <v-flex md4>
         <v-select :label="title" v-model="sCategory" :items="categories" item-value="バインダー名">
         </v-select>
@@ -28,11 +28,11 @@
       </v-flex>
     </v-layout>
 
-    <v-layout class="pr-1 pt-2">
+    <v-layout class="pt-2">
       <v-flex md12>
         <v-data-table no-data-text="該当レシピがありません" :items="recipes"
                       :headers="[{ text: 'レシピ名', value: 'レシピ名'}]"
-                      rows-per-page-text="レシピ表示数"
+                      rows-per-page-text="表示数"
                       hide-headers>
           <template slot="items" slot-scope="r">
             <td v-if="useCharacterInfo">

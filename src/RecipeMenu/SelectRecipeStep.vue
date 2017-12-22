@@ -80,11 +80,14 @@
                     hide-headers
                     hide-actions>
         <template slot="items" slot-scope="r">
-          <td class="text-md-center">
+          <td class="text-xs-center">
             <item-button both :item="r.item">
             </item-button>
+            <v-text-field class="pt-0 numField hidden-sm-and-up" :min="0" :max="r.item.個数" :suffix="'/'+String(r.item.個数)+'個'" type="number"
+                          mask="######" v-model="owned[r.item.アイテム名]">
+            </v-text-field>
           </td>
-          <td>
+          <td class="hidden-xs-only">
             <v-text-field class="pt-0 numField" :min="0" :max="r.item.個数" :suffix="'/'+String(r.item.個数)+'個'" type="number"
                           mask="######" v-model="owned[r.item.アイテム名]">
             </v-text-field>

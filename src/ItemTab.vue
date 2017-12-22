@@ -25,11 +25,11 @@
       </v-flex>
     </v-layout>
 
-    <v-layout class="pr-1">
+    <v-layout class="pt-1">
       <v-flex md12>
         <v-data-table no-data-text="該当アイテムがありません" :items="items"
                       :headers="[{ text: 'アイテム名', value: 'アイテム名'}]"
-                      rows-per-page-text="アイテム表示数"
+                      rows-per-page-text="表示数"
                       hide-headers>
           <template slot="items" slot-scope="r">
             <td v-if="useCharacterInfo">
