@@ -1,5 +1,6 @@
 
-export const baseURL = 'https://moecoop.arukascloud.io'
+// export const baseURL = 'https://moecoop.arukascloud.io'
+export const baseURL = 'https://api.coop.moe/'
 
 export function getCall(url, callback) {
   const xhr = new XMLHttpRequest()
