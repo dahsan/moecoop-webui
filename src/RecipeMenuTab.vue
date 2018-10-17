@@ -51,6 +51,10 @@ export default {
   methods: {
     setStep: function(step) {
       this.step = step
+      if (this.step == 1) {
+        this.owned = {}
+        this.targets = []
+      }
     },
     setTargets: function(targets) {
       this.targets = targets
