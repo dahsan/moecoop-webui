@@ -170,7 +170,7 @@ export default {
       }, (xhr) => {
         if (xhr.readyState == 4 && xhr.status == 200) {
           let ret = JSON.parse(xhr.response)
-          this.recipes = ret.必要レシピ
+          this.recipes = ret.必要レシピ.reverse()
           this.items = ret.必要素材.filter((elm, i, a) => !this.targets.find(e => e.アイテム名 == elm.アイテム名)).reverse()
           this.leftovers = ret.余り物
           this.loadingResult = false
