@@ -17,6 +17,9 @@ export const mutations = {
   setRecipe(state, newRecipe) {
     state.recipe = newRecipe
   },
+  setNumberOfCombine(state, num) {
+    state.numberOfCombine = num
+  },
   setLoadingRecipe(state, s) {
     state.loadingRecipe = s
   },
@@ -116,11 +119,14 @@ export const actions = {
     })
   },
   setRecipe({ commit }, newRecipe) {
+    const recipe = newRecipe.recipe
+    const num = newRecipe.num
     return new Promise((resolve, reject) => {
       commit('setLoadingRecipe', true)
-      getCall(baseURL+newRecipe.詳細, (xhr) => {
+      getCall(baseURL+recipe.詳細, (xhr) => {
         if (xhr.readyState==4 && xhr.status==200) {
           commit('setRecipe', JSON.parse(xhr.response))
+          commit('setNumberOfCombine', num)
           commit('setLoadingRecipe', false)
           resolve()
         } else if (xhr.status==404) {
@@ -134,10 +140,17 @@ export const actions = {
             生成物: { 'わからん': 0 },
             備考: '細かいことは\nわかりません(´・ω・`)',
           })
+          commit('setNumberOfCombine', num)
           commit('setLoadingRecipe', false)
           resolve()
         }
       })
+    })
+  },
+  setNumberOfCombine({ commit }, num) {
+    return new Promise((resolve, reject) => {
+      commit('setNumberOfCombine', num)
+      resolve()
     })
   },
   setPrice({ commit, state }, payload) {
@@ -195,6 +208,7 @@ export default new Vuex.Store({
       生成物: [{'アイテム名': 'わからん'}],
       備考: 'よくわからん(´・ω・`)',
     },
+    numberOfCombine: 1,
     loadingRecipe: false,
     characters: [
       { name: 'しらたま', url: '', skills: {} },

@@ -33,7 +33,7 @@
                     hide-actions>
         <template slot="items" slot-scope="r">
           <td class="text-md-center">
-            <recipe-button both :recipe="r.item">
+            <recipe-button both :numberOfCombine="r.item.コンバイン数" :recipe="r.item">
             </recipe-button>
           </td>
           <td>

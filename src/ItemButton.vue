@@ -37,7 +37,7 @@ export default {
       this.$store.dispatch('setItem', it).then(() => {
         const rs = this.$store.state.item.レシピ
         if (this.both && rs.length > 0) {
-          this.$store.dispatch('setRecipe', rs[0])
+          this.$store.dispatch('setRecipe', { recipe: rs[0], num: 1 })
         }
       })
     },

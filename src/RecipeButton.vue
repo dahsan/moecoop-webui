@@ -16,6 +16,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    numberOfCombine: {
+      type: Number,
+      default: 1,
+    }
   },
   data: () => ({
     dialog: false,
@@ -32,7 +36,7 @@ export default {
   },
   methods: {
     updateRecipe: function(r) {
-      this.$store.dispatch('setRecipe', r).then(() => {
+      this.$store.dispatch('setRecipe', { recipe: r, num: this.numberOfCombine }).then(() => {
         if (this.both) {
           this.$store.dispatch('setItem', this.$store.state.recipe.生成物[0])
         }

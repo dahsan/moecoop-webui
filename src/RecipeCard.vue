@@ -4,6 +4,8 @@
       <v-progress-circular v-if="loadingRecipe" indeterminate color="primary">
       </v-progress-circular>
       {{recipe.レシピ名+'のレシピ情報'}}
+      (<v-text-field class="pt-0 numField" min="1" maxlength="8" suffix="回分" type="Number" mask="#####" v-model="numberOfCombine"></v-text-field>)
+
       <v-spacer></v-spacer>
       <v-btn flat small icon class="small hidden-xs-only" @click.native="initRecipe()">
         <v-icon>close</v-icon>
@@ -27,7 +29,7 @@
           <item-button :item="ing">
           </item-button>
         </v-flex>
-        <v-flex md6 class="text-md-center" v-text="ing.個数">
+        <v-flex md6 class="text-md-center" v-text="ing.個数*numberOfCombine">
         </v-flex>
       </v-layout>
 
@@ -49,7 +51,7 @@
           <item-button :item="prod">
           </item-button>
         </v-flex>
-        <v-flex md6 class="text-md-center" v-text="prod.個数">
+        <v-flex md6 class="text-md-center" v-text="prod.個数*numberOfCombine">
         </v-flex>
       </v-layout>
 
@@ -125,6 +127,18 @@ export default {
     recipe() {
       return this.$store.state.recipe
     },
+    numberOfCombine: {
+      get: function() {
+        return this.$store.state.numberOfCombine
+      },
+      set: function(num) {
+        if (num == '') {
+          this.$store.dispatch('setNumberOfCombine', 1)
+        } else {
+          this.$store.dispatch('setNumberOfCombine', Number(num))
+        }
+      }
+    },
     loadingRecipe() {
       return this.$store.state.loadingRecipe
     },
@@ -156,5 +170,10 @@ export default {
   .caption {
     font-weight: bold;
     font-family: sans-serif;
+  }
+
+  .numField {
+    width: 90px;
+    margin: 0 auto;
   }
 </style>
