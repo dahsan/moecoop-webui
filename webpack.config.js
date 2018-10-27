@@ -1,6 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
 
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 var FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 
@@ -63,12 +64,13 @@ module.exports = {
   },
   devtool: '#eval-source-map',
   plugins: [
-    new FaviconsWebpackPlugin({
-      logo: './src/assets/moecoop.svg',
-      prefix: 'images/',
-      inject: true,
-      title: appName,
-    }),
+    new VueLoaderPlugin(),
+    // new FaviconsWebpackPlugin({
+    //   logo: './src/assets/moecoop.svg',
+    //   prefix: 'images/',
+    //   inject: true,
+    //   title: appName,
+    // }),
     new HtmlWebpackPlugin({
       title: appName,
       template: '!!html-loader!./index.html'
