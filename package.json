@@ -8,9 +8,9 @@
   "licence": "MIT",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --mode=development --open --hot",
-    "build": "cross-env NODE_ENV=production webpack --mode=production --progress --hide-modules",
-    "test": "cross-env NODE_ENV=test mocha --require @babel/register --use_strict"
+    "dev": "webpack-dev-server --mode=development --open --hot",
+    "build": "webpack --mode=production --progress --hide-modules",
+    "test": "mocha --require @babel/register --use_strict"
   },
   "dependencies": {
     "lodash": "^4.17.4",
@@ -25,7 +25,6 @@
     "@babel/register": "^7.0.0",
     "babel-loader": "^8.0.4",
     "babel-plugin-espower": "~3.0.0",
-    "cross-env": "^5.0.5",
     "css-loader": "~1.0.0",
     "favicons-webpack-plugin": "~0.0.9",
     "file-loader": "~2.0.0",
