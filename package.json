@@ -3,7 +3,7 @@
   "description": "生協の知恵袋のウェブUI版です",
   "version": "1.0.0",
   "author": "もじょんぬ <moe.e.coop@gmail.com>",
-  "homepage": "http://fukuro.coop.moe/",
+  "homepage": "https://fukuro.coop.moe/",
   "repository": "github:coop-mojo/moecoop-webui",
   "licence": "MIT",
   "private": true,
