@@ -65,12 +65,12 @@ module.exports = {
   devtool: '#eval-source-map',
   plugins: [
     new VueLoaderPlugin(),
-    // new FaviconsWebpackPlugin({
-    //   logo: './src/assets/moecoop.svg',
-    //   prefix: 'images/',
-    //   inject: true,
-    //   title: appName,
-    // }),
+    new FaviconsWebpackPlugin({
+      logo: './src/assets/moecoop.svg',
+      prefix: 'images/',
+      inject: true,
+      title: appName,
+    }),
     new HtmlWebpackPlugin({
       title: appName,
       template: '!!html-loader!./index.html'
