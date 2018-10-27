@@ -60,9 +60,6 @@ module.exports = (env, argv) => {
       historyApiFallback: true,
       noInfo: true
     },
-    performance: {
-      hints: false
-    },
     devtool: argv.mode == 'production' ? 'none' : 'eval-source-map',
     plugins: [
       new VueLoaderPlugin(),
