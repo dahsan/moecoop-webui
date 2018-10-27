@@ -1,11 +1,11 @@
-var path = require('path')
-var webpack = require('webpack')
+const path = require('path')
+const webpack = require('webpack')
 
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-var FaviconsWebpackPlugin = require('favicons-webpack-plugin')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-var appName = '生協の知恵袋'
+const appName = '生協の知恵袋'
 
 module.exports = (env, argv) => {
   return {
