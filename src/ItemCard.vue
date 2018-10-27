@@ -135,7 +135,6 @@
 <script>
 import RecipeButton from './RecipeButton.vue'
 import { baseURL, postCall } from './rest'
-import _ from 'lodash'
 
 export default {
   name: 'item-card',

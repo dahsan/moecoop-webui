@@ -113,7 +113,6 @@
 </template>
 
 <script>
-import _ from 'lodash'
 import ItemButton from './ItemButton.vue'
 
 export default {

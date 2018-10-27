@@ -100,7 +100,7 @@
 
 <script>
 import ItemButton from '../ItemButton.vue'
-import _ from 'lodash'
+import debounce from 'lodash.debounce'
 import { baseURL, getCall } from '../rest'
 
 export default {
@@ -136,7 +136,7 @@ export default {
     },
   },
   methods: {
-    lazyGetItems: _.debounce(
+    lazyGetItems: debounce(
       function() {
         this.getItems()
       },

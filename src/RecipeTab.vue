@@ -51,7 +51,7 @@
 
 <script>
 import RecipeButton from './RecipeButton.vue'
-import _ from 'lodash'
+import debounce from 'lodash.debounce'
 import { baseURL, getCall } from './rest'
 
 export default {
@@ -79,7 +79,7 @@ export default {
     }
   },
   methods: {
-    lazyGetRecipes: _.debounce(
+    lazyGetRecipes: debounce(
       function() {
         this.getRecipes()
       },

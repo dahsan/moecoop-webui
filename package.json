@@ -13,7 +13,7 @@
     "test": "mocha --require @babel/register --use_strict"
   },
   "dependencies": {
-    "lodash": "^4.17.4",
+    "lodash.debounce": "^4.0.8",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.0",

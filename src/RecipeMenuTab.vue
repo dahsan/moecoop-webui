@@ -29,7 +29,6 @@
 
 <script>
 import ItemButton from './ItemButton.vue'
-import _ from 'lodash'
 import { baseURL, getCall } from './rest'
 import SelectItemStep from './RecipeMenu/SelectItemStep.vue'
 import SelectRecipeStep from './RecipeMenu/SelectRecipeStep.vue'
