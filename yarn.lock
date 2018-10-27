@@ -1852,9 +1852,9 @@ deep-is@~0.1.3:
   integrity sha1-s2nW+128E+7PUk+RsHD+7cNXzzQ=
 
 deepmerge@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-2.1.0.tgz#511a54fff405fc346f0240bb270a3e9533a31102"
-  integrity sha512-Q89Z26KAfA3lpPGhbF6XMfYAm3jIV3avViy6KOJ2JLzFbeWHOvPQUu5aSJIWXap3gDZC2y1eF5HXEPI2wGqgvw==
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-2.2.1.tgz#5d3ff22a01c00f645405a2fbc17d0778a1801170"
+  integrity sha512-R9hc1Xa/NOBi9WRVUWg19rl1UB7Tt4kuPd+thNJgFZoxXsTz7ncaPaeIm+40oSGuP33DfMb4sZt1QIGiJzC4EA==
 
 define-properties@^1.1.2:
   version "1.1.3"
@@ -6026,10 +6026,10 @@ shebang-regex@^1.0.0:
   resolved "https://registry.yarnpkg.com/shebang-regex/-/shebang-regex-1.0.0.tgz#da42f49740c0b42db2ca9728571cb190c98efea3"
   integrity sha1-2kL0l0DAtC2yypcoVxyxkMmO/qM=
 
-shvl@^1.2.0:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/shvl/-/shvl-1.2.1.tgz#7ea96257475b20cb69d2a58897c0640c93973593"
-  integrity sha512-tb4dR5y8nKG5FAvTK0ohzmvfIFonLW80W/Utk4y3U414Gz1fj8t95PfopvkoJX6O7SvByLF1U+E/sTT+NxvHIg==
+shvl@^1.3.0:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/shvl/-/shvl-1.3.1.tgz#6c20a17b4a20b08e9f8cab60c50a92229fcc176e"
+  integrity sha512-+rRPP46hloYUAEImJcqprUgXu+05Ikqr4h4V+w5i2zJy37nAqtkQKufs3+3S2fDq6JNRrHMIQhB/Vaex+jgAAw==
 
 signal-exit@^3.0.0:
   version "3.0.2"
@@ -6894,12 +6894,12 @@ vuetify@^0.17.3:
   integrity sha512-Brk8dOeR/vkG4By5r2JXtS1jJojP3sFOtyTXtflH7aVPF+14Z0xBNO3nM4QuPgWofHi3pw/9maJZEbDVND7iNQ==
 
 vuex-persistedstate@^2.0.0:
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/vuex-persistedstate/-/vuex-persistedstate-2.5.1.tgz#129274514e2e46b49e8ca8066cf85b345c7b4ce2"
-  integrity sha512-UioTOoIRDDThJu/8NEP9T+kd9l7YPPVM/J+2/UTquMAP3Ce1MevM3aKtRMax4egdbQ5me7Q/eQ8Tc6+SOQNk/w==
+  version "2.5.4"
+  resolved "https://registry.yarnpkg.com/vuex-persistedstate/-/vuex-persistedstate-2.5.4.tgz#a19710ad7f9a08cea4e65fc585924d9fdac7384a"
+  integrity sha512-XYJhKIwO+ZVlTaXyxKxnplrJ88Fnvk5aDw753bxzRw5/yMKLQ6lq9CDCBex2fwZaQcLibhtgJOxGCHjy9GLSlQ==
   dependencies:
     deepmerge "^2.1.0"
-    shvl "^1.2.0"
+    shvl "^1.3.0"
 
 vuex@^3.0.0:
   version "3.0.1"
