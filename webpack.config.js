@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -62,6 +63,7 @@ module.exports = (env, argv) => {
     },
     devtool: argv.mode == 'production' ? 'none' : 'eval-source-map',
     plugins: [
+      new BundleAnalyzerPlugin(),
       new VueLoaderPlugin(),
       new FaviconsWebpackPlugin({
         logo: './src/assets/moecoop.svg',
