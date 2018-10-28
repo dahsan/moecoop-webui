@@ -5,8 +5,6 @@ import App from './App.vue'
 import store from './store'
 import router from './router'
 
-import '../node_modules/vuetify/src/stylus/main.styl'
-
 Vue.use(Vuetify)
 
 new Vue({
