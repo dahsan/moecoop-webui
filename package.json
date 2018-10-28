@@ -9,6 +9,7 @@
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --mode=development --open --hot",
+    "debug-build": "webpack --mode=development --progress --hide-modules",
     "build": "webpack --mode=production --progress --hide-modules",
     "test": "mocha --require @babel/register --use_strict"
   },

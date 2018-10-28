@@ -61,7 +61,6 @@ module.exports = (env, argv) => {
     },
     devtool: is_production ? 'none' : 'eval-source-map',
     plugins: [
-      new BundleAnalyzerPlugin(),
       new VueLoaderPlugin(),
       new FaviconsWebpackPlugin({
         logo: './src/assets/moecoop.svg',
@@ -100,6 +99,6 @@ module.exports = (env, argv) => {
           },
         ]
       })
-    ]
+    ].concat(is_production ? [] : [new BundleAnalyzerPlugin()])
   }
 }
